@@ -108,6 +108,10 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 
 /* Sidebar - Start */
 
+#story-title {
+  display: none;
+}
+
 #story-caption {
   margin-bottom: 6.5em;
 }
@@ -267,6 +271,7 @@ ul.actions li {
 	}
 }
 /* Horizontal Health Bar - End */</style><script role="script" id="twine-user-script" type="text/twine-javascript">//Config.ui.stowBarInitially = true;
+Config.history.controls = false;
 
 /* Health Bar code - Start */
 window.Health = function (CurHP, MaxHP, BarID, Horizontal, Container) {
@@ -307,11 +312,11 @@ The snapping comes from right beside his ear. The adventurer frowns, but conscio
 
 The bound wolf only lets out a pained groan at first. Everything hurts. Slowly but surely, memories start to return. Memories of who he is...
 
-[[Continue|Wolf Warrior Chosen]]</tw-passagedata><tw-passagedata pid="2" name="StoryAuthor" tags="" position="24,8" size="100,100">by &lt;a href=&quot;http://www.slethstories.com/&quot; target=&quot;_blank&quot;&gt;Sleth&lt;/a&gt;</tw-passagedata><tw-passagedata pid="3" name="StoryBanner" tags="" position="248,8" size="100,100"></tw-passagedata><tw-passagedata pid="4" name="StoryCaption" tags="" position="357,6" size="100,100">Captured, bound and trapped in a mage&#39;s tower that stands in its own reality... 
+[[Continue|Wolf Warrior Chosen]]</tw-passagedata><tw-passagedata pid="2" name="StoryAuthor" tags="" position="24,8" size="100,100">by &lt;a href=&quot;http://www.slethstories.com/&quot; target=&quot;_blank&quot;&gt;Sleth&lt;/a&gt;</tw-passagedata><tw-passagedata pid="3" name="StoryBanner" tags="" position="248,8" size="100,100">&lt;img src=&quot;images/banner.png&quot; width=&quot;256&quot;&gt;\
+&lt;div class=&quot;divider div-transparent div-arrow-down&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="4" name="StoryCaption" tags="" position="357,6" size="100,100">Captured, bound and trapped in a mage&#39;s tower that stands in its own reality... 
 
 Can you escape?
-</tw-passagedata><tw-passagedata pid="5" name="StoryDisplayTitle" tags="" position="137,8" size="100,100">&lt;img src=&quot;images/banner.png&quot; width=&quot;256&quot;&gt;\
-&lt;div class=&quot;divider div-transparent div-arrow-down&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="6" name="StoryMenu" tags="" position="466,7" size="100,100"></tw-passagedata><tw-passagedata pid="7" name="Soft Awakening" tags="" position="543,221" size="100,100">&lt;&lt;set $warrior = true&gt;&gt;\
+</tw-passagedata><tw-passagedata pid="5" name="StoryDisplayTitle" tags="" position="137,8" size="100,100">The Mage&#39;s Tower</tw-passagedata><tw-passagedata pid="6" name="StoryMenu" tags="" position="466,7" size="100,100"></tw-passagedata><tw-passagedata pid="7" name="Soft Awakening" tags="" position="543,221" size="100,100">&lt;&lt;set $warrior = true&gt;&gt;\
 It takes some effort, but the wolf opens his eyes. It takes a few seconds to regain their focus. At the same time, the stiffness of his body feels worse than ever. This nap was anything but comfortable.
 
 As his vision clears, $name realizes that he&#39;s not quite lying down. In fact, he&#39;s pretty much standing up. The feeling of the leather wrappings around his wrists, ankles, and mid-section becomes obvious upon his first attempts to move with a groan. \
@@ -470,7 +475,8 @@ With a spring to his step, the panther approaches, closing in the last distance 
   &lt;ul class=&quot;actions&quot;&gt;\
 	&lt;li&gt;[[Growl at Ivex|Molesting]]&lt;/li&gt;
   &lt;/ul&gt;\
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="19" name="StoryInit" tags="" position="1025,8" size="100,100">&lt;&lt;set $name = &quot;Drekkar&quot;&gt;&gt;\
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="19" name="StoryInit" tags="" position="1025,8" size="100,100">&lt;&lt;set document.title = &quot;The Mage&#39;s Tower&quot;&gt;&gt;
+&lt;&lt;set $name = &quot;Drekkar&quot;&gt;&gt;\
 &lt;&lt;set $class = &quot;warrior&quot;&gt;&gt;\
 &lt;&lt;set $warrior = true&gt;&gt;\
 &lt;&lt;set $mage = false&gt;&gt;\
