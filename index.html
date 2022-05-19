@@ -296,7 +296,63 @@ ul.actions li {
 		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
 	}
 }
-/* Horizontal Health Bar - End */</style><script role="script" id="twine-user-script" type="text/twine-javascript">importStyles('https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css');
+/* Horizontal Health Bar - End */
+
+/**
+ * ==============================================
+ * Dot Flashing
+ * ==============================================
+ */
+.dot-flashing {
+  position: relative;
+  margin-left: 6.5px;
+  width: 4px;
+  height: 4px;
+  border-radius: 5px;
+  background-color: #ffa000;
+  color: #ffa000;
+  animation: dotFlashing 1s infinite linear alternate;
+  animation-delay: .5s;
+}
+
+.dot-flashing::before, .dot-flashing::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+.dot-flashing::before {
+  left: -6.5px;
+  width: 4px;
+  height: 4px;
+  border-radius: 5px;
+  background-color: #ffa000;
+  color: #ffa000;
+  animation: dotFlashing 1s infinite alternate;
+  animation-delay: 0s;
+}
+
+.dot-flashing::after {
+  left: 6.5px;
+  width: 4px;
+  height: 4px;
+  border-radius: 5px;
+  background-color: #ffa000;
+  color: #ffa000;
+  animation: dotFlashing 1s infinite alternate;
+  animation-delay: 1s;
+}
+
+@keyframes dotFlashing {
+  0% {
+    background-color: #ffa000;
+  }
+  50%,
+  100% {
+    background-color: #ebe6ff;
+  }
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">importStyles('https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css');
 
 //Config.ui.stowBarInitially = true;
 Config.history.controls = false;
@@ -1742,49 +1798,67 @@ The lion works with a constant, unmoving straight face. The only other thing of 
 
 Other than that, the lion just continues to grind herbs like before. Never stopping and barely moving. The wolf continues to watch him quietly. Judging by the lion&#39;s stillness, it might take some &lt;span class=&quot;imp-info&quot;&gt;time&lt;/span&gt; before he does something interesting.
 
-...
+&lt;span id=&quot;timer1&quot;&gt;\
 
+&lt;div class=&quot;dot-flashing&quot;&gt;&lt;/div&gt;
+&lt;/span&gt;\
 &lt;&lt;timed &#96;$lionwatch1 + &quot;s&quot;&#96; t8n&gt;&gt;\
+&lt;&lt;replace &quot;#timer1&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 Upon spending some time observing him, the wolf can see that the lion&#39;s motions feel... unnatural. His vague expression remains unchanged as well. Something is off about him.
 
-...
-&lt;&lt;set $lionwatch1 = 0&gt;&gt;\
+&lt;span id=&quot;timer2&quot;&gt;\
 
+&lt;div class=&quot;dot-flashing&quot;&gt;&lt;/div&gt;
+&lt;/span&gt;\
+&lt;&lt;set $lionwatch1 = 0&gt;&gt;\
 &lt;&lt;next &#96;$lionwatch2 + &quot;s&quot;&#96;&gt;&gt;\
+&lt;&lt;replace &quot;#timer2&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 The gleam of his pendant is more than just a reflection of the low light of the burning lanterns that illuminate the room. When the wolf focuses his eyes on it it feels as if... there&#39;s something... swirling inside it? It&#39;s definitely magical in some way.
 
-...
-&lt;&lt;set $lionwatch2 = 0&gt;&gt;\
+&lt;span id=&quot;timer3&quot;&gt;\
 
+&lt;div class=&quot;dot-flashing&quot;&gt;&lt;/div&gt;
+&lt;/span&gt;\
+&lt;&lt;set $lionwatch2 = 0&gt;&gt;\
 &lt;&lt;next &#96;$lionwatch3 + &quot;s&quot;&#96;&gt;&gt;\
+&lt;&lt;replace &quot;#timer3&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 When the lion finishes grinding the current herbs, he reaches for a new bowl of them without even looking. Shoving his large hand inside, he grabs a handful and just shoves them into the mixture to grind them. His eyes don&#39;t shift one inch as he continues.
 
 ...Yet at the same time, the wolf can see one reaction in him. His member had been erect before, but it seems to harden yet a little more even though nothing has touched it. Maybe the lion thought about something arousing? $name frowns at the sight. This can&#39;t be a proud warrior like he thought...
 
 All the lion does is continue to grind herbs.
 
-...
-&lt;&lt;set $lionwatch3 = 0&gt;&gt;\
+&lt;span id=&quot;timer4&quot;&gt;\
 
+&lt;div class=&quot;dot-flashing&quot;&gt;&lt;/div&gt;
+&lt;/span&gt;\
+&lt;&lt;set $lionwatch3 = 0&gt;&gt;\
 &lt;&lt;next &#96;$lionwatch4 + &quot;s&quot;&#96;&gt;&gt;\
+&lt;&lt;replace &quot;#timer4&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 It takes a while for the lion to grind the new herbs to what might be an acceptable level. Nothing of them remains in the mortar and then, finally, the lion puts it down. The wolf&#39;s ears perk up. It&#39;s the first time he&#39;s done that.
 
 The lion takes a step back from his work. $name retreats a little thinking he might head or look towards the door, but he doesn&#39;t. Instead, the lion simply takes hold of his cock with his big paw and, without even looking down at it... starts stroking it.
 
 The wolf&#39;s eyes go wide. The big male has stopped what he was doing to... jerk off? Just like that? The lion&#39;s expression remains blank and unchanged even as his paw glides up and down the length of his hard member, stimulating it. As he starts doing it, he continues to just jerk himself off in a steady rhythm.
 
-...
-&lt;&lt;set $lionwatch4 = 0&gt;&gt;\
+&lt;span id=&quot;timer5&quot;&gt;\
 
+&lt;div class=&quot;dot-flashing&quot;&gt;&lt;/div&gt;
+&lt;/span&gt;\
+&lt;&lt;set $lionwatch4 = 0&gt;&gt;\
 &lt;&lt;next &#96;$lionwatch5 + &quot;s&quot;&#96;&gt;&gt;\
+&lt;&lt;replace &quot;#timer5&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 Standing there at the door watching the lion masturbate makes the wolf shift uncomfortably. He remains absolutely silent as to not be seen, but the lion never turns his head or shifts his gaze. He simply keeps staring down at the ground herbs while his paw works at his cock. Still, watching this, for some reason, makes the wolf&#39;s own arousal twitch. He doesn&#39;t have a particular desire for males, but the lingering arousal in his system makes watching the large lion masturbating become a somewhat arousing experience...
 
 Beads of pre-cum appear at the tip of the lion&#39;s member only to then turn into thin strings as they fall down to the floor below. The lion&#39;s rhythm doesn&#39;t change and, for a while, it just feels like he&#39;s going to keep idly jerking off forever.
 
-...
-&lt;&lt;set $lionwatch5 = 0&gt;&gt;\
+&lt;span id=&quot;timer6&quot;&gt;\
 
+&lt;div class=&quot;dot-flashing&quot;&gt;&lt;/div&gt;
+&lt;/span&gt;\
+&lt;&lt;set $lionwatch5 = 0&gt;&gt;\
 &lt;&lt;next &#96;$lionwatch6 + &quot;s&quot;&#96;&gt;&gt;\
+&lt;&lt;replace &quot;#timer6&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 The lion keeps jerking himself off. The huge leonine&#39;s hand just keeps beating his cock without ceasing.
 
 &lt;&lt;print $name&gt;&gt;&#39;s ears twitch as, finally, something changes. In a display of flexibility, the large lion suddenly brings his leg up high and plants a footpaw firmly up on the counter in front of him. With his hand, he pulls the mix of herbs closer, and with the lion tilted slightly to the side now the wolf gets a full view of the events.
@@ -1803,10 +1877,13 @@ Much to the wolf&#39;s dismay, after mixing for a while longer, the lion soon du
 
 What the hell?!
 
-...
-&lt;&lt;set $lionwatch6 = 0&gt;&gt;\
+&lt;span id=&quot;timer7&quot;&gt;\
 
+&lt;div class=&quot;dot-flashing&quot;&gt;&lt;/div&gt;
+&lt;/span&gt;\
+&lt;&lt;set $lionwatch6 = 0&gt;&gt;\
 &lt;&lt;next &#96;$lionwatch7 + &quot;s&quot;&#96;&gt;&gt;
+&lt;&lt;replace &quot;#timer7&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 With his own cock still pulsing after the display, the wolf just continues watching for a while longer, but after the unusual display, the lion goes back to his old, expressionless self doing nothing but grinding herbs in a continuous motion.
 
 It doesn&#39;t seem like he&#39;s going to be going anywhere or doing anything different for the time being unless interrupted. On the other hand, he seems almost... mindless. Despite his size, he does not seem as dangerous to the wolf as he looked at first. Approaching him could be a good idea after all... maybe.
@@ -1939,7 +2016,7 @@ The wolf&#39;s eyes scan the room around him for weapons or ways to subdue the l
 
 After all, Ivex could still return at any minute or hear something if things get too loud...
 
-[[Continue|Lion Fight]]</tw-passagedata><tw-passagedata pid="81" name="Lion Fight" tags="" position="1320,1905" size="100,100">&lt;&lt;display &quot;Lion Pindown (Text)&quot;&gt;&gt;
+[[Continue|Lion Fight]]</tw-passagedata><tw-passagedata pid="81" name="Lion Fight" tags="" position="1320,1905" size="100,100">&lt;&lt;display &quot;Lion Fight (Text)&quot;&gt;&gt;
 
 [[Continue|Lion Pindown]]</tw-passagedata><tw-passagedata pid="82" name="Lion Pindown" tags="" position="1352,2057" size="100,100">&lt;&lt;display &quot;Lion Pindown (Text)&quot;&gt;&gt;
 &lt;&lt;if $arousalLevel == 1&gt;&gt;\
