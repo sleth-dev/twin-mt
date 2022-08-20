@@ -24,28 +24,29 @@ The Mage's Tower
 /* Title Screen - Start */
 .title-container {
   position:relative;
-  margin: -40px;
 }
 .title-character {
   position:absolute;
-  top:-10px;
+  top:-2vw;
   z-index:0;
+  max-width:100%;
 }
 
 .title-logo {
-  position:absolute;
-  top: 10px;
-  right: 150px;
+  position:relative;
+  top:-2vw;
+  display:block;
+  margin-left:auto;
   z-index:1;
+  max-width:50%;
 }
 
 .title-options {
   z-index: 2;
-  position: relative;
-  top: 300px;
-  left: 425px;
+  position: absolute;
+  right: 10%;
+  display: inline-block;
   background-color: #222;
-  width: 165px;
   padding: 30px;
   border: 1px solid #aaa;
   border-radius: 15px;
@@ -6787,9 +6788,9 @@ Thank you so much!
 <</silently>>
 <div class="title-container">
 <<timed 1s t8n>>\
-<img class="title-character" @src="$characterDisplay" height="620">\
+<img class="title-character" @src="$characterDisplay">\
 <<next 2s>>\
-<img class="title-logo" src="images/logo_tr.png" height="300">\
+<img class="title-logo" src="images/logo_tr.png">\
 <<next 3s>>
 <div class="title-options">\
 <<link "New Game">>
