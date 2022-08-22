@@ -101,28 +101,29 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 	<!-- UUID://F420476E-098A-46C9-9EFF-9652F277776A// --><tw-storydata name="The Mage&#39;s Tower" startnode="178" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="F420476E-098A-46C9-9EFF-9652F277776A" zoom="1" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* Title Screen - Start */
 .title-container {
   position:relative;
-  margin: -40px;
 }
 .title-character {
   position:absolute;
-  top:-10px;
+  top:-2vw;
   z-index:0;
+  max-width:100%;
 }
 
 .title-logo {
-  position:absolute;
-  top: 10px;
-  right: 150px;
+  position:relative;
+  top:-2vw;
+  display:block;
+  margin-left:auto;
   z-index:1;
+  max-width:50%;
 }
 
 .title-options {
   z-index: 2;
-  position: relative;
-  top: 300px;
-  left: 425px;
+  position: absolute;
+  right: 10%;
+  display: inline-block;
   background-color: #222;
-  width: 165px;
   padding: 30px;
   border: 1px solid #aaa;
   border-radius: 15px;
@@ -5880,9 +5881,9 @@ Thank you so much!</tw-passagedata><tw-passagedata pid="245" name="Title Screen 
 &lt;&lt;/silently&gt;&gt;
 &lt;div class=&quot;title-container&quot;&gt;
 &lt;&lt;timed 1s t8n&gt;&gt;\
-&lt;img class=&quot;title-character&quot; @src=&quot;$characterDisplay&quot; height=&quot;620&quot;&gt;\
+&lt;img class=&quot;title-character&quot; @src=&quot;$characterDisplay&quot;&gt;\
 &lt;&lt;next 2s&gt;&gt;\
-&lt;img class=&quot;title-logo&quot; src=&quot;images/logo_tr.png&quot; height=&quot;300&quot;&gt;\
+&lt;img class=&quot;title-logo&quot; src=&quot;images/logo_tr.png&quot;&gt;\
 &lt;&lt;next 3s&gt;&gt;
 &lt;div class=&quot;title-options&quot;&gt;\
 &lt;&lt;link &quot;New Game&quot;&gt;&gt;
