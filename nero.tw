@@ -9,12 +9,12 @@ The Mage's Tower (Nero)
 	"format-version": "2.36.1",
 	"start": "Title Screen",
 	"tag-colors": {
-		"end": "yellow",
+		"end": "orange",
 		"hub": "purple",
 		"incomplete": "red",
 		"key": "red",
 		"noreturn": "red",
-		"start": "green",
+		"restart": "green",
 		"text": "blue"
 	},
 	"zoom": 0.6
@@ -374,12 +374,6 @@ Config.history.controls = false;
 
 $(document.head).append("<link rel='icon' href='images/mt_icon_tr.png'>");
 
-predisplay["Menu Return"] = function (taskName) {
-	if (! tags().contains("noreturn")) {
-		State.variables.return = passage();
-	}
-};
-
 /* Health Bar code - Start */
 window.Health = function (CurHP, MaxHP, BarID, Horizontal, Container) {
 	if (Container == undefined) {
@@ -414,7 +408,7 @@ macros.arousalbar = {
 /* Arousal Bar Macro - End */
 
 
-:: Bound {"position":"425,550","size":"100,100"}
+:: Bound {"position":"2500,175","size":"100,100"}
 The sound of snapping fingers feels distant at first. As consciousness returns, it grows closer and closer until it starts becoming loud.
 
 The snapping comes from right beside his ear. The adventurer frowns, but consciousness has not returned in its entirety just yet. He feels as if... as if he had fallen down a well. At least that's all he can remember, sort of. It was bright, it was sudden, and now...
@@ -423,7 +417,7 @@ The snapping comes from right beside his ear. The adventurer frowns, but conscio
 
 The bound wolf only lets out a pained groan at first. Everything hurts. Slowly but surely, memories start to return. Memories of who he is...
 
-[[Continue|Wolf Warrior Chosen]]
+[[Choose your adventurer|Choose Character]]
 
 
 :: StoryAuthor {"position":"25,25","size":"100,100"}
@@ -439,7 +433,7 @@ by <a href="http://www.slethstories.com/" target="_blank">Sleth</a>
 The Mage's Tower
 
 
-:: StoryMenu {"position":"1425,250","size":"100,100"}
+:: StoryMenu {"position":"2500,500","size":"100,100"}
 [[Archives]]
 [[Credits]]
 
@@ -926,7 +920,7 @@ He needs to escape... before the crazed mage returns and before that thing's mag
 [[Continue|Escape Options]]
 
 
-:: Escape Options [start] {"position":"525,1625","size":"100,100"}
+:: Escape Options [restart] {"position":"525,1625","size":"100,100"}
 <<silently>>
 <<set $CurArousal = 10>>
 <<set $observation1 = false>>
@@ -1541,7 +1535,7 @@ Working hard to ignore his arousal, the wolf focuses on what really matters.
 <</if>>\
 
 
-:: Escape Start [start] {"position":"500,2650","size":"100,100"}
+:: Escape Start [restart] {"position":"500,2650","size":"100,100"}
 <<silently>>
 <<set $candleTimer = "0s">>
 <<set $window = false>>
@@ -2488,8 +2482,8 @@ To change the adventurer's fate, you can...
 </div>
 
 
-:: Archives [noreturn] {"position":"1625,425","size":"100,100"}
-[[Return to the game|$return]]
+:: Archives {"position":"2400,700","size":"100,100"}
+<<link "Return to the game" $return>>
 
 <h1>Archives</h1>
 Welcome to the Mage's Tower Archives.
@@ -2501,23 +2495,17 @@ Grayed out endings are paths that have not yet been found, although there are hi
 
 <hr>
 <h2>Endings unlocked:</h2>
-<<include "Interrogation Archive Display">>\
-<<silently>>[[Interrogation Archive Display]]<</silently>>\
+<<include [[Interrogation Archive Display]]>>\
 \
-<<include "Enthrallment Archive Display">>\
-<<silently>>[[Enthrallment Archive Display]]<</silently>>\
+<<include [[Enthrallment Archive Display]]>>\
 \
-<<include "Extraction Archive Display">>\
-<<silently>>[[Extraction Archive Display]]<</silently>>\
+<<include [[Extraction Archive Display]]>>\
 \
-<<include "Ivex Punishment Archive Display">>\
-<<silently>>[[Ivex Punishment Archive Display]]<</silently>>\
+<<include [[Ivex Punishment Archive Display]]>>\
 \
-<<include "Ivex Enthrallment Archive Display">>\
-<<silently>>[[Ivex Enthrallment Archive Display]]<</silently>>\
+<<include [[Ivex Enthrallment Archive Display]]>>\
 \
-<<include "Ivex Extraction Archive Display">>\
-<<silently>>[[Ivex Extraction Archive Display]]<</silently>>\
+<<include [[Ivex Extraction Archive Display]]>>\
 
 
 :: The Desk {"position":"900,4350","size":"100,100"}
@@ -2757,7 +2745,7 @@ To change the adventurer's fate, you can...
 [[Continue|Extraction End 1]]
 
 
-:: Interrogation Archive [noreturn] {"position":"2100,400","size":"100,100"}
+:: Interrogation Archive {"position":"1700,1100","size":"100,100"}
 <<include "Ivex Torture 1 (Text)">>
 
 <<include "Ivex Torture 2 (Text)">>
@@ -3287,7 +3275,7 @@ For some reason, that smell feels incredibly <b>arousing</b>. If he could look a
 No matter how much he tries, $name cannot find a way out. He's trapped there grinding herbs and getting aroused by it until who knows how long after that, Ivex himself opens the door.
 
 
-:: Interrogation Archive Display {"position":"2000,400","size":"100,100"}
+:: Interrogation Archive Display {"position":"1700,1000","size":"100,100"}
 <<silently>>\
   <<if $interrogationEndingFreeze && $interrogationEndingShock>>
     <<set $interrogationSpell = 'freeze'>>
@@ -3454,7 +3442,7 @@ With one sudden move, the lion's hand reaches over his head. The wolf feels some
 $name blinks. Through his fucking, he didn't realize the lion had freed his other hand, reached out for the pendant and now managed to place it over his neck.
 
 
-:: Enthrallment Archive [noreturn] {"position":"2100,525","size":"100,100"}
+:: Enthrallment Archive {"position":"1825,1100","size":"100,100"}
 <<if $lionFuck>>\
 <<include "Lion Fight (Text)">>
 
@@ -3486,7 +3474,7 @@ But there's no decision to be made. After being exposed to that candle for so lo
 [[Return to the Archives|Archives]]
 
 
-:: Enthrallment Archive Display {"position":"2000,525","size":"100,100"}
+:: Enthrallment Archive Display {"position":"1825,1000","size":"100,100"}
 <<silently>>\
   <<set $lionFuck = false>>
 <</silently>>\
@@ -4035,7 +4023,7 @@ The whole world around him starts shifting into a blur.
 [[Continue|Outside]]
 
 
-:: Outside [start] {"position":"950,5325","size":"100,100"}
+:: Outside [restart] {"position":"950,5325","size":"100,100"}
 The big wolf stumbles forward. A sense of vertigo overwhelms him for a moment as everything spins and loses its shape. However, as quickly as it comes, the feeling goes away. The wolf suddenly feels his feet touching the ground again. His hands find a table behind him to hold onto to keep himself steady and, when he blinks... everything feels different.
 
 The air on his bare fur feels colder than before. The floor under his feet is simple wood rather than stone. As the wolf looks around, he realizes he is no longer in the large hallway he was before, but rather somewhere else entirely.
@@ -4419,7 +4407,7 @@ With a drawn-out moan, the wolf's exposed cock starts pulsing inside the slime a
 It doesn't stop there, and neither does the slime. All the stimulation keeps going as the wolf's orgasm hits, shooting jet after jet of cum into the slime. His seed seems to be 'caught' by the blob. The white, pearly substance is gathered just above his cock, melding together as the wolf is encouraged to shoot more and more. The slime keeps milking him, kneading his cock, his knot, and inflicting pleasure all around his body until the wolf's cock is reduced to quick throbs, spurting the last remnants of his orgasm. Only then does the slime start slowing down, although the stimulation doesn't truly stop. It allows the wolf to catch his breath, though. And as he looks down…
 
 
-:: Extraction Archive Display {"position":"2000,650","size":"100,100"}
+:: Extraction Archive Display {"position":"1950,1000","size":"100,100"}
 <<silently>>\
   <<if $extractionGentleEnd && $extractionForcefulEnd>>
     <<set $extractionVariant = 'gentle'>>
@@ -4468,7 +4456,7 @@ It doesn't stop there, and neither does the slime. All the stimulation keeps goi
 <</if>>\
 
 
-:: Extraction Archive [noreturn] {"position":"2100,650","size":"100,100"}
+:: Extraction Archive {"position":"1950,1100","size":"100,100"}
 <<include "Pulled In (Text)">>
 
 <<include "Pulled Further (Text)">>
@@ -4514,7 +4502,7 @@ It doesn't stop there, and neither does the slime. All the stimulation keeps goi
 [[Return to the Archives|Archives]]
 
 
-:: Title Screen [start] {"position":"425,425","size":"100,100"}
+:: Title Screen [restart] {"position":"2500,25","size":"100,100"}
 <div class="title-screen">
 <<silently>>
 <<if $personalEnding>>
@@ -6087,7 +6075,7 @@ With a handsome amount of gold in his hands, the wolf moves on. The life of an a
 Or, at least, he will try to.
 
 
-:: Ivex Enthrallment Archive Display {"position":"2000,900","size":"100,100"}
+:: Ivex Enthrallment Archive Display {"position":"2200,1000","size":"100,100"}
 <<if $enthralmentIvexEnding>>\
   <b>[[Ending: A New Servant|Ivex Enthrallment Archive]]</b>
 <<else>>\
@@ -6098,7 +6086,7 @@ Or, at least, he will try to.
 <</if>>\
 
 
-:: Ivex Enthrallment Archive [noreturn] {"position":"2100,900","size":"100,100"}
+:: Ivex Enthrallment Archive {"position":"2200,1100","size":"100,100"}
 <<include "Enthrallment Vengeance (Text)">>
 
 <<include "Ivex Enthrallment 1 (Text)">>
@@ -6122,7 +6110,7 @@ Or, at least, he will try to.
 [[Return to the Archives|Archives]]
 
 
-:: Ivex Extraction Archive Display {"position":"2000,1025","size":"100,100"}
+:: Ivex Extraction Archive Display {"position":"2325,1000","size":"100,100"}
 <<if $extractionIvexEnding>>\
   <b>[[Ending: Energy Supply|Ivex Extraction Archive]]</b>
 <<else>>\
@@ -6133,7 +6121,7 @@ Or, at least, he will try to.
 <</if>>\
 
 
-:: Ivex Extraction Archive [noreturn] {"position":"2100,1025","size":"100,100"}
+:: Ivex Extraction Archive {"position":"2325,1100","size":"100,100"}
 <<include "Extraction Vengeance (Text)">>
 
 <<include "Ivex Extraction 1 (Text)">>
@@ -6153,7 +6141,7 @@ Or, at least, he will try to.
 [[Return to the Archives|Archives]]
 
 
-:: Ivex Punishment Archive Display {"position":"2000,775","size":"100,100"}
+:: Ivex Punishment Archive Display {"position":"2075,1000","size":"100,100"}
 <<if $personalEnding>>\
   <b>[[Ending: Punishment|Ivex Punishment Archive]]</b>
 <<else>>\
@@ -6164,7 +6152,7 @@ Or, at least, he will try to.
 <</if>>\
 
 
-:: Ivex Punishment Archive [noreturn] {"position":"2100,775","size":"100,100"}
+:: Ivex Punishment Archive {"position":"2075,1100","size":"100,100"}
 The wolf, still holding Ivex up by the scruff, lifts him higher so that he can look at the unconscious feline's face. Then, without hesitation, $name brings a paw up and gives the panther's muzzle a hard slap.
 
 Ivex shakes, awakening with a grunt and a mewl. The feline blinks, his feet wiggling up in the air and he looks around confused for a moment before his eyes focus on the large wolf holding him up. The sight of him trying to do something about it, only to realize that his arms are bound behind his back and his bound feet can't even touch the floor makes for quite an amusing scene.
@@ -6544,8 +6532,8 @@ Or, at least, he will try to.
 [[Return to the Archives|Archives]]
 
 
-:: Credits [noreturn] {"position":"1225,450","size":"100,100"}
-[[Return to the game|$return]]
+:: Credits {"position":"2600,700","size":"100,100"}
+<<link "Return to the game" $return>>
 
 The writing and development of this interactive story was made by me, [[Sleth|http://www.slethstories.com/]].
 
@@ -6676,5 +6664,116 @@ And, of course, also an honorable mention to everyone that has supported me and 
 </ul>\
 
 Thank you so much!
+
+
+:: Choose Character {"position":"2500,325","size":"100,100"}
+XXX Drekkar sketch
+XXX Nero sketch
+
+[[Continue as Drekkar|Wolf Warrior Chosen]]
+[[Continue as Nero|Nero Chosen]]
+
+
+:: Nero Chosen [restart] {"position":"3800,400","size":"100,100"}
+<<include [[Nero 1F Init]]>>\
+
+XXX Nero fuller description
+
+[[Continue|Nero 1F]]
+
+
+:: Nero 1F [hub] {"position":"3800,600","size":"100,100"}
+<!--
+Each 1F module can add actions, which are rendered below.
+-->\
+<<set $nero1_actions = []>>\
+<<include [[Nero 1F Candle]]>>\
+<<include [[Nero 1F Focus]]>>\
+<<include [[Nero 1F Ivex]]>>\
+\
+<<silently>>
+	<<if $nero1_actions.length === 0>>
+    	<<set $nero1_actions = ["You found a bug|Nero 1F Bug"]>>
+        [[Nero 1F Bug]]
+    <</if>>
+<</silently>>\
+<div class="action-box">\
+  <ul class="actions">\
+  	<<for _action range $nero1_actions>>\
+    	<<set _parts = _action.split("|")>>\
+    	<li><<link _parts[0] _parts[1]>><</link>></li>\
+	<</for>>\
+  </ul>\
+</div>\
+
+
+:: Nero 1F Init {"position":"3900,400","size":"100,100"}
+<<silently>>
+<!--
+Floor 1 is on a clock, because Ivex gets an alert at a fixed time.
+"Player looks at something" takes 1 tick. Other actions take more.
+Ivex's actions follow the clock, but his actions can be delayed and
+modified by player actions.
+The lust candle also uses the clock.
+-->
+<<set $nero1_clock = 0>>
+<<set $nero1_ivex_alert_time = 20>>
+<<set $nero1_ivex_alerted = false>>
+
+<!--
+These are default durations for various actions.
+Specific actions can override these to take more or less time.
+-->
+<<set $nero1_casting_duration = 4>>
+<<set $nero1_talking_duration = 4>>
+<<set $nero1_ivex_action_duration = 4>>
+
+<!--
+The lust candle increases Nero's lust from 0 to 100.
+The lust meter is nonlinear:
+80% of the meter is lust 0-60 (low_lust).
+80%-90% is lust 60-80 (mid_lust).
+The last 10% is lust 80-90 (high_lust).
+At 90, the meter is full and starts throbbing.
+Crossing the high_lust threshold enables high-lust logic.
+When Nero is breathing normally, lust increases by lust_rate each tick.
+When heavy pain is true, lust increases by heavy_lust_rate each tick.
+-->
+<<set $nero1_candle_active = false>>
+<<set $nero1_lust = 0>>
+<<set $nero1_low_lust = 60>>
+<<set $nero1_mid_lust = 80>>
+<<set $nero1_high_lust = 90>>
+<<set $nero1_breathing = true>>
+<<set $nero1_lust_rate = 2>>
+<<set $nero1_heavy_pain = false>>
+<<set $nero1_heavy_pain_rate = 4>>
+
+<!--
+XXX Ivex mood variables
+XXX Ivex interrupt variables
+XXX Nero knowledge variables
+-->
+
+<</silently>>\
+
+
+:: Nero 1F Bug {"position":"3600,600","size":"100,100"}
+XXX found a bug
+
+
+:: testing {"position":"3800,200","size":"100,100"}
+
+
+:: Nero 1F Candle {"position":"3800,725","size":"100,100"}
+XXX candle
+
+
+:: Nero 1F Focus {"position":"3925,725","size":"100,100"}
+XXX focus
+
+
+:: Nero 1F Ivex {"position":"3675,725","size":"100,100"}
+XXX Ivex
 
 
