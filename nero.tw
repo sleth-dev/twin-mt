@@ -13,7 +13,7 @@ The Mage's Tower (Nero)
 		"hub": "purple",
 		"incomplete": "red",
 		"key": "red",
-		"noreturn": "red",
+		"noreturn": "yellow",
 		"restart": "green",
 		"text": "blue"
 	},
@@ -373,6 +373,12 @@ Config.ui.stowBarInitially = true;
 Config.history.controls = false;
 
 $(document.head).append("<link rel='icon' href='images/mt_icon_tr.png'>");
+
+$(document).on(':passagestart', function (ev) {
+	if (! ev.passage.tags.contains("noreturn")) {
+		State.variables.return = ev.passage.title;
+	}
+});
 
 /* Health Bar code - Start */
 window.Health = function (CurHP, MaxHP, BarID, Horizontal, Container) {
@@ -2482,8 +2488,8 @@ To change the adventurer's fate, you can...
 </div>
 
 
-:: Archives {"position":"2400,700","size":"100,100"}
-<<link "Return to the game" $return>>
+:: Archives [noreturn] {"position":"2400,700","size":"100,100"}
+<<link "Return to the game" $return>><</link>>
 
 <h1>Archives</h1>
 Welcome to the Mage's Tower Archives.
@@ -2745,7 +2751,7 @@ To change the adventurer's fate, you can...
 [[Continue|Extraction End 1]]
 
 
-:: Interrogation Archive {"position":"1700,1100","size":"100,100"}
+:: Interrogation Archive [noreturn] {"position":"1700,1100","size":"100,100"}
 <<include "Ivex Torture 1 (Text)">>
 
 <<include "Ivex Torture 2 (Text)">>
@@ -3275,7 +3281,7 @@ For some reason, that smell feels incredibly <b>arousing</b>. If he could look a
 No matter how much he tries, $name cannot find a way out. He's trapped there grinding herbs and getting aroused by it until who knows how long after that, Ivex himself opens the door.
 
 
-:: Interrogation Archive Display {"position":"1700,1000","size":"100,100"}
+:: Interrogation Archive Display [noreturn] {"position":"1700,1000","size":"100,100"}
 <<silently>>\
   <<if $interrogationEndingFreeze && $interrogationEndingShock>>
     <<set $interrogationSpell = 'freeze'>>
@@ -3442,7 +3448,7 @@ With one sudden move, the lion's hand reaches over his head. The wolf feels some
 $name blinks. Through his fucking, he didn't realize the lion had freed his other hand, reached out for the pendant and now managed to place it over his neck.
 
 
-:: Enthrallment Archive {"position":"1825,1100","size":"100,100"}
+:: Enthrallment Archive [noreturn] {"position":"1825,1100","size":"100,100"}
 <<if $lionFuck>>\
 <<include "Lion Fight (Text)">>
 
@@ -3474,7 +3480,7 @@ But there's no decision to be made. After being exposed to that candle for so lo
 [[Return to the Archives|Archives]]
 
 
-:: Enthrallment Archive Display {"position":"1825,1000","size":"100,100"}
+:: Enthrallment Archive Display [noreturn] {"position":"1825,1000","size":"100,100"}
 <<silently>>\
   <<set $lionFuck = false>>
 <</silently>>\
@@ -4407,7 +4413,7 @@ With a drawn-out moan, the wolf's exposed cock starts pulsing inside the slime a
 It doesn't stop there, and neither does the slime. All the stimulation keeps going as the wolf's orgasm hits, shooting jet after jet of cum into the slime. His seed seems to be 'caught' by the blob. The white, pearly substance is gathered just above his cock, melding together as the wolf is encouraged to shoot more and more. The slime keeps milking him, kneading his cock, his knot, and inflicting pleasure all around his body until the wolf's cock is reduced to quick throbs, spurting the last remnants of his orgasm. Only then does the slime start slowing down, although the stimulation doesn't truly stop. It allows the wolf to catch his breath, though. And as he looks down…
 
 
-:: Extraction Archive Display {"position":"1950,1000","size":"100,100"}
+:: Extraction Archive Display [noreturn] {"position":"1950,1000","size":"100,100"}
 <<silently>>\
   <<if $extractionGentleEnd && $extractionForcefulEnd>>
     <<set $extractionVariant = 'gentle'>>
@@ -4456,7 +4462,7 @@ It doesn't stop there, and neither does the slime. All the stimulation keeps goi
 <</if>>\
 
 
-:: Extraction Archive {"position":"1950,1100","size":"100,100"}
+:: Extraction Archive [noreturn] {"position":"1950,1100","size":"100,100"}
 <<include "Pulled In (Text)">>
 
 <<include "Pulled Further (Text)">>
@@ -6075,7 +6081,7 @@ With a handsome amount of gold in his hands, the wolf moves on. The life of an a
 Or, at least, he will try to.
 
 
-:: Ivex Enthrallment Archive Display {"position":"2200,1000","size":"100,100"}
+:: Ivex Enthrallment Archive Display [noreturn] {"position":"2200,1000","size":"100,100"}
 <<if $enthralmentIvexEnding>>\
   <b>[[Ending: A New Servant|Ivex Enthrallment Archive]]</b>
 <<else>>\
@@ -6086,7 +6092,7 @@ Or, at least, he will try to.
 <</if>>\
 
 
-:: Ivex Enthrallment Archive {"position":"2200,1100","size":"100,100"}
+:: Ivex Enthrallment Archive [noreturn] {"position":"2200,1100","size":"100,100"}
 <<include "Enthrallment Vengeance (Text)">>
 
 <<include "Ivex Enthrallment 1 (Text)">>
@@ -6110,7 +6116,7 @@ Or, at least, he will try to.
 [[Return to the Archives|Archives]]
 
 
-:: Ivex Extraction Archive Display {"position":"2325,1000","size":"100,100"}
+:: Ivex Extraction Archive Display [noreturn] {"position":"2325,1000","size":"100,100"}
 <<if $extractionIvexEnding>>\
   <b>[[Ending: Energy Supply|Ivex Extraction Archive]]</b>
 <<else>>\
@@ -6121,7 +6127,7 @@ Or, at least, he will try to.
 <</if>>\
 
 
-:: Ivex Extraction Archive {"position":"2325,1100","size":"100,100"}
+:: Ivex Extraction Archive [noreturn] {"position":"2325,1100","size":"100,100"}
 <<include "Extraction Vengeance (Text)">>
 
 <<include "Ivex Extraction 1 (Text)">>
@@ -6141,7 +6147,7 @@ Or, at least, he will try to.
 [[Return to the Archives|Archives]]
 
 
-:: Ivex Punishment Archive Display {"position":"2075,1000","size":"100,100"}
+:: Ivex Punishment Archive Display [noreturn] {"position":"2075,1000","size":"100,100"}
 <<if $personalEnding>>\
   <b>[[Ending: Punishment|Ivex Punishment Archive]]</b>
 <<else>>\
@@ -6152,7 +6158,7 @@ Or, at least, he will try to.
 <</if>>\
 
 
-:: Ivex Punishment Archive {"position":"2075,1100","size":"100,100"}
+:: Ivex Punishment Archive [noreturn] {"position":"2075,1100","size":"100,100"}
 The wolf, still holding Ivex up by the scruff, lifts him higher so that he can look at the unconscious feline's face. Then, without hesitation, $name brings a paw up and gives the panther's muzzle a hard slap.
 
 Ivex shakes, awakening with a grunt and a mewl. The feline blinks, his feet wiggling up in the air and he looks around confused for a moment before his eyes focus on the large wolf holding him up. The sight of him trying to do something about it, only to realize that his arms are bound behind his back and his bound feet can't even touch the floor makes for quite an amusing scene.
@@ -6532,8 +6538,8 @@ Or, at least, he will try to.
 [[Return to the Archives|Archives]]
 
 
-:: Credits {"position":"2600,700","size":"100,100"}
-<<link "Return to the game" $return>>
+:: Credits [noreturn] {"position":"2600,700","size":"100,100"}
+<<link "Return to the game" $return>><</link>>
 
 The writing and development of this interactive story was made by me, [[Sleth|http://www.slethstories.com/]].
 
