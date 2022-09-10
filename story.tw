@@ -16,7 +16,7 @@ The Mage's Tower
 		"start": "green",
 		"text": "blue"
 	},
-	"zoom": 1
+	"zoom": 0.6
 }
 
 
@@ -263,28 +263,28 @@ ul.actions li {
 
 /* Horizontal Health Bar - Start */
 .hzbarbkg {  /* default class for all horizontal bar backgrounds */
-	position: relative;
-	height: 15px;
-	width: 50%;
-	background-color: #111;
-	background-image: linear-gradient(to right, rgba(68, 68, 68, 0.5), rgba(34, 34, 34, 0.5) 5px), linear-gradient(to bottom, rgba(68, 68, 68, 0.5), rgba(0, 0, 0, 0) 5px), linear-gradient(to left, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 5px), linear-gradient(to top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 5px);
+    position: relative;
+    height: 15px;
+    width: 50%;
+    background-color: #111;
+    background-image: linear-gradient(to right, rgba(68, 68, 68, 0.5), rgba(34, 34, 34, 0.5) 5px), linear-gradient(to bottom, rgba(68, 68, 68, 0.5), rgba(0, 0, 0, 0) 5px), linear-gradient(to left, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 5px), linear-gradient(to top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 5px);
     border-radius: 10px;
-	z-index: 10;
-	visibility: visible;
+    z-index: 10;
+    visibility: visible;
 }
 .hzbar {  /* default class for all horizontal bars */
-	position: absolute;
-	bottom: 0px;
-	left: 0px;
-	height: 15px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 15px;
     border-radius: 10px;
-	background-color: transparent;
-	background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 5px), linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 5px), linear-gradient(to right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 5px), linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 5px);
-	z-index: 20;
-	transition: width ease 1s, background-color ease 1s;
+    background-color: transparent;
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 5px), linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 5px), linear-gradient(to right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 5px), linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 5px);
+    z-index: 20;
+    transition: width ease 1s, background-color ease 1s;
 }
 #horizontalhealthbar {  /* colors for specific fixed-color horizontal bars */
-	background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 5px), linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 5px), linear-gradient(to right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 5px), linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 5px), radial-gradient( circle at bottom right, #a1001e, #a1001e 60% );
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 5px), linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 5px), linear-gradient(to right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 5px), linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 5px), radial-gradient( circle at bottom right, #a1001e, #a1001e 60% );
 }
 .pulsingbar {
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
@@ -293,20 +293,20 @@ ul.actions li {
 }
 
 @keyframes pulse {
-	0% {
-		transform: scale(1.05);
-		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
-	}
+    0% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    }
 
-	70% {
-		transform: scale(1);
-		box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
-	}
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    }
 
-	100% {
-		transform: scale(1.05);
-		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-	}
+    100% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
 }
 /* Horizontal Health Bar - End */
 
@@ -376,44 +376,44 @@ $(document.head).append("<link rel='icon' href='images/mt_icon_tr.png'>");
 predisplay["Menu Return"] = function (taskName) {
 	if (! tags().contains("noreturn")) {
 		State.variables.return = passage();
-	}
+    }
 };
 
 /* Health Bar code - Start */
 window.Health = function (CurHP, MaxHP, BarID, Horizontal, Container) {
-	if (Container == undefined) {
-		console.log("Container undefined!!");
-		Container = document;
-	}
-	var HP = parseInt((CurHP / MaxHP) * 100).clamp(0, 100);
-	var BarElement = $(Container).find("#" + BarID);
-	if (Horizontal) {
-		BarElement.css({ width: HP + "%" });
-	} else {
-		BarElement.css({ height: HP + "%" });
-	}
-	//BarElement.attr("title", CurHP + "/" + MaxHP);
-	//$(Container).find("#" + BarID + "bkg").attr("title", CurHP + "/" + MaxHP + " HP");
+    if (Container == undefined) {
+        console.log("Container undefined!!");
+        Container = document;
+    }
+    var HP = parseInt((CurHP / MaxHP) * 100).clamp(0, 100);
+    var BarElement = $(Container).find("#" + BarID);
+    if (Horizontal) {
+        BarElement.css({ width: HP + "%" });
+    } else {
+        BarElement.css({ height: HP + "%" });
+    }
+    //BarElement.attr("title", CurHP + "/" + MaxHP);
+    //$(Container).find("#" + BarID + "bkg").attr("title", CurHP + "/" + MaxHP + " HP");
 };
 /* Health Bar code - End */
 
 /* Arousal Bar Macro - Start */
 macros.arousalbar = {
-	handler: function(place, macroName, params, parser) {
-		var CurArousal = params[0];
-		var MaxArousal = params[1];
-		
-		$(document).one(':passagerender', function (ev) {
-			Health(CurArousal, MaxArousal, "horizontalhealthbar", true, ev.content);
-		});
-		
-		new Wikifier(place, "<div id=\"horizontalhealthbarbkg\" class=\"hzbarbkg\"><div id=\"horizontalhealthbar\" class=\"hzbar\"></div></div>");
-	}
+    handler: function(place, macroName, params, parser) {
+        var CurArousal = params[0];
+        var MaxArousal = params[1];
+        
+        $(document).one(':passagerender', function (ev) {
+            Health(CurArousal, MaxArousal, "horizontalhealthbar", true, ev.content);
+        });
+        
+        new Wikifier(place, "<div id=\"horizontalhealthbarbkg\" class=\"hzbarbkg\"><div id=\"horizontalhealthbar\" class=\"hzbar\"></div></div>");
+    }
 }
 /* Arousal Bar Macro - End */
 
 
-:: Bound [start] {"position":"24,188","size":"100,100"}
+:: Bound {"position":"2500,175","size":"100,100"}
 The sound of snapping fingers feels distant at first. As consciousness returns, it grows closer and closer until it starts becoming loud.
 
 The snapping comes from right beside his ear. The adventurer frowns, but consciousness has not returned in its entirety just yet. He feels as if... as if he had fallen down a well. At least that's all he can remember, sort of. It was bright, it was sudden, and now...
@@ -425,25 +425,25 @@ The bound wolf only lets out a pained groan at first. Everything hurts. Slowly b
 [[Continue|Wolf Warrior Chosen]]
 
 
-:: StoryAuthor {"position":"24,8","size":"100,100"}
+:: StoryAuthor {"position":"1825,150","size":"100,100"}
 by <a href="http://www.slethstories.com/" target="_blank">Sleth</a>
 
 
-:: StoryBanner {"position":"248,8","size":"100,100"}
+:: StoryBanner {"position":"2075,150","size":"100,100"}
 <img src="images/logo_tr.png" width="220">\
 <div class="divider div-transparent div-arrow-down"></div>
 
 
-:: StoryDisplayTitle {"position":"137,8","size":"100,100"}
+:: StoryDisplayTitle {"position":"1950,150","size":"100,100"}
 The Mage's Tower
 
 
-:: StoryMenu {"position":"103,2545","size":"100,100"}
+:: StoryMenu {"position":"2500,500","size":"100,100"}
 [[Archives]]
 [[Credits]]
 
 
-:: Soft Awakening {"position":"543,221","size":"100,100"}
+:: Soft Awakening {"position":"900,625","size":"100,100"}
 <<set $warrior = true>>\
 It takes some effort, but the wolf opens his eyes. It takes a few seconds to regain their focus. At the same time, the stiffness of his body feels worse than ever. This nap was anything but comfortable.
 
@@ -467,7 +467,7 @@ He is also smirking triumphantly.
 [[Continue|Awakened]]
 
 
-:: Rough Awakening {"position":"543,331","size":"100,100"}
+:: Rough Awakening {"position":"1025,625","size":"100,100"}
 <<set $rough_awakening = true>>\
 \
 Sleeping is easier. The wolf groans, but goes limp again. The sweet embrace of darkness feels good. Maybe just for a little while longer...
@@ -497,7 +497,7 @@ He is also smirking triumphantly.
 [[Continue|Awakened]]
 
 
-:: Ivex Description {"position":"748,114","size":"100,100"}
+:: Ivex Description {"position":"750,825","size":"100,100"}
 As advertised, Ivex is a black panther.
 
 The wolf had never seen the mage outside of the drawings in his wanted poster, but on those he looked to be more on the slim side, as most magic users are. The mage that stands before the bound adventurer, however, is not slim at all. Though not extremely muscular, there are clear outlines of them on the visible parts of his arms and legs. His chest is broad, and the panther is remarkably tall for a feline.
@@ -509,7 +509,7 @@ Unlike most mages as well, Ivex doesn't wear robes, but rather regular clothing 
 [[Return|Awakened]]
 
 
-:: Office Description {"position":"626,112","size":"100,100"}
+:: Office Description {"position":"750,700","size":"100,100"}
 The mage's office does not look special in itself, but it is rather curious.
 
 The office is sleek and fancy with luxurious furniture. Strange objects adorn the cabinets here or there, but most of all the wolf can see bookcases filled with books about magic. At its center and off to the wolf's side, a large desk with the basics can be seen: parchment, ink, quill and stacks of papers and letters spread over the table.
@@ -521,7 +521,7 @@ Another curious aspect to the wolf is that, off to the side, he can see a window
 [[Return|Awakened]]
 
 
-:: Awakened {"position":"677,247","size":"100,100"}
+:: Awakened {"position":"950,750","size":"100,100"}
 "Finally awake," the panther continues, "most people put up more of a fight when they are foolish enough to hunt me."
 
 The wolf's eyes follow the panther, still having trouble focusing properly, but slowly the $class regains his proper sight. For the first time, the wolf is able to see that the cross he's bound to looks out of place in some kind of [[office|Office Description]].
@@ -551,36 +551,13 @@ The panther stares at the wolf expecting an answer.
 
 <div class="action-box">\
   <ul class="actions">\
-	<li>[['"You won\'t get anything out of me!"'|Refusal]]</li>
-	<li>[['"...If I tell you what you want to know, then what?"'|Consideration]]	  </li>
+    <li>[['"You won\'t get anything out of me!"'|Refusal]]</li>
+    <li>[['"...If I tell you what you want to know, then what?"'|Consideration]]	  </li>
   </ul>\
 </div>
 
 
-:: Choose your character {"position":"110,351","size":"100,100"}
-CHARACTER SELECTION
-
-[[Wolf Warrior|Wolf Warrior Character Sheet]]
-[[Wolf Mage|Wolf Mage Character Sheet]]
-
-
-:: Wolf Warrior Character Sheet [incomplete] {"position":"249,276","size":"100,100"}
-(wolf warrior character sheet display)
-
-
-[[Return to character selection|Choose your character]]
-[[Continue as Drekkar|Wolf Warrior Chosen]]
-
-
-:: Wolf Mage Character Sheet [incomplete] {"position":"247,396","size":"100,100"}
-(wolf mage character sheet display)
-
-
-[[Return to character selection|Choose your character]]
-[[Continue as Nero|Wolf Mage Chosen]]
-
-
-:: Wolf Warrior Chosen {"position":"398,178","size":"100,100"}
+:: Wolf Warrior Chosen {"position":"950,500","size":"100,100"}
 <<set $name = "Drekkar">>\
 <<set $class = "warrior">>\
 <<set $warrior = true>>\
@@ -594,42 +571,25 @@ Drekkar's muscles, usually his most powerful weapon, ache. They feel stiff. An a
 
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[Make an effort to wake up.|Soft Awakening]]</li>
-	<li>[[...Cling to the comfort of sleep.|Rough Awakening]]</li>
+    <li>[[Make an effort to wake up.|Soft Awakening]]</li>
+    <li>[[...Cling to the comfort of sleep.|Rough Awakening]]</li>
   </ul>\
 </div>
 
 
-:: Wolf Mage Chosen {"position":"398,300","size":"100,100"}
-<<set $name = "Nero">>\
-<<set $class = "mage">>\
-<<set $warrior = false>>\
-<<set $mage = true>>\
-<<set $rough_awakening = false>>\
-
-Nero's mind, usually his most powerful weapon, feels muddled. Thinking straight is a struggle, but little by little the wolf's thoughts start to reorganize themselves. Whatever he was under must have been either a very powerful anethesiac or a deep sleep spell of some kind. Although the symptoms of light vertigo also suggest some sort of teleportation...
-
-Thinking hurts. This is too much to try to reason in this state. Nero lets out another small groan...
-
-"Last chance, buddy. Wake up, or else..." the voice says again. The wolf can hear a mix of amusement and impatience in it...
-
-[[Make an effort to wake up|Soft Awakening]]
-[[Cling to the comfort of sleep|Rough Awakening]]
-
-
-:: Refusal {"position":"816,223","size":"100,100"}
+:: Refusal {"position":"900,875","size":"100,100"}
 Much to <<print $name>>'s delight, the reaction at least seems to wipe that smirk out of the panther's face for a second. Only for a second, though, as a different kind of smile opens up. A smile that makes the wolf's ears lower themselves even if just a little.
 
 "I was kind of hoping you would say that. I enjoy the brave types very much." The panther approaches, closing in the last distance between him and the wolf.
 
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[Growl at Ivex.|Molesting]]</li>
+    <li>[[Growl at Ivex.|Molesting]]</li>
   </ul>\
 </div>
 
 
-:: Consideration {"position":"816,327","size":"100,100"}
+:: Consideration {"position":"1025,875","size":"100,100"}
 "Aahh... the good boy type," the panther muses. "I am ever so glad. Or am I? Perhaps we won't have too much trouble here after all."
 
 The panther took a step forward and opened a sinister smile. "Unfortunately, I regret to say that regardless of your collaboration, you won't be getting out of here. I have plans for you."
@@ -642,12 +602,12 @@ With a spring to his step, the panther approaches, closing in the last distance 
 
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[Growl at Ivex.|Molesting]]</li>
+    <li>[[Growl at Ivex.|Molesting]]</li>
   </ul>\
 </div>
 
 
-:: StoryInit {"position":"363,9","size":"100,100"}
+:: StoryInit {"position":"2200,150","size":"100,100"}
 <<set $name = "Drekkar">>\
 <<set $class = "warrior">>\
 <<set $warrior = true>>\
@@ -707,20 +667,20 @@ With a spring to his step, the panther approaches, closing in the last distance 
 <<append "#ui-bar-body">>
   <div id="ui-bar-footer">
     <span>
-	  <a class="footer-element" target="_blank" href="https://www.patreon.com/sleth"><img alt="Patreon" src="images/pa_logo.png" height="30"></a>
+      <a class="footer-element" target="_blank" href="https://www.patreon.com/sleth"><img alt="Patreon" src="images/pa_logo.png" height="30"></a>
 
-	  <a class="footer-element" target="_blank" href="https://twitter.com/slethwulf"><img alt="Twitter" src="images/tw_logo.png" height="30"></a>
+      <a class="footer-element" target="_blank" href="https://twitter.com/slethwulf"><img alt="Twitter" src="images/tw_logo.png" height="30"></a>
 
-	  <a class="footer-element" target="_blank" href="https://www.furaffinity.net/user/sleth/"><img alt="FurAffinity" src="images/fa_logo.png" height="30"></a>
+      <a class="footer-element" target="_blank" href="https://www.furaffinity.net/user/sleth/"><img alt="FurAffinity" src="images/fa_logo.png" height="30"></a>
 
-	  <a class="footer-element" target="_blank" href="https://sleth.sofurry.com/"><img alt="SoFurry" src="images/sf_logo.png" height="30"></a>
-	</span>
+      <a class="footer-element" target="_blank" href="https://sleth.sofurry.com/"><img alt="SoFurry" src="images/sf_logo.png" height="30"></a>
+    </span>
   </div>
 <</append>>
 <</nobr>>
 
 
-:: Molesting {"position":"960,271","size":"100,100"}
+:: Molesting {"position":"950,1000","size":"100,100"}
 <<print $name>> opens a warning growl, but even though the wolf tugs against the restraints of the cross he's bound to, there is nothing that can be done against the feeling of extreme vulnerability. The panther, the enemy, stands right there, well within the range of touch, and all the wolf can do is remain there with his limbs spread wide.
 
 "Look at you, wolf. Such a powerful <<print $class>>..." The panther licks his lips. His hand comes to the wolf's chest. His touch feels invasive as he places his hand upon <<print $name>>'s broad pectorals and feels it up. All $name can do is snarl once more, but the wolf knows that his growling is nothing but a fake threat at that moment. There has to be a way to turn the tables on that damned mage, but how...?
@@ -754,7 +714,7 @@ And simply snaps his fingers.
 [[Continue|Naked]]
 
 
-:: Naked {"position":"1092,274","size":"100,100"}
+:: Naked {"position":"1075,1000","size":"100,100"}
 In an instant, all the wolf feels is... bare.
 
 With an urgent look, $name looks down and realizes that, just like that, without moving an inch from his bound state, he now stands there not only bound, but also completely and entirely <b>naked</b>.
@@ -780,7 +740,7 @@ The panther then turns away, thankfully, but to reach into one of the cabinets s
 [[Continue|Candle]]
 
 
-:: Candle {"position":"1074,421","size":"100,100"}
+:: Candle {"position":"1200,1000","size":"100,100"}
 <<set $FurtherDefiance = false>>\
 ...a candle.
 
@@ -807,12 +767,12 @@ The panther approaches again.
 <div class="action-box">\
   <ul class="actions">\
 	<li>[["Whatever you're trying to do, it won't work!" Keep holding your breath in defiance.|Hold Breath Defiantly]]</li>
-	<li>[[He has a point. Breathe out and at least give him a warning growl.|Growl Defiantly]]</li>
+    <li>[[He has a point. Breathe out and at least give him a warning growl.|Growl Defiantly]]</li>
   </ul>\
 </div>
 
 
-:: Hold Breath Defiantly {"position":"1067,555","size":"100,100"}
+:: Hold Breath Defiantly {"position":"1325,1000","size":"100,100"}
 $name keeps holding his breath, but it becomes harder to do so as Ivex steps towards him again. The feeling of vulnerability towards the panther grows tenfold when he is within the range of touch. Bound to the cross in a spread position, holding his breath and now completely naked, it feels even worse than before.
 
 "You really are something else," the panther chuckles, "thinking you can defy me. Most of them are regretting their actions and begging me to let them go at this point..."
@@ -843,15 +803,15 @@ Drekkar has years of training enduring pain, though. The thought of having his p
 
 <div class="action-box">\
   <ul class="actions">\
-  	<<if $rough_awakening == false || ($rough_awakening == true && $warrior == true)>>\
-	<li>[[Defy Ivex and keep holding his breath.|Further Defiance]]</li>
+      <<if $rough_awakening == false || ($rough_awakening == true && $warrior == true)>>\
+    <li>[[Defy Ivex and keep holding his breath.|Further Defiance]]</li>
 <</if>>\
-	<li>[[There is no choice. Breathe out and at least give him a warning growl.|Growl Defiantly]]</li>
+    <li>[[There is no choice. Breathe out and at least give him a warning growl.|Growl Defiantly]]</li>
   </ul>\
 </div>
 
 
-:: Growl Defiantly {"position":"927,480","size":"100,100"}
+:: Growl Defiantly {"position":"1325,1125","size":"100,100"}
 "You look cute when you growl. The last defiant adventurer I had was a lion. He couldn't growl like you, but he sure as hell could roar. Oh, how he roared when he was in your place breathing in what you're breathing..."
 
 Ivex lets out a small laugh. The candle continues to burn off to the side and the spicy smell seems stronger than before. <<print $name>>'s canine nose can detect even the subtleties of the smell and, indeed, it smells like nothing he has ever felt before.
@@ -877,7 +837,7 @@ The panther's words cease suddenly when Ivex turns his head back in a sudden mov
 [[Continue|Alarm]]
 
 
-:: Further Defiance {"position":"997,678","size":"100,100"}
+:: Further Defiance {"position":"1450,1000","size":"100,100"}
 The seconds go by and $name makes every effort to keep holding his breath. Eyes locked, the panther seems to take notice of the active defiance. It is with much satisfaction that the wolf can see his smile fading, even if just a little, in annoyance. The thought of irritating the cocky mage is enough to bring the bound wolf some pleasure in this terrible situation.
 
 Unfortunately, that pleasure soon becomes radiating, blinding pain. In a swift move, the panther's hand holding the wolf's balls closes in a tight grip. The wolf's sensitive nuts get squeezed inside the panther's relentless paw.
@@ -898,12 +858,12 @@ Ivex's hand returns to the wolf's thigh. The invasive touch makes the wolf grow 
 
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[Give him a weak warning growl...|Growl Defiantly]]</li>
+    <li>[[Give him a weak warning growl...|Growl Defiantly]]</li>
   </ul>\
 </div>
 
 
-:: Alarm {"position":"795,503","size":"100,100"}
+:: Alarm {"position":"1325,1250","size":"100,100"}
 Thankfully, the panther then lets go of the wolf entirely. Before turning towards the door, $name can see that Ivex is frowning.
 
 "How unfortunate," the mage finally says. "An interruption. Right when things were about to get interesting! What a busy day..."
@@ -923,7 +883,7 @@ Then, poof. In the blink of an eye, the mage disappears, leaving $name alone. Bo
 [[Continue|Alone]]
 
 
-:: Alone {"position":"672,500","size":"100,100"}
+:: Alone {"position":"1200,1250","size":"100,100"}
 With the panther mage gone, all that remains is silence. The wolf finds himself alone in the office and bound at its center like some sort of depraved display. Looking down at himself, <<print $name>>'s ears fold back a little.
 
 Jutting from his sheath, his erection stands at full mast now. It even throbs in the air every now and then. The canine-shaped, tapered member practically glows in its bright red, veiny shape. Even the wolf's sheath starts to bulge a little as his knot threatens to start growing as well.
@@ -943,7 +903,7 @@ He had to find a way to escape. Ivex being gone gives him his best chance! But..
 [[Continue|The Candle]]
 
 
-:: The Candle {"position":"549,466","size":"100,100"}
+:: The Candle {"position":"1075,1250","size":"100,100"}
 Bound and alone in the room without Ivex's cocky blabbering as a distraction, $name can feel the effects of the candle more sharply.
 
 It burns there on the corner, innocently, yet the magically-enhanced scent that the candle produces, fills the air with, grows stronger by the minute. Every breath the wolf takes is filled with that strong scent. It heats up the canine's sensitive nose and, more than that, it heats up his very core.
@@ -965,7 +925,7 @@ He needs to escape... before the crazed mage returns and before that thing's mag
 [[Continue|Escape Options]]
 
 
-:: Escape Options {"position":"399,454","size":"100,100"}
+:: Escape Options [restart] {"position":"525,1625","size":"100,100"}
 <<silently>>
 <<set $CurArousal = 10>>
 <<set $observation1 = false>>
@@ -1008,14 +968,14 @@ A way out. There must be a way out! There isn't much choice left, but to...
 
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[Keep looking around the room for a solution.|Observation 1]]</li>
-	<li>[[Try and pull at the leather bindings with vigor!|Struggle 1]]</li>
+    <li>[[Keep looking around the room for a solution.|Observation 1]]</li>
+    <li>[[Try and pull at the leather bindings with vigor!|Struggle 1]]</li>
   </ul>\
 </div>
 <</timed>>\
 
 
-:: Observation 1 {"position":"237,582","size":"100,100"}
+:: Observation 1 {"position":"450,1775","size":"100,100"}
 As his eyes scan the room for the tenth time, the wolf's ears drop low. His hope starts to wane, but as his vision sweeps over the left side with care, something catches his eye.
 
 It's a mirror. A small, handheld mirror resting on its side casually against \
@@ -1036,7 +996,7 @@ The crystals are, of course, completely unreachable to the naked wolf bound to t
 <<if $escapeActions>>\
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[Reevaluate his options.|Escape Actions]]</li>
+    <li>[[Reevaluate his options.|Escape Actions]]</li>
   </ul>\
 </div>
 <<else>>\
@@ -1044,7 +1004,7 @@ The crystals are, of course, completely unreachable to the naked wolf bound to t
 <</if>>\
 
 
-:: Struggle 1 {"position":"456,583","size":"100,100"}
+:: Struggle 1 {"position":"600,1775","size":"100,100"}
 $name growls in frustration and tries, with more vehemence, to pull against the bindings with brute strength.
 
 Grunting with effort, the wolf puts all of his physical prowess behind the act. It takes quite a bunch of pulling and tugging, but while the leather bands wrapped around his wrists and ankles are as unyielding as the wood the cross is made of, the wolf does notice something.
@@ -1066,7 +1026,7 @@ Unfortunately, all the physical effort also served to quicken the wolf's breathi
 <<if $escapeActions>>\
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[Reevaluate his options.|Escape Actions]]</li>
+    <li>[[Reevaluate his options.|Escape Actions]]</li>
   </ul>\
 </div>
 <<else>>\
@@ -1074,7 +1034,7 @@ Unfortunately, all the physical effort also served to quicken the wolf's breathi
 <</if>>\
 
 
-:: Escape Actions [hub] {"position":"250,716","size":"200,200"}
+:: Escape Actions {"position":"475,1925","size":"200,200"}
 <<nobr>>
   <<set $escapeActions = true>>
   <<if $CurArousal > 90 && $CurArousal < 100>>
@@ -1083,7 +1043,7 @@ Unfortunately, all the physical effort also served to quicken the wolf's breathi
     <<set $CurArousal += 9>>
   <</if>>
   <<if $CurArousal >= 100>>
-	<<goto "Arousal Overwhelmed">>
+    <<goto "Arousal Overwhelmed">>
   <</if>>
 <</nobr>>
 Candle's Influence: <<arousalbar $CurArousal $MaxArousal>>
@@ -1098,7 +1058,7 @@ The candle still burns silently at the corner.
 <<if $CurArousal <= 30>>\
 The wolf's forced arousal feels... <span style="color:#46bb26">distracting</span>.
 <br><br>
-<<include "Arousal Level 1">>
+<<include "Arousal Level 1">> <!-- [[Arousal Level 1]] -->
 
 <<elseif $CurArousal > 30 && $CurArousal <= 50>>
 The wolf's forced arousal feels... <span style="color:#e7d778">gripping</span>.
@@ -1132,23 +1092,23 @@ There must be a way to get out of his bonds, but how?
 <div class="action-box">\
   <ul class="actions">\
     <<if $observation1>>\
-	  <li>[[Look around the room for a solution once more...|Observation 2]]</li>
-	<<else>>\
-	  <li>[[Look around the room for a solution.|Observation 1]]</li>
-	<</if>>\
-	<<if $struggle1>>\
-	  <li>[[Try harder to wear down the bindings with strength and effort!|Struggle 2]]</li>
-	<<else>>\
-	  <li>[[Try and pull at the leather bindings with vigor!|Struggle 1]]</li>
-	<</if>>\
-	or...
-	<li>[[Take a moment to gather his thoughts about everything learned so far...|Gather Thoughts]]</li>
+      <li>[[Look around the room for a solution once more...|Observation 2]]</li>
+    <<else>>\
+      <li>[[Look around the room for a solution.|Observation 1]]</li>
+    <</if>>\
+    <<if $struggle1>>\
+      <li>[[Try harder to wear down the bindings with strength and effort!|Struggle 2]]</li>
+    <<else>>\
+      <li>[[Try and pull at the leather bindings with vigor!|Struggle 1]]</li>
+    <</if>>\
+    or...
+    <li>[[Take a moment to gather his thoughts about everything learned so far...|Gather Thoughts]]</li>
   </ul>\
 </div>
 <</timed>>
 
 
-:: Arousal Level 1 {"position":"36,502","size":"100,100"}
+:: Arousal Level 1 {"position":"725,1925","size":"100,100"}
 Avoiding taking deep breaths, $name just tries his best not to think about the constant distraction throbbing between his legs. He can seldom help glancing down towards it, though. It's always within his field of vision and trying to jump to the front of his mind.
 
 The wolf's cock. It stands there, fully aroused. His knot has inflated some, although not completely, and having it still trapped inside his sheath brings the wolf some discomfort, but he tries not to think about that either.
@@ -1158,7 +1118,7 @@ Small jolts of pleasure keep coming from his cock, though. Every time he breathe
 The bead of pre-cum lingering at the very tip of his firm arousal glistens as a constant threat of how those very instincts might betray him.
 
 
-:: Arousal Level 2 {"position":"35,614","size":"100,100"}
+:: Arousal Level 2 {"position":"825,1925","size":"100,100"}
 It's getting harder and harder to resist. After breathing so much of the candle's foul air, the heat coursing inside the wolf now feels constant. His fur feels too warm and an urge to pant, to let his tongue loll out is always there, but he resists it to avoid breathing even more of the cursed affliction.
 
 The wolf's cock reflects his increased state of arousal. It stands rock hard, as erect as the wolf ever remembers feeling it, and the small veins on its bright red surface bulge ever so slightly as well from how incredibly aroused he feels. It throbs more often than before, pulsing alongside the wolf's quickened heartbeat while, at the same time, serving as a beacon that promises unending pleasure to the wolf's affected mind. The urge to touch it, to feel his fingers trailing over that sensitive surface, is crushing.
@@ -1166,7 +1126,7 @@ The wolf's cock reflects his increased state of arousal. It stands rock hard, as
 The lupine's knot bulges his sheath in a very uncomfortable way being pretty much fully grown. From its very tip, a tendril of pre-cum lingers. Another droplet soon comes, then slowly falls down to the floor below his bound self. It's constant now. Every instinct the wolf has is slowly turning towards one thing and one thing alone: sex.
 
 
-:: Arousal Level 3 {"position":"35,723","size":"100,100"}
+:: Arousal Level 3 {"position":"925,1925","size":"100,100"}
 Panting becomes inevitable. Every breath is like a new log thrown into a bonfire of arousal burning within the wolf. It's getting harder and harder to think, to keep his eyes away from his cock. It stands there, proud, pulsing. Pleasure without end promised, if he could just touch it...!
 
 The wolf's cock throbs constantly now. Its surface glistens against the candlelight, the wolf's length covered in his own pre-cum that now keeps oozing from his tip without pause. Some of it runs down his length and brings involuntary groans from the wolf, some of it drips down to the ground below. His knot has grown as big as it can get outside of a tie and, much to both the wolf's relief and dismay, it has managed to push his sheath back. The bulb of sensitive flesh, thick and large, pulses alongside the whole of the wolf's length just begging to be touched. To be shoved into something. Something tight, something that would-
@@ -1176,7 +1136,7 @@ With a shake of his head, $name tries his best to keep his focus away from his c
 It takes a growl to break himself off of it. With increased urgency, $name realizes he has to find a way out soon, or else he will for sure be doomed, just as Ivex said.
 
 
-:: Arousal Level 4 {"position":"33,832","size":"100,100"}
+:: Arousal Level 4 {"position":"725,2025","size":"100,100"}
 Every breath is fire. $name can feel his eyes tearing up, but is it from the way his whole body burns up, or out of sheer frustration due to being unable to sate his lust?
 
 This is the cruelest of tortures. The wolf's breathing is quick and short and, even as he actively tries to slow it down, it's impossible now. His blood feels hot, his heart races and, most of all... his cock.
@@ -1188,7 +1148,7 @@ It feels impossible, but for the wolf, he swears he can feel it. It's not quite 
 It's maddening! With bated breath, $name shakes his head and grits his teeth together trying his hardest to keep his focus away from his cock.
 
 
-:: Arousal Overwhelmed {"position":"147,1057","size":"100,100"}
+:: Arousal Overwhelmed [end] {"position":"925,2025","size":"100,100"}
 <<set $CurArousal = 110>>\
 Candle's Influence: <<arousalbar $CurArousal $MaxArousal>>
 <<done>>
@@ -1230,7 +1190,7 @@ With a laugh, Ivex withdraws his hand.
 <</timed>>
 
 
-:: Arousal Level 5 {"position":"34,944","size":"100,100"}
+:: Arousal Level 5 {"position":"825,2025","size":"100,100"}
 "FUCK!" $name yells in a growl. It's hard to even shift his eyes away from his cock. Small veins bulge from its side as the canine-shaped length almost glows as it throbs there in the air. Untouched. No stimulation, even though the wolf needs it. He NEEDS IT!
 
 Drool runs down the sides of <<print $name>>'s muzzle, but he does not care. It doesn't matter. Nothing matters, only the constant waves of arousal his burning body feels. It radiates from his loins, from his cock, from his fucking knot, and he needs to touch it! He needs it!
@@ -1244,7 +1204,7 @@ He <i>needs</i> to get out. It's almost impossible to think now. The candle's fi
 Fighting to stay conscious and absolutely desperate, $name fights to resist, but it's a battle he's about to lose.
 
 
-:: Gather Thoughts {"position":"490,724","size":"100,100"}
+:: Gather Thoughts {"position":"450,2200","size":"100,100"}
 Exercising patience despite the urgency of his situation, $name takes a moment to reevaluate everything he knows so far, in an attempt to figure out the best way to escape. Before Ivex's cursed candle overwhelms him, that is.
 <<if $CurArousal < 60>>\
 
@@ -1314,7 +1274,7 @@ That can work! Now to manage that before the candle's influence grows too strong
 <<if $baseCrystal>>\
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[Attempt to dislodge the crystal at the cross' base.|Dislodge Crystal]]</li>
+    <li>[[Attempt to dislodge the crystal at the cross' base.|Dislodge Crystal]]</li>
   </ul>\
 </div>
 <<else>>\
@@ -1322,13 +1282,13 @@ The time gathering his thoughts was valuable, but the breathing never stops and,
 
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[Ponder on what action to take next...|Escape Actions]]</li>
+    <li>[[Ponder on what action to take next...|Escape Actions]]</li>
   </ul>\
 </div>
 <</if>>\
 
 
-:: Observation 2 {"position":"182,938","size":"100,100"}
+:: Observation 2 {"position":"300,2000","size":"100,100"}
 The wolf's eyes scan the room again. With increasing urgency, $name attempts to focus on each thing and think about how it could possibly help get out of that damned cross.
 
 Most things are useless or, if they would have some use, it does not matter because he cannot reach them. The sharp leather opener at the desk taunts him with its usefulness, but it is completely out of reach with him stuck to that cross.
@@ -1348,12 +1308,12 @@ And the whole time, he still has to breathe. The fire inside him grows by the mi
 
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[Reevaluate his options.|Escape Actions]]</li>
+    <li>[[Reevaluate his options.|Escape Actions]]</li>
   </ul>\
 </div>
 
 
-:: Struggle 2 {"position":"393,936","size":"100,100"}
+:: Struggle 2 {"position":"600,2200","size":"100,100"}
 <<if $warrior && $CurArousal > 90>>\
 It's too much. Drekkar pants, huffs and drools like a wild beast. Rage swells within him as he stares down at his cock. The arousal, the impossible, infinite arousal he feels fuels his anger. Those bonds... they keep him from reaching what he needs, and he cannot take it anymore.
 
@@ -1376,8 +1336,8 @@ As his paw envelops his cock, the wolf lets out a moan of relief. At that moment
 <<set $bound = false>>\
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[Fight the urges and snuff out the candle first.|Snuff Candle]]</li>
-	<li>[[Choose pleasure. Sate the needs burning within.|Jerk off]]</li>
+    <li>[[Fight the urges and snuff out the candle first.|Snuff Candle]]</li>
+    <li>[[Choose pleasure. Sate the needs burning within.|Jerk off]]</li>
   </ul>\
 </div>
 <<else>>\
@@ -1396,13 +1356,13 @@ The bound lupine takes a moment to catch his breath and recover his strength.
 
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[Reevaluate his options.|Escape Actions]]</li>
+    <li>[[Reevaluate his options.|Escape Actions]]</li>
   </ul>\
 </div>
 <</if>>\
 
 
-:: Dislodge Crystal {"position":"583,875","size":"100,100"}
+:: Dislodge Crystal {"position":"400,2325","size":"100,100"}
 <<set $finalArousal = $curArousal>>\
 With a grunt, the wolf starts his desperate attempt to get rid of the crystals holding the cross he's bound to. Drawing from what he has learned so far, $name pulls with his right arm against the bindings with all of his strength while, at the same time, he <i>pushes</i> back against the cross with his left leg. With the directed tension, the cross shifts to the side.
 
@@ -1429,13 +1389,13 @@ At the same time, the letter opener sitting on the desk is well within reach now
 <<set $bound = true>>\
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[Rush to the candle to put it out.|Snuff Candle]]</li>
-	<li>[[Rush to the leather opener to cut out the bonds.|Free Himself]]</li>
+    <li>[[Rush to the candle to put it out.|Snuff Candle]]</li>
+    <li>[[Rush to the leather opener to cut out the bonds.|Free Himself]]</li>
   </ul>\
 </div>
 
 
-:: Snuff Candle {"position":"653,1012","size":"100,100"}
+:: Snuff Candle {"position":"400,2500","size":"100,100"}
 <<set $candle = false>>\
 <<if $bound>>\
 With urgency, the wolf awkwardly stumbles and hops towards the candle, even still stuck to the loose cross. Luckily, despite its insane magical properties, the candle itself works just like a normal candle. Leaning over it and blowing at it is enough to snuff out its fire.
@@ -1450,7 +1410,7 @@ His eyes shift to the table. The next step has to be freeing himself from these 
 
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[Finally cut the bonds away.|Free Himself]]</li>
+    <li>[[Finally cut the bonds away.|Free Himself]]</li>
   </ul>\
 </div>
 <<else>>\
@@ -1470,13 +1430,13 @@ Working hard to ignore his arousal, the wolf focuses on what really matters.
 
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[Start working on escaping this tower...|Escape Start]]</li>
+    <li>[[Start working on escaping this tower...|Escape Start]]</li>
   </ul>\
 </div>
 <</if>>\
 
 
-:: Jerk off {"position":"440,1136","size":"100,100"}
+:: Jerk off [end] {"position":"800,2200","size":"100,100"}
 Fuck it! $name needs it. He needs the pleasure! After that is taken care of, then the wolf can deal with the candle and think about escaping. Only one thing matters now!
 
 With his paw blissfully wrapped around his cock, $name lets himself fall forward to his knees. An involuntary smile comes to his muzzle and he feels himself tearing up from the sheer happiness of being able to sate the lust burning within him. Every breath is fire, and now his paw can fan the fire.
@@ -1517,7 +1477,7 @@ Ivex approaches him and the mindless wolf can only look up at the panther.
 [[Continue|Ivex Torture 1]]
 
 
-:: Ivex Torture 1 {"position":"208,1198","size":"100,100"}
+:: Ivex Torture 1 {"position":"1100,2025","size":"100,100"}
 <<silently>>
 <<set $defiance = 0>>
 <<if $rough_awakening>>
@@ -1532,7 +1492,7 @@ Ivex approaches him and the mindless wolf can only look up at the panther.
 [[Continue|Ivex Torture 2]]
 
 
-:: Free Himself {"position":"520,1010","size":"100,100"}
+:: Free Himself {"position":"600,2375","size":"100,100"}
 Stumbling awkwardly with the cross' weight upon his back and still stuck in a spread-eagle position, the wolf hops and steps towards the desk on the side. Turning to the side and leaning in, it still takes some effort for him to be able to take hold of the letter opener with his hand, but he succeeds.
 
 With it in hand, it's only a matter of awkwardly cutting the leather binding without harming himself in the process. It does not take too long and, with one hand free, cutting the others is a breeze.
@@ -1546,7 +1506,7 @@ A smile opens in the corner of the wolf's muzzle.
 
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[It's too late. It's impossible to resist. Start jerking off.|Jerk off]]</li>
+    <li>[[It's too late. It's impossible to resist. Start jerking off.|Jerk off]]</li>
   </ul>\
 </div>
 <<elseif $candle>>\
@@ -1558,8 +1518,8 @@ The wolf's mind is torn with indecision.
 
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[It's too hard to resist. Start jerking off.|Jerk off]]</li>
-	<li>[[Don't yield! Go to the candle and snuff it out.|Snuff Candle]]</li>
+    <li>[[It's too hard to resist. Start jerking off.|Jerk off]]</li>
+    <li>[[Don't yield! Go to the candle and snuff it out.|Snuff Candle]]</li>
   </ul>\
 </div>
 <<else>>\
@@ -1573,14 +1533,14 @@ Working hard to ignore his arousal, the wolf focuses on what really matters.
   <ul class="actions">\
     <<if ($CurArousal > 80)>>\
       <li>[[It's really hard to resist. Start jerking off.|Jerk off]]</li>
-	<</if>>\
-	<li>[[Start working on escaping this tower...|Escape Start]]</li>
+    <</if>>\
+    <li>[[Start working on escaping this tower...|Escape Start]]</li>
   </ul>\
 </div>
 <</if>>\
 
 
-:: Escape Start [start] {"position":"616,1164","size":"100,100"}
+:: Escape Start [restart] {"position":"500,2650","size":"100,100"}
 <<silently>>
 <<set $candleTimer = "0s">>
 <<set $window = false>>
@@ -1624,31 +1584,7 @@ This is not the time to be worried about his modesty. This is the time to be wor
 [[Continue|The Upper Office]]
 
 
-:: To Be Continued 1 {"position":"548,1304","size":"100,100"}
-<b>Aaaand... that's it!</b>
-
-You've managed to escape the perverted mage Ivex's bondage and moved on to escape the tower! This marks the first half of the game completed and, unfortunately, it is where this first version ends.
-
-I have a few spicier plans for the second part leading to a (or a few) even spicier conclusions! I hope you enjoyed this first attempt at an interactive story so far!
-
-This game is a prototype, a test, a tryout before I move on to something bigger and more serious that I have in mind! I'm trying things out here, both story-wise and coding-wise, and trying to learn as much as I can while entertaining everybody in the process as well!
-
-This prototype also comes as the results of the polls that all my patrons voted on, by the way! The setting that won the poll was 'High Magic' and the kinks were, in order, 'Bondage' first, 'CBT' second and 'Milking' third. I can promise that all of these will be included and, as you might have seen, some already were.
-
-Big thanks to my patrons for their support while I work on this!
-
-For now, you can still play around with different options. Was it easy to get here? Did it take you a few tries? There are a few different ways to successfully reach the way of escaping and some ways that don't lead you here at all!
-
-If you haven't, I do recommend trying different choices and seeing what changes! There's one particularly risky way to get here that I don't know how many people will find. There's also dire consequences of different kinds for failing to escape in time…
-
-My Patreon is also slightly ahead of the public build with some new content available for them first. If you'd like, check it out over at <a class="footer-element" target="_blank" href="https://www.patreon.com/sleth">Patreon</a> where <a class="footer-element" target="_blank" href="https://www.patreon.com/posts/64812733">version 0.7</a> is already out, which the next one coming soon as well!
-
-If you'd like,
-
-[[Return to the beginning|Bound]]
-
-
-:: The Upper Office [hub] {"position":"811,1166","size":"100,100"}
+:: The Upper Office {"position":"500,2900","size":"100,100"}
 With the freedom to move around the office space, the wolf can now properly assess what is in this room. The many desks and cabinets seem to have nothing but documents on them with the occasional thick book lying here or there.
 
 The wolf's best bets, however, are of course the open window on one side of the wall and the simple wooden door on the opposite one.
@@ -1660,34 +1596,34 @@ The wolf feels that, using his hand, he could bring himself to an immensely sati
 
 <div class="action-box">\
   <ul class="actions">\
-  	<<if !$room>>\
-  	<li>[[Look around the room some more.|Room]]</li>
-	<</if>>
-	<<if !$window>>\
-	<li>[[Investigate the window.|Window]]</li>
-	<</if>>\
+      <<if !$room>>\
+      <li>[[Look around the room some more.|Room]]</li>
+    <</if>>
+    <<if !$window>>\
+    <li>[[Investigate the window.|Window]]</li>
+    <</if>>\
     <<if !$jerkoff>>\
-	<li>[[...Jerk off.|Arousal Relief]]</li>
-	<</if>>\
-	<li>[[Try the door.|Door]]</li>
+    <li>[[...Jerk off.|Arousal Relief]]</li>
+    <</if>>\
+    <li>[[Try the door.|Door]]</li>
   </ul>\
 </div>
 <<else>>\
 <div class="action-box">\
   <ul class="actions">\
-  	<<if !$room>>\
-  	<li>[[Look around the room some more.|Room]]</li>
-	<</if>>
-	<<if !$window>>\
-	<li>[[Investigate the window.|Window]]</li>
-	<</if>>\
-	<li>[[Try the door.|Door]]</li>
+      <<if !$room>>\
+      <li>[[Look around the room some more.|Room]]</li>
+    <</if>>
+    <<if !$window>>\
+    <li>[[Investigate the window.|Window]]</li>
+    <</if>>\
+    <li>[[Try the door.|Door]]</li>
   </ul>\
 </div>
 <</if>>\
 
 
-:: Room {"position":"862,1316","size":"100,100"}
+:: Room {"position":"300,2925","size":"100,100"}
 With his erection bobbing between his legs, the wolf searches the room with haste.
 
 Throwing the cabinets open, $name frowns. More papers, candles, ink and quills. Standard utilities and nothing else. The wolf doesn't waste too much time going through that stuff.
@@ -1698,7 +1634,7 @@ Nothing of note is found.
 [[Continue|The Upper Office]]
 
 
-:: Window {"position":"963,1200","size":"100,100"}
+:: Window {"position":"300,3050","size":"100,100"}
 $name approaches the window. Maybe it's climbable?
 
 Upon putting his paws on the window's sill, the wolf's hopes of climbing out of there vanish. Not only that, though... something is wrong.
@@ -1715,7 +1651,7 @@ Regardless... there is no way out through the window. Climbing down the smooth w
 [[Continue|The Upper Office]]
 
 
-:: Door {"position":"851,1029","size":"100,100"}
+:: Door {"position":"650,2900","size":"100,100"}
 Narrowing his eyes, $name heads towards the door. The wolf lets out a low growl, measuring the door's apparent sturdiness as he approaches it fully expecting to have to tackle it down.
 
 When his paw tries the door's handle, however, it twists. The door is not locked and it just opens.
@@ -1725,7 +1661,7 @@ Outside of it, there's a small hallway with no other doors, but it leads to a st
 <<if $room && $window>>\
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[Leave the office and head down the stairs.|Head Downstairs]]</li>
+    <li>[[Leave the office and head down the stairs.|Head Downstairs]]</li>
   </ul>\
 </div>
 <<else>>\
@@ -1733,14 +1669,14 @@ There might still be useful things to see in the office before leaving, though.
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Close the door and keep looking.|The Upper Office]]</li>
-	<li>[[Leave the office and head down the stairs.|Head Downstairs]]</li>
+      <li>[[Close the door and keep looking.|The Upper Office]]</li>
+    <li>[[Leave the office and head down the stairs.|Head Downstairs]]</li>
   </ul>\
 </div>
 <</if>>\
 
 
-:: Head Downstairs {"position":"987,966","size":"100,100"}
+:: Head Downstairs {"position":"775,2900","size":"100,100"}
 <<silently>>\
   <<set $stoneDoor = false>>
   <<set $lionDoor = false>>
@@ -1761,7 +1697,7 @@ There is little choice but to proceed, though.
 [[Continue|Second Floor]]
 
 
-:: Interrogation End {"position":"28,1345","size":"100,100"}
+:: Interrogation End [end] {"position":"2300,1800","size":"100,100"}
 $name fell into Ivex's hands.
 
 <<if $interrogationEndingUnlock>>\
@@ -1794,47 +1730,47 @@ To change the adventurer's fate, you can...
 
 <div class="action-box">\
   <ul class="actions">\  
-  	<li>[[Attempt to escape again.|Escape Options]]</li>
-  	<li>[[Return to the beginning of the game.|Title Screen]]</li>
+      <li>[[Attempt to escape again.|Escape Options]]</li>
+      <li>[[Return to the beginning of the game.|Title Screen]]</li>
   </ul>\
 </div>
 
 
-:: Easy Way {"position":"64,1480","size":"100,100"}
+:: Easy Way {"position":"1375,1975","size":"100,100"}
 <<include "Easy Way (Text)">>
 
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[Stay silent and growl.|Resistance]]</li>
-	<li>[[Spit towards Ivex to show his distaste.|Defiance]]</li>	
+    <li>[[Stay silent and growl.|Resistance]]</li>
+    <li>[[Spit towards Ivex to show his distaste.|Defiance]]</li>	
   </ul>\
 </div>
 
 
-:: Hard Way {"position":"342,1481","size":"100,100"}
+:: Hard Way {"position":"1375,2100","size":"100,100"}
 <<include "Hard Way (Text)">>
 <<set $defiance += 1>>\
 
 <div class="action-box">\
   <ul class="actions">\
-	<li>[[Stay silent and growl.|Resistance]]</li>
-	<li>[[Spit towards Ivex to show his distaste.|Defiance]]</li>	
+    <li>[[Stay silent and growl.|Resistance]]</li>
+    <li>[[Spit towards Ivex to show his distaste.|Defiance]]</li>	
   </ul>\
 </div>
 
 
-:: Ivex Torture 2 {"position":"204,1342","size":"100,100"}
+:: Ivex Torture 2 {"position":"1225,2025","size":"100,100"}
 <<include "Ivex Torture 2 (Text)">>
 
 <div class="action-box">\
   <ul class="actions">\
     <li>[[Splay ears in submission.|Easy Way]]</li>
-	<li>[[Growl in defiance.|Hard Way]]</li>
+    <li>[[Growl in defiance.|Hard Way]]</li>
   </ul>\
 </div>
 
 
-:: Arousal Relief {"position":"727,1316","size":"100,100"}
+:: Arousal Relief {"position":"300,2800","size":"100,100"}
 Fuck it. It will be quick and it will feel great! With a glance towards the door and a growl coming from his throat, $name wraps his paw around his cock and that alone brings a groan of relief.
 
 Closing his eyes, he starts pumping it. In fast, quick motions, the wolf lets his hand glide over the surface of his cock, stimulating it, pleasuring it. Nobody knows his own dick better than his own hand, so with dexterity, his paw strokes his cock up and down. It teases the tip, then when it reaches the base, the wolf opens his grip just lightly to give his knot a squeeze before it keeps going...
@@ -1856,31 +1792,31 @@ With a growl of frustration, all $name can do is try to ignore his erection agai
 [[Continue|The Upper Office]]
 
 
-:: Resistance {"position":"118,1616","size":"100,100"}
+:: Resistance {"position":"1525,2100","size":"100,100"}
 <<include "Resistance (Text)">>
 
 <div class="action-box">\
   <ul class="actions">\
     <li>[['"Yes, I come from the far north, so what?"'|Ice]]</li>
-	<li>[['"No, I come from the south, so what?"'|Shock]]</li>
-	<li>[["Stay silent."|Random Punishment]]</li>
+    <li>[['"No, I come from the south, so what?"'|Shock]]</li>
+    <li>[["Stay silent."|Random Punishment]]</li>
   </ul>\
 </div>
 
 
-:: Ice {"position":"48,1789","size":"100,100"}
+:: Ice {"position":"1675,2200","size":"100,100"}
 <<include "Ice (Text)">>
 
 [[Continue|Ice 2]]
 
 
-:: Shock {"position":"446,1789","size":"100,100"}
+:: Shock {"position":"1675,1900","size":"100,100"}
 <<include "Shock (Text)">>
 
 [[Continue|Shock 2]]
 
 
-:: Random Punishment {"position":"294,1790","size":"100,100"}
+:: Random Punishment {"position":"1675,2050","size":"100,100"}
 <<silently>>
 <<set $defiance += 2>>\
 <<set $punishment to random(1, 2)>>
@@ -1904,7 +1840,7 @@ The mage grins.
 <</if>>\
 
 
-:: Ice 2 {"position":"100,1936","size":"100,100"}
+:: Ice 2 {"position":"1800,2200","size":"100,100"}
 <<include "Ice 2 (Text)">>
 
 <div class="action-box">\
@@ -1914,7 +1850,7 @@ The mage grins.
 </div>
 
 
-:: Ice 3 {"position":"139,2087","size":"100,100"}
+:: Ice 3 {"position":"1925,2200","size":"100,100"}
 <<if !$interrogationEndingFreeze>>\
 <<set $interrogationEndingFreezeUnlock = true>>\
 <</if>>\
@@ -1923,7 +1859,7 @@ The mage grins.
 [[Continue|Extra Torture]]
 
 
-:: Extra Torture {"position":"257,2232","size":"100,100"}
+:: Extra Torture {"position":"2050,2025","size":"100,100"}
 <<include "Extra Torture (Text)">>
 
 <<if $defiance > 3>>\
@@ -1937,7 +1873,7 @@ The mage grins.
 <</if>>\
 
 
-:: Defiant End {"position":"377,2375","size":"100,100"}
+:: Defiant End {"position":"2225,2025","size":"100,100"}
 <<if !$interrogationEnding>>\
 <<set $interrogationEndingUnlock = true>>\
 <</if>>\
@@ -1951,7 +1887,7 @@ The mage grins.
 [[Continue|Interrogation End]]
 
 
-:: Compliant End {"position":"132,2376","size":"100,100"}
+:: Compliant End {"position":"2125,1900","size":"100,100"}
 <<if !$interrogationEnding>>\
 <<set $interrogationEndingUnlock = true>>\
 <</if>>\
@@ -1965,20 +1901,20 @@ The mage grins.
 [[Continue|Interrogation End]]
 
 
-:: Defiance {"position":"386,1618","size":"100,100"}
+:: Defiance {"position":"1525,1975","size":"100,100"}
 <<include "Defiance (Text)">>
 <<set $defiance += 1>>\
 
 <div class="action-box">\
   <ul class="actions">\
     <li>[['"Yes, I come from the far north, so what?"'|Ice]]</li>
-	<li>[['"No, I come from the south, so what?"'|Shock]]</li>
-	<li>[["Stay silent."|Random Punishment]]</li>
+    <li>[['"No, I come from the south, so what?"'|Shock]]</li>
+    <li>[["Stay silent."|Random Punishment]]</li>
   </ul>\
 </div>
 
 
-:: Shock 2 {"position":"394,1934","size":"100,100"}
+:: Shock 2 {"position":"1800,1900","size":"100,100"}
 <<include "Shock 2 (Text)">>
 
 <div class="action-box">\
@@ -1988,7 +1924,7 @@ The mage grins.
 </div>
 
 
-:: Shock 3 {"position":"367,2087","size":"100,100"}
+:: Shock 3 {"position":"1925,1900","size":"100,100"}
 <<if !$interrogationEndingShock>>\
 <<set $interrogationEndingShockUnlock = true>>\
 <</if>>\
@@ -1997,7 +1933,7 @@ The mage grins.
 [[Continue|Extra Torture]]
 
 
-:: Second Floor [hub] {"position":"1186,928","size":"200,200"}
+:: Second Floor {"position":"675,3100","size":"200,200"}
 <<if $end07>>\
   <<goto "To Be Continued 2">>
 <</if>>\
@@ -2029,22 +1965,22 @@ Now the question is... where to go?
 <div class="action-box">\
   <ul class="actions">\
     <<if !$extractionRoom>>\
-  	  <li>[[Try the closed door.|Extraction Room Intro]]</li>
-	<<else>>\
-	  <li>[[Try the large hall.|Extraction Room]]</li>
-	<</if>>\
-	<<if !$lionGemstoneKnowledge>>\
-	  <<if $lionWatch>>\
-	    <li>[[Try the door with the lion inside.|Lion Watch]]</li>
-	  <<else>>\
-	    <li>[[Pry open the door with someone inside.|Lion Room Intro]]</li>	
-	  <</if>>\
-	<</if>>\
+        <li>[[Try the closed door.|Extraction Room Intro]]</li>
+    <<else>>\
+      <li>[[Try the large hall.|Extraction Room]]</li>
+    <</if>>\
+    <<if !$lionGemstoneKnowledge>>\
+      <<if $lionWatch>>\
+        <li>[[Try the door with the lion inside.|Lion Watch]]</li>
+      <<else>>\
+        <li>[[Pry open the door with someone inside.|Lion Room Intro]]</li>	
+      <</if>>\
+    <</if>>\
   </ul>\
 </div>
 
 
-:: Extraction Room Intro {"position":"1254,792","size":"100,100"}
+:: Extraction Room Intro {"position":"725,3775","size":"100,100"}
 <<if !$extractionDoor>>\
 With care, the wolf approaches the closed door. Taking a couple of reflexive sniffs towards it, the smells coming from it seem... varied, but also stale. With his ears perked up, $name tries to listen in to see if there's movement inside, but not a sound comes from it.
 
@@ -2061,8 +1997,8 @@ Maybe it would be good to go in and take a closer look... or maybe trying someth
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Pry further and investigate the room.|Extraction Room]]</li>
-	<li>[[Return to the hallway.|Second Floor]]</li>
+      <li>[[Pry further and investigate the room.|Extraction Room]]</li>
+    <li>[[Return to the hallway.|Second Floor]]</li>
   </ul>\
 </div>\
 <<else>>\
@@ -2072,14 +2008,14 @@ Maybe it would be good to go in and take a closer look... or maybe trying someth
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Pry further and investigate the room.|Extraction Room]]</li>
-	<li>[[Return to the hallway.|Second Floor]]</li>
+      <li>[[Pry further and investigate the room.|Extraction Room]]</li>
+    <li>[[Return to the hallway.|Second Floor]]</li>
   </ul>\
 </div>\
 <</if>>\
 
 
-:: Lion Room Intro {"position":"1235,1181","size":"100,100"}
+:: Lion Room Intro {"position":"950,3100","size":"100,100"}
 <<if !$lionDoor>>\
 Silently approaching the half-open door, the wolf carefully places his paw upon it and slides it open just a tad bit more so that he can peer inside.
 
@@ -2094,8 +2030,8 @@ Perhaps observing him for a little while longer could be useful. Getting discove
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Pry further and watch the lion.|Lion Watch]]</li>
-	<li>[[Return to the hallway.|Second Floor]]</li>
+      <li>[[Pry further and watch the lion.|Lion Watch]]</li>
+    <li>[[Return to the hallway.|Second Floor]]</li>
   </ul>\
 </div>\
 <<else>>\
@@ -2109,29 +2045,14 @@ Approaching him for more information could be useful, even if risky...
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Pry further and watch the lion.|Lion Watch]]</li>
-	<li>[[Return to the hallway.|Second Floor]]</li>
+      <li>[[Pry further and watch the lion.|Lion Watch]]</li>
+    <li>[[Return to the hallway.|Second Floor]]</li>
   </ul>\
 </div>\
 <</if>>\
 
 
-:: Blocked Exit {"position":"1447,965","size":"100,100"}
-Silently making his way past the other doors, the wolf quickly reaches the end of the hallway, where he is greeted by the black door he had seen before.
-
-From up close it looks even thicker. If it wasn't made of a different material, it might as well be part of a solid wall. Placing his hand on it, the wolf can feel that the black stone is smooth, but there doesn't seem to be any way to open it. Judging by the hallways' layout and the indications on the floor, it seems like it would be fair to guess that there are more stairs leading down to the next floor behind this sealed door.
-
-$name frowns. Tackling it would certainly not help and it would draw attention. Even a powerful wolf such as him cannot force this door open. Still, it can't be there for nothing. There has to be a way to open it and the wolf hopes that the answer is not just magic.
-
-After spending a few more moments feeling up the door in different places, the wolf is forced to sigh and give up. There is no moving further down the tower without finding a way to open this door.
-
-All $name can do is turn back and look into his other options.
-<<set $stoneDoor = true>>\
-
-[[Continue|Second Floor]]
-
-
-:: Lion Watch {"position":"1342,1292","size":"100,100"}
+:: Lion Watch {"position":"950,3225","size":"100,100"}
 <<set $lionWatch = true>>\
 <<set $lionwatchFinal = ($lionwatch1 + $lionwatch2 + $lionwatch3 + $lionwatch4+ $lionwatch5 + $lionwatch6 + $lionwatch7)>>
 With care, the wolf pries the door open just a little more so that he can slide his head inside to watch. <<print $name>>'s erection grinds uncomfortably against the wooden door, reminding him of its presence, but he does his best to ignore it.
@@ -2241,19 +2162,19 @@ It doesn't seem like he's going to be going anywhere or doing anything different
 \
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Stop watching him and return to the hallway.|Second Floor]]</li>
-	<<if $lionCutscene>>\
-	  <li>[[Approach the lion.|Lion Start]]</li>
-	<<else>>\
-	  <<timed `$lionwatchFinal + "s"` t8n>>\
-	    <li>[[Approach the lion.|Lion Start]]</li>
-	  <</timed>>\
-	<</if>>\
+      <li>[[Stop watching him and return to the hallway.|Second Floor]]</li>
+    <<if $lionCutscene>>\
+      <li>[[Approach the lion.|Lion Start]]</li>
+    <<else>>\
+      <<timed `$lionwatchFinal + "s"` t8n>>\
+        <li>[[Approach the lion.|Lion Start]]</li>
+      <</timed>>\
+    <</if>>\
   </ul>\
 </div>\
 
 
-:: Extraction Room {"position":"1410,788","size":"100,100"}
+:: Extraction Room {"position":"525,3900","size":"200,200"}
 <<if $extractionRoom>>\
 There isn't much to see despite the room's size. The mysterious, numbered alcoves line up along the tall walls around the wolf, with most of them being closed.
 
@@ -2273,14 +2194,14 @@ A careful, more thorough investigation of the strange room could be helpful.
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Examine the desk.|The Desk]]</li>
-	<li>[[Examine the altar.|The Altar]]</li>
+      <li>[[Examine the desk.|The Desk]]</li>
+    <li>[[Examine the altar.|The Altar]]</li>
     <li>[[Go back to the hallway.|Second Floor]]</li>
   </ul>\
 </div>
 
 
-:: Lion Start {"position":"1266,1450","size":"100,100"}
+:: Lion Start {"position":"1075,3225","size":"100,100"}
 Frowning and taking a deep breath, the wolf has had enough observing and decides to approach the lion. One of his paws goes down to cover his hard cock as best as it can, but the wolf's ears remain up and his stance a wary one. The lion has the appearance of a warrior himself, and he's definitely not normal, so he doesn't know what to expect.
 
 Abandoning subtlety, the wolf opens the door and steps in. The sounds do cause the lion to turn his head towards the lupine, although his hands continue to grind herbs and his expression does not change, even as he sets his eyes on $name.
@@ -2293,13 +2214,13 @@ The question makes the wolf blink. At least the lion isn't showing any signs of 
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[['"Uhh... Yes?"'|Lion Conversation]]</li>
-	<li>[['"I'm looking for a way out..."'|Lion Conversation]]</li>
+      <li>[['"Uhh... Yes?"'|Lion Conversation]]</li>
+    <li>[['"I'm looking for a way out..."'|Lion Conversation]]</li>
   </ul>\
 </div>\
 
 
-:: Lion Conversation {"position":"1219,1599","size":"100,100"}
+:: Lion Conversation {"position":"1200,3225","size":"100,100"}
 Before the wolf can even properly finish speaking, however, the lion interrupts him.
 
 "I am directed to provide the means for one to take their place. Wait here."
@@ -2344,13 +2265,13 @@ Apparently tired of waiting, the lion starts stepping forward, raising the penda
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Let the lion put the pendant on.|Mind Capture]]</li>
-	<li>[[Refuse the pendant.|Lion Refusal]]</li>
+      <li>[[Let the lion put the pendant on.|Mind Capture]]</li>
+    <li>[[Refuse the pendant.|Lion Refusal]]</li>
   </ul>\
 </div>\
 
 
-:: Mind Capture {"position":"883,1849","size":"100,100"}
+:: Mind Capture [end] {"position":"1325,3225","size":"100,100"}
 <<include "Mind Capture (Text)">>
 
 <span class="bad-ending">Bad Ending: <i>Enthrallment</i></span>
@@ -2358,7 +2279,7 @@ Apparently tired of waiting, the lion starts stepping forward, raising the penda
 [[Continue|Mind Capture 2]]
 
 
-:: Lion Refusal {"position":"1294,1749","size":"100,100"}
+:: Lion Refusal {"position":"1200,3350","size":"100,100"}
 There's no way $name is letting this lion put some magic gadget on him without him knowing what it is, especially coming from someone like that panther.
 
 With a growl, $name takes a step back and slaps the lion's hands to the side.
@@ -2384,13 +2305,13 @@ After all, Ivex could still return at any minute or hear something if things get
 [[Continue|Lion Fight]]
 
 
-:: Lion Fight {"position":"1320,1905","size":"100,100"}
+:: Lion Fight {"position":"1200,3475","size":"100,100"}
 <<include "Lion Fight (Text)">>
 
 [[Continue|Lion Pindown]]
 
 
-:: Lion Pindown {"position":"1352,2057","size":"100,100"}
+:: Lion Pindown {"position":"1200,3600","size":"100,100"}
 <<include "Lion Pindown (Text)">>
 <<if $arousalLevel == 1>>\
 
@@ -2402,13 +2323,13 @@ The candle's lingering influence... it drives the wolf crazy, It's so hard to re
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Fight the urge. Tie the lion up and be done with it.|Lion Bondage]]</li>
-	<li>[[The lion is a defeated thrall. Just a quick fuck to help relieve the urges...|Lion Fucking]]</li>
+      <li>[[Fight the urge. Tie the lion up and be done with it.|Lion Bondage]]</li>
+    <li>[[The lion is a defeated thrall. Just a quick fuck to help relieve the urges...|Lion Fucking]]</li>
   </ul>\
 </div>\
 
 
-:: Lion Bondage [key] {"position":"1602,1810","size":"100,100"}
+:: Lion Bondage [key] {"position":"1000,3800","size":"100,100"}
 <<set $end07 = false>>\
 Reaching for the rope, it is only a matter of holding the lion down while forcing his arms back to tie them behind his back. Once that is done, the wolf plays it safe by doing the same to his legs and finishing with the lion in a tight hogtie.
 
@@ -2447,7 +2368,7 @@ He is ready to try and craft the key to his escape.
 
 <div class="action-box">\
   <ul class="actions">\
-  	[[Try and craft the red gemstone.|Gemstone Crafting]]
+      [[Try and craft the red gemstone.|Gemstone Crafting]]
   </ul>\
 </div>
 <<else>>\
@@ -2464,7 +2385,7 @@ All the wolf can do for now is return to the hallway and explore the rest of thi
 <</if>>\
 
 
-:: Lion Fucking {"position":"1346,2260","size":"100,100"}
+:: Lion Fucking {"position":"1350,3600","size":"100,100"}
 <<include "Lion Fucking (Text)">>
 <<if $arousalLevel >= 2>>\
 
@@ -2474,15 +2395,15 @@ But there's no decision to be made. After being exposed to that candle for so lo
 <div class="action-box">\
   <ul class="actions">\
     <<if $arousalLevel < 2>>\
-  	<li>[[Resist knotting him.|Lion Finish]]</li>
-	<<else>>\
-	<li>[[Knot him!|Lion Knotting]]</li>
-	<</if>>\
+      <li>[[Resist knotting him.|Lion Finish]]</li>
+    <<else>>\
+    <li>[[Knot him!|Lion Knotting]]</li>
+    <</if>>\
   </ul>\
 </div>\
 
 
-:: Lion Finish {"position":"1630,2180","size":"100,100"}
+:: Lion Finish {"position":"1250,3750","size":"100,100"}
 Gritting his teeth, it takes every ounce of effort from the wolf to, instead of shoving his knot into that damned lion hard as he wants to, reach down to his knot with his own paw and give it a hard squeeze.
 
 $name moans out loud. That's what he needs, that's what any wolf needs, to drive him crazy and past the point of no return. With pleasure overcoming him, the wolf's cock throbs, shoved deep inside the lion save for the knot, to start depositing the wolf's mark deep into the other male.
@@ -2497,12 +2418,12 @@ But, no! He's wasted enough time as it is! Ivex could return at any time. Lookin
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Tie the lion up and be done with it.|Lion Bondage]]</li>
+      <li>[[Tie the lion up and be done with it.|Lion Bondage]]</li>
   </ul>\
 </div>\
 
 
-:: Lion Knotting {"position":"1116,2199","size":"100,100"}
+:: Lion Knotting {"position":"1475,3600","size":"100,100"}
 <<if !$enthrallmentLion>>\
 <<set $enthrallmentLionUnlock = true>>\
 <</if>>\
@@ -2511,7 +2432,7 @@ But, no! He's wasted enough time as it is! Ivex could return at any time. Lookin
 [[Continue|Mind Capture (Knot)]]
 
 
-:: Mind Capture (Knot) {"position":"1109,1912","size":"100,100"}
+:: Mind Capture (Knot) {"position":"1600,3600","size":"100,100"}
 <<include "Mind Capture (Knot) (Text)">>
 
 <span class="bad-ending">Bad Ending: <i>Enthrallment</i></span>
@@ -2519,19 +2440,19 @@ But, no! He's wasted enough time as it is! Ivex could return at any time. Lookin
 [[Continue|Mind Capture 2]]
 
 
-:: Mind Capture 2 {"position":"986,2045","size":"100,100"}
+:: Mind Capture 2 {"position":"1450,3225","size":"100,100"}
 <<include "Mind Capture 2 (Text)">>
 
 [[Continue|Enthrallment 1]]
 
 
-:: Enthrallment 1 {"position":"886,2199","size":"100,100"}
+:: Enthrallment 1 {"position":"1575,3225","size":"100,100"}
 <<include "Enthrallment 1 (Text)">>
 
 [[Continue|Enthrallment 2]]
 
 
-:: Enthrallment 2 {"position":"749,2028","size":"100,100"}
+:: Enthrallment 2 {"position":"1700,3225","size":"100,100"}
 <<if !$enthrallmentEnding>>\
 <<set $enthrallmentEndingUnlock = true>>\
 <</if>>\
@@ -2542,7 +2463,7 @@ But, no! He's wasted enough time as it is! Ivex could return at any time. Lookin
 [[Continue|Enthrallment End]]
 
 
-:: Enthrallment End {"position":"697,1731","size":"100,100"}
+:: Enthrallment End [end] {"position":"1800,2875","size":"100,100"}
 $name became Ivex's thrall.
 
 <<if $enthrallmentEndingUnlock>>\
@@ -2560,38 +2481,14 @@ To change the adventurer's fate, you can...
 
 <div class="action-box">\
   <ul class="actions">\  
-  	<li>[[Return to the point of escaping the first floor.|Escape Start]]</li>
-  	<li>[[Return to the beginning of the game.|Title Screen]]</li>
+      <li>[[Return to the point of escaping the first floor.|Escape Start]]</li>
+      <li>[[Return to the beginning of the game.|Title Screen]]</li>
   </ul>\
 </div>
 
 
-:: To Be Continued 2 {"position":"1104,1252","size":"100,100"}
-<b>Aaaand... that's it, again!</b>
-
-You've reached the end of this version! Unfortunately, in order to see what lies beyond the other door and finally escape this tower once and for all, you'll need to wait a bit longer. The next version will get you closer to the end!
-
-For now, however, just as before, I encourage you to try some new things if you haven't yet. Choose different options, see what happens...
-
-Starting from this enhanced build, you can check out the [[Archives]] (also always available in the sidebar menu) and see what you have unlocked and what's still left to be unlocked! Not only that, but in there, you'll have the ability to easily read through any endings you have already unlocked as many times as you want without having to go through the entire game to reach them. I hope you enjoy it!
-
-Overall, though, thank you so much for playing this prototype interactive story. If you wanna see more ASAP, my <a target="_blank" href="https://www.patreon.com/sleth">patreon</a> is one build ahead of the public release with more content! They'll also get a poll that will influence one of the endings... ;)
-
-It's thanks to their awesome support that I can keep working on my passion for writing!
-
-Regardless of supporting me with $$ or not, thank you so much for playing! If you'd like, leave a comment about the game or something and I'll gladly read it and take it to heart as well.
-
-From here, you can...
-
-[[Return to the start of the second floor|Escape Start]]
-
-OR!
-
-[[Return all the way to the beginning|Bound]]
-
-
-:: Archives [noreturn] {"position":"331,2607","size":"100,100"}
-[[Return to the game|$return]]
+:: Archives [noreturn] {"position":"2400,700","size":"100,100"}
+<<link "Return to the game" $return>><</link>>\
 
 <h1>Archives</h1>
 Welcome to the Mage's Tower Archives.
@@ -2603,20 +2500,20 @@ Grayed out endings are paths that have not yet been found, although there are hi
 
 <hr>
 <h2>Endings unlocked:</h2>
-<<include "Interrogation Archive Display">>
+<<include [[Interrogation Archive Display]]>>
 
-<<include "Enthrallment Archive Display">>
+<<include [[Enthrallment Archive Display]]>>
 
-<<include "Extraction Archive Display">>
+<<include [[Extraction Archive Display]]>>
 
-<<include "Ivex Punishment Archive Display">>
+<<include [[Ivex Punishment Archive Display]]>>
 
-<<include "Ivex Enthrallment Archive Display">>
+<<include [[Ivex Enthrallment Archive Display]]>>
 
-<<include "Ivex Extraction Archive Display">>
+<<include [[Ivex Extraction Archive Display]]>>
 
 
-:: The Desk {"position":"1535,637","size":"100,100"}
+:: The Desk {"position":"900,4350","size":"100,100"}
 <<if $theDesk>>\
 The only interesting things the wolf can see on the desk are the <span class="imp-info">thick book</span> and the <span class="imp-info">journal</span>.
 <<else>>\
@@ -2636,20 +2533,20 @@ If they belong to Ivex, they might be worth checking out.
 
 <div class="action-box">\
   <ul class="actions">\
-	<<if !$theJournal>>\
-	<li>[[Examine the journal.|The Journal]]</li>
-	<<else>>\
-	<li>[[Examine the journal again.|Journal Notes]]</li>
-	<</if>>\
+    <<if !$theJournal>>\
+    <li>[[Examine the journal.|The Journal]]</li>
+    <<else>>\
+    <li>[[Examine the journal again.|Journal Notes]]</li>
+    <</if>>\
     <<if !$spellbookKnowledge>>\
-  	<li>[[Examine the large book.|The Spellbook]]</li>
-	<</if>>\	
-	<li>[[Go try something else.|Extraction Room]]</li>
+      <li>[[Examine the large book.|The Spellbook]]</li>
+    <</if>>\	
+    <li>[[Go try something else.|Extraction Room]]</li>
   </ul>\
 </div>
 
 
-:: The Altar {"position":"1307,618","size":"100,100"}
+:: The Altar {"position":"800,4000","size":"100,100"}
 <<if $thePlatform>>\
 $name approaches the altar at the center of the room to take a closer look once more.
 
@@ -2682,19 +2579,19 @@ Still, it looks absolutely harmless.
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Touch the substance.|Pulled In]]</li>
-	<li>[[Go back to try something else.|Extraction Room]]</li>
+      <li>[[Touch the substance.|Pulled In]]</li>
+    <li>[[Go back to try something else.|Extraction Room]]</li>
   </ul>\
 </div>
 
 
-:: Pulled In {"position":"1208,491","size":"100,100"}
+:: Pulled In {"position":"925,4000","size":"100,100"}
 <<include "Pulled In (Text)">>
 
 [[Continue|Pulled Further]]
 
 
-:: Pulled Further {"position":"1455,465","size":"100,100"}
+:: Pulled Further [end] {"position":"1050,4000","size":"100,100"}
 <<include "Pulled Further (Text)">>
 
 <span class="bad-ending">Bad Ending: <i>Extraction</i></span>
@@ -2702,75 +2599,75 @@ Still, it looks absolutely harmless.
 [[Continue|Extraction 1]]
 
 
-:: Extraction 1 {"position":"1321,235","size":"100,100"}
+:: Extraction 1 {"position":"1175,4000","size":"100,100"}
 <<include "Extraction 1 (Text)">>
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[["Hmmfgh!!"|Extraction 2]]</li>
-	<li>[["Hmmfffhhg?!"|Extraction 2]]</li>
+      <li>[["Hmmfgh!!"|Extraction 2]]</li>
+    <li>[["Hmmfffhhg?!"|Extraction 2]]</li>
   </ul>\
 </div>
 
 
-:: Extraction 2 {"position":"1187,146","size":"100,100"}
+:: Extraction 2 {"position":"1300,4000","size":"100,100"}
 <<include "Extraction 2 (Text)">>
 
 [[Continue|Extraction 3]]
 
 
-:: Extraction 3 {"position":"1361,32","size":"100,100"}
+:: Extraction 3 {"position":"1425,4000","size":"100,100"}
 <<include "Extraction 3 (Text)">>
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[["Hmmrrrrhfgh!!!"|Forceful Extraction 1]]</li>
-	<li>[["Hmmmffh..."|Gentle Extraction 1]]</li>
+      <li>[["Hmmrrrrhfgh!!!"|Forceful Extraction 1]]</li>
+    <li>[["Hmmmffh..."|Gentle Extraction 1]]</li>
   </ul>\
 </div>
 
 
-:: Forceful Extraction 1 {"position":"1535,219","size":"100,100"}
+:: Forceful Extraction 1 {"position":"1550,4050","size":"100,100"}
 <<set $forcefulExtraction = true>>\
 <<include "Forceful Extraction 1 (Text)">>
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[["HMMRFGH!!!"|Forceful Extraction 2]]</li>
+      <li>[["HMMRFGH!!!"|Forceful Extraction 2]]</li>
   </ul>\
 </div>
 
 
-:: Gentle Extraction 1 {"position":"1534,0","size":"100,100"}
+:: Gentle Extraction 1 {"position":"1550,3925","size":"100,100"}
 <<set $forcefulExtraction = false>>\
 <<include "Gentle Extraction 1 (Text)">>
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[["Hmmmmfffgghh...!"|Gentle Extraction 2]]</li>
+      <li>[["Hmmmmfffgghh...!"|Gentle Extraction 2]]</li>
   </ul>\
 </div>
 
 
-:: Forceful Extraction 2 {"position":"1672,220","size":"100,100"}
+:: Forceful Extraction 2 {"position":"1675,4050","size":"100,100"}
 <<include "Forceful Extraction 2 (Text)">>
 
 [[Continue|Forceful Extraction 3]]
 
 
-:: Forceful Extraction 3 {"position":"1797,222","size":"100,100"}
+:: Forceful Extraction 3 {"position":"1800,4050","size":"100,100"}
 <<include "Forceful Extraction 3 (Text)">>
 
 [[Continue|Forceful Extraction End]]
 
 
-:: Forceful Extraction End {"position":"1922,222","size":"100,100"}
+:: Forceful Extraction End {"position":"1925,4050","size":"100,100"}
 <<include "Forceful Extraction End (Text)">>
 
 [[Continue|Extraction End 1]]
 
 
-:: Extraction End 1 {"position":"2058,76","size":"100,100"}
+:: Extraction End 1 {"position":"2050,3975","size":"100,100"}
 <<include "Extraction End 1 (Text)">>
 
 <<if $forcefulExtraction>>\
@@ -2780,7 +2677,7 @@ Still, it looks absolutely harmless.
 <</if>>\
 
 
-:: Forceful Extraction End 2 {"position":"2195,239","size":"100,100"}
+:: Forceful Extraction End 2 {"position":"2175,4050","size":"100,100"}
 <<if !$extractionEnding>>\
 <<set $extractionEndingUnlock = true>>\
 <</if>>\
@@ -2793,7 +2690,7 @@ Still, it looks absolutely harmless.
 [[Continue|Extraction End 2]]
 
 
-:: Extraction End 2 {"position":"2342,85","size":"100,100"}
+:: Extraction End 2 [end] {"position":"2525,3575","size":"100,100"}
 $name remained trapped serving as fuel for Ivex's magic.
 
 <<if $extractionEndingUnlock>>\
@@ -2816,13 +2713,13 @@ To change the adventurer's fate, you can...
 
 <div class="action-box">\
   <ul class="actions">\  
-  	<li>[[Return to the point of escaping the first floor.|Escape Start]]</li>
-  	<li>[[Return to the beginning of the game.|Title Screen]]</li>
+      <li>[[Return to the point of escaping the first floor.|Escape Start]]</li>
+      <li>[[Return to the beginning of the game.|Title Screen]]</li>
   </ul>\
 </div>
 
 
-:: Gentle Extraction End 2 {"position":"2197,1","size":"100,100"}
+:: Gentle Extraction End 2 {"position":"2175,3925","size":"100,100"}
 <<if !$extractionEnding>>\
 <<set $extractionEndingUnlock = true>>\
 <</if>>\
@@ -2835,25 +2732,25 @@ To change the adventurer's fate, you can...
 [[Continue|Extraction End 2]]
 
 
-:: Gentle Extraction 2 {"position":"1674,0","size":"100,100"}
+:: Gentle Extraction 2 {"position":"1675,3925","size":"100,100"}
 <<include "Gentle Extraction 2 (Text)">>
 
 [[Continue|Gentle Extraction 3]]
 
 
-:: Gentle Extraction 3 {"position":"1801,0","size":"100,100"}
+:: Gentle Extraction 3 {"position":"1800,3925","size":"100,100"}
 <<include "Gentle Extraction 3 (Text)">>
 
 [[Continue|Gentle Extraction End]]
 
 
-:: Gentle Extraction End {"position":"1926,1","size":"100,100"}
+:: Gentle Extraction End {"position":"1925,3925","size":"100,100"}
 <<include "Gentle Extraction End (Text)">>
 
 [[Continue|Extraction End 1]]
 
 
-:: Interrogation Archive [noreturn] {"position":"471,2696","size":"100,100"}
+:: Interrogation Archive [noreturn] {"position":"1700,1100","size":"100,100"}
 <<include "Ivex Torture 1 (Text)">>
 
 <<include "Ivex Torture 2 (Text)">>
@@ -2911,7 +2808,7 @@ The wolf chooses to remain silent with nothing but a low growl towards the mage.
 [[Return to the Archives|Archives]]
 
 
-:: Ivex Torture 1 (Text) [text] {"position":"311,1198","size":"100,100"}
+:: Ivex Torture 1 (Text) [text] {"position":"1100,1925","size":"100,100"}
 The mage hums to himself as he takes the time to casually walk around the wolf, observing him from all sides. $name can't help but keep desperately pulling against the restraints. The wolf's cock flexes, dripping pre-cum almost constantly now from the overwhelming arousal he's subjected to.
 
 "Look at you... barely more than a feral beast now, slave to your baser instincts..." the mage mocked. "What would your fellow adventurers say if they could see you now? Bound, drooling, wanting to get out just so that you can pleasure yourself relentlessly..."
@@ -2933,7 +2830,7 @@ Ivex pulls the cloth covering his nose down as well to reveal his large grin.
 "Now that you're back with me... shall we begin?"
 
 
-:: Ivex Torture 2 (Text) [text] {"position":"310,1342","size":"100,100"}
+:: Ivex Torture 2 (Text) [text] {"position":"1225,1925","size":"100,100"}
 The mage brings both his hands up. A few precise movements are made and $name can see the panther's eyes glow for a moment. Ivex mutters some words under his breath and then the creaking sound of a chest opening comes from behind the bound wolf. From there, a small crystal comes floating to Ivex with remarkable speed, which he promptly catches with ease and holds up.
 
 "This is a gravity crystal. Handy things, those are. You can bind their energy and attach them to anything. They have many practical uses, but I'm going to show you one of my favorites." Ivex took a step forward.
@@ -2961,7 +2858,7 @@ Ivex chuckles in a way of mocking. "See how utterly helpless you are before me? 
 The weight on the wolf's balls feels heavy. It tugs at them uncomfortably and, even though it has only been a few seconds, it already starts to feel a little painful to hold the crystal with his nuts alone. Ivex stares at the wolf with a cocky smile of superiority waiting for his answer.
 
 
-:: Easy Way (Text) [text] {"position":"168,1482","size":"100,100"}
+:: Easy Way (Text) [text] {"position":"1375,1875","size":"100,100"}
 "Learning your place I see..." the mage smiles. Even though the wolf says nothing, Ivex seems smart enough to pick up the hesitation in body language.
 
 The panther leans in close, his hand coming to the wolf's leg to caress it. $name can't help but draw in a sharp breath as just the caressing near his needy cock is enough to make the wolf's heartbeat accelerate.
@@ -2979,7 +2876,7 @@ It gets even worse when Ivex starts massaging it ever so lightly with his finger
 A vague question. The wolf's knowledge is limited, but any details he tells Ivex could put the Adventurer's guild or whoever else they send after Ivex in the same danger he is facing. Betraying his comrades is something the wolf would never do, and just the fact that Ivex believes he would is an offense in itself.
 
 
-:: Hard Way (Text) [text] {"position":"446,1481","size":"100,100"}
+:: Hard Way (Text) [text] {"position":"1375,2200","size":"100,100"}
 "Aahh... still so full of fire, aren't you? Even knowing how small you are next to me?" Ivex says with his usual lingering smile of amusement. "I suppose it's only fair. I haven't even begun to show you what I can do to you."
 
 <<print $name>>'s growling continues. "You wouldn't stand a fucking chance against a warrior like me if it weren't for your magic tricks!"
@@ -3005,7 +2902,7 @@ It gets even worse when Ivex starts massaging it ever so lightly with his finger
 A vague question. The wolf's knowledge is limited, but any details he tells Ivex could put the Adventurer's guild or whoever else they send after Ivex in the same danger he is facing. Betraying his comrades is something the wolf would never do.
 
 
-:: Resistance (Text) [text] {"position":"222,1615","size":"100,100"}
+:: Resistance (Text) [text] {"position":"1525,2200","size":"100,100"}
 "Not willing to tell me, hmm? A shame... such a shame..." Ivex speaks with obviously fake disappointment. In fact, he smiles, the panther's tail swishing back and forth lazily as a sign of worrying satisfaction and amusement.
 
 $name decides to remain quiet. It is hard enough to endure the weight on his balls on one side and the urge to let out sounds of pleasure as Ivex's fingers still continue to tease his oversensitive cock. If only that cursed arousal would go away! Looking down at his member, hard as a rock and leaking, a small wave of shame comes over the wolf, but this is all the sick mage's doing, $name tells himself. Only his doing...
@@ -3027,7 +2924,7 @@ The light touch is not enough to satisfy the wolf's urges, not nearly enough, bu
 "So? Do you like the cold or not? Answer me or I'll make my own assumptions..." he grins once more.
 
 
-:: Defiance (Text) [text] {"position":"490,1617","size":"100,100"}
+:: Defiance (Text) [text] {"position":"1525,1875","size":"100,100"}
 $name spits at the mage to give his response. The panther is fast enough to take a quick step back so that the spit, at best, splashes at his footpaws.
 
 The mage's smile fades immediately.
@@ -3065,7 +2962,7 @@ The light touch is not enough to satisfy the wolf, not nearly enough, but it doe
 "So? Do you like the cold or not? Answer me or I'll make my own assumptions..." he grins once more.
 
 
-:: Shock (Text) [text] {"position":"549,1788","size":"100,100"}
+:: Shock (Text) [text] {"position":"1675,1800","size":"100,100"}
 With a chuckle, the panther comes even closer. $name grows stiff and growls seeing the panther leaning against him. With the wolf bound and spread as he is, Ivex has full freedom to press his side against the wolf's, going as far as leaning his head to rest it against <<print $name>>'s broad chest. The panther's hand never leaves the wolf's cock, continuing to stroke and tease it in its way too slow manner, but the mage's other hand comes to caress the exposed fur of the wolf's chest.
 
 "Such a big specimen... the big ones are my favorite. Wolves, even more. I wonder what sounds you'll make..."
@@ -3093,7 +2990,7 @@ $name breathes a small sigh of relief.
 Yet Ivex grins again. "Time to have fun with you."
 
 
-:: Shock 2 (Text) [text] {"position":"499,1933","size":"100,100"}
+:: Shock 2 (Text) [text] {"position":"1800,1800","size":"100,100"}
 The panther's eyes move back to the wolf's cock. That hand never stopped teasing it, much to the wolf's dismay, and the weight on his balls never went away either. Yet, still, as Ivex chuckles again, his hand speeds up. The stroking gets faster. The panther's hand skillfully strokes and teases the whole of the wolf's exposed length, going all the way down to the knot, toying with it to make him gasp, then moving back to the dripping tip. He does it a few times, furthering the wolf's pleasure, and soon $name is panting. The candle did too much. His balls churn and the weight feels more uncomfortable than ever. $name feels like he could cum ten times in a row and one of them is already coming with just that bit of stimulation... until Ivex grins.
 
 <<print $name>>'s eyes start going wide.
@@ -3123,7 +3020,7 @@ It feels like far, far too long before he lets go, and the tingling sensation re
 "Now, are you willing to tell me <b>everything</b> I want to know?" the mage asks with three fingers playing around the wolf's knot, threatening to touch it. It takes effort to even form words to muster a response, but when $name finally manages to...
 
 
-:: Shock 3 (Text) [text] {"position":"473,2087","size":"100,100"}
+:: Shock 3 (Text) [text] {"position":"1925,1800","size":"100,100"}
 Before the wolf can finish saying anything at all, a movement from Ivex's finger has some kind of belt come flying from behind to wrap itself around the wolf's muzzle with lightning speed. It buckles itself and tightens <b>hard</b>, making the wolf flinch and causing him to be unable to open his muzzle at all.
 
 "Hmmmhgghm!" the wolf complains. It's impossible to form proper words with his muzzle shut tight.
@@ -3143,7 +3040,7 @@ Ivex spends a little time pleasuring the wolf, but unfortunately, it is all too 
 $name shakes his hand, letting out muffled pleas and complaints against it, but it is to no avail. The wolf howls through his shut muzzle as Ivex envelops his cock in lightning once more and starts stroking it with that hand instead...
 
 
-:: Extra Torture (Text) [text] {"position":"361,2232","size":"100,100"}
+:: Extra Torture (Text) [text] {"position":"2050,2125","size":"100,100"}
 It's hard to tell for how long the mage plays with the wolf. Unable to even say anything, all $name can do is stay there, bound and exposed, as he endures the whims of the sadistic mage. With his magic-engulfed hand, he alternates between torturing and pleasuring the wolf's exposed cock a few more times before he moves on to different methods.
 
 Ivex seems to take immense pleasure in shifting the weight of the crystal hanging from the wolf's balls back and forth. Sometimes it grows light to give his nuts some relief, and sometimes the mage makes it so heavy that $name feels like his balls are supporting the weight of a person by themselves.
@@ -3161,7 +3058,7 @@ To the wolf, it feels like hours pass by. His cock feels sore, his balls even mo
 Ivex approaches the wolf again, leaning against his chest, his hand caressing the wolf's tortured knot and bringing a whine of need from the bound adventurer.
 
 
-:: Defiant End (Text) [text] {"position":"482,2374","size":"100,100"}
+:: Defiant End (Text) [text] {"position":"2325,2025","size":"100,100"}
 Ivex's painful squeezing thankfully does not last long. The panther soon lets go of it, stepping back, but as he does, he motions with his hands again and...
 
 Four small metal rings come to him, all flying between the mage and the wolf. With a smile, the panther motions more delicately, and much to the wolf's dismay, all four rings fly in order towards his cock and carefully slide around it. One rests right above his knot, the other three a little spaced out around the wolf's throbbing length.
@@ -3215,7 +3112,7 @@ The mage turns and starts walking away. $name grunts and yells through his shut 
 $name shakes his head. Ivex, however, just laughs and walks away. The large wolf is left alone in the room, bound, with the candle burning and clouded in unending pleasure for who knows how long. Overwhelmed by everything inflicted upon him, $name can't even wonder what Ivex has in store for him in the future now that he's in the mage's hands.
 
 
-:: Compliant End (Text) [text] {"position":"236,2375","size":"100,100"}
+:: Compliant End (Text) [text] {"position":"2125,1800","size":"100,100"}
 Ivex's pleasurable stroking does not last long. The panther soon lets go of it, stepping back, but as he does, he motions with his hands again and...
 
 Four small metal rings come to him, all flying between the mage and the wolf. With a smile, the panther motions more delicately, and much to the wolf's dismay, all four rings fly in order towards his cock and carefully slide around it. One rests right above his knot, the other three a little spaced out around the wolf's throbbing length.
@@ -3251,7 +3148,7 @@ Ivex lets go of all he is holding and, as usual, everything floats up instead of
 $name shakes his head. Ivex, however, just laughs and motions with his hand again. The gear approaches the bound wolf... and there is nothing he can do to stop it.
 
 
-:: Ice (Text) [text] {"position":"150,1788","size":"100,100"}
+:: Ice (Text) [text] {"position":"1675,2300","size":"100,100"}
 With a chuckle, the panther comes even closer. $name grows stiff and growls seeing the panther leaning against him. With the wolf bound and spread as he is, Ivex has full freedom to press his side against the wolf's, going as far as leaning his head to rest it against <<print $name>>'s broad chest. The panther's hand never leaves the wolf's cock, continuing to stroke and tease it in its way too slow manner, but the mage's other hand comes to caress the exposed fur of the wolf's chest.
 
 "Such a big specimen... the big ones are my favorite. Wolves, even more. I wonder what sounds you'll make..."
@@ -3279,7 +3176,7 @@ He breathes a sigh of relief.
 Yet Ivex grins again. "Time to have fun with you."
 
 
-:: Ice 2 (Text) [text] {"position":"203,1935","size":"100,100"}
+:: Ice 2 (Text) [text] {"position":"1800,2300","size":"100,100"}
 The panther's eyes move back to the wolf's cock. That hand never stopped teasing it, much to the wolf's dismay, and the weight on his balls never went away either. Yet, still, as Ivex chuckles again, his hand speeds up. The stroking gets faster. The panther's hand skillfully strokes and teases the whole of the wolf's exposed length, going all the way down to the knot, toying with it to make him gasp, then moving back to the dripping tip. He does it a few times, furthering the wolf's pleasure, and soon $name is panting. The candle did too much. His balls churn and the weight feels more uncomfortable than ever. $name feels like he could cum ten times in a row and one of them is already coming with just that bit of stimulation... until Ivex grins.
 
 <<print $name>>'s eyes start going wide.
@@ -3305,7 +3202,7 @@ $name can't help it. The wolf lets out what is almost a howl as the ice envelops
 "Now, are you willing to tell me <b>everything</b> I want to know?" the mage asks without letting go of the wolf's knot. It takes effort to even form words to muster a response, but when $name finally manages to...
 
 
-:: Ice 3 (Text) [text] {"position":"241,2086","size":"100,100"}
+:: Ice 3 (Text) [text] {"position":"1925,2300","size":"100,100"}
 Before the wolf can finish saying anything at all, a movement from Ivex's finger has some kind of belt come flying from behind to wrap itself around the wolf's muzzle with lightning speed. It buckles itself and tightens <b>hard</b>, making the wolf flinch and causing him to be unable to open his muzzle at all.
 
 "Hmmmhgghm!" the wolf complains. It's impossible to form proper words with his muzzle shut tight.
@@ -3321,7 +3218,7 @@ It feels like a long time goes by before Ivex's hand finally retreats. The wolf'
 $name shakes his hand, letting out muffled pleas and complaints against it, but it is to no avail. The wolf howls through his shut muzzle as Ivex envelops his cock in ice once more and starts stroking all over again.
 
 
-:: Mind Capture (Knot) (Text) [text] {"position":"1212,1912","size":"100,100"}
+:: Mind Capture (Knot) (Text) [text] {"position":"1700,3600","size":"100,100"}
 For a moment, $name feels his adrenaline shoot up. His first reflex is to bring his paw up to remove the pendant from his neck, but as he tries to do so he realizes... it doesn't work. His arm won't move, no matter how much he wills it to. Neither will the other one, or his legs, or... anything!
 
 The wolf finds himself stuck there, on all fours above the lion with his knot stuck to the feline. His mind races for a moment, his heart speeding up, but then...
@@ -3349,7 +3246,7 @@ His body starts grinding herbs next to the lion and there's nothing he can do ab
 $name is trapped.
 
 
-:: Mind Capture (Text) [text] {"position":"989,1848","size":"100,100"}
+:: Mind Capture (Text) [text] {"position":"1325,3125","size":"100,100"}
 The lion stands chest to chest with the wolf and brings the pendant up. $name reluctantly allows the feline to put it over his head and around his neck.
 
 Looking down at it, the wolf can see the blue gemstone glowing brighter. It is as if there is a mist inside it that glows and whirls. At first, nothing happens.
@@ -3371,7 +3268,7 @@ His body starts grinding herbs next to the lion and there's nothing he can do ab
 $name is trapped.
 
 
-:: Mind Capture 2 (Text) [text] {"position":"1090,2045","size":"100,100"}
+:: Mind Capture 2 (Text) [text] {"position":"1450,3125","size":"100,100"}
 It doesn't matter how much the wolf shouts and yells inside his thoughts or how much willpower he puts into defying his body's movements. It won't obey. Whatever that pendant is, it's strong enough to overcome him entirely.
 
 $name is forced to remain there next to the lion in the exact same state the leonine warrior is in. Blank expression and mindlessly grinding herbs for Ivex's nefarious purposes. Like... like some sort of slave. Like a mindless fucking thrall! The thought alone is enough to drive the wolf mad with anger, but his heart does not even speed up. It feels so unnatural to feel these things without really feeling them!
@@ -3383,7 +3280,7 @@ For some reason, that smell feels incredibly <b>arousing</b>. If he could look a
 No matter how much he tries, $name cannot find a way out. He's trapped there grinding herbs and getting aroused by it until who knows how long after that, Ivex himself opens the door.
 
 
-:: Interrogation Archive Display {"position":"182,2696","size":"100,100"}
+:: Interrogation Archive Display [noreturn] {"position":"1700,1000","size":"100,100"}
 <<silently>>\
   <<if $interrogationEndingFreeze && $interrogationEndingShock>>
     <<set $interrogationSpell = 'freeze'>>
@@ -3402,73 +3299,73 @@ No matter how much he tries, $name cannot find a way out. He's trapped there gri
     <<set $interrogationEnd = 'rough'>>
   <<else>>
     <<set $interrogationEnd = ''>>
-  <</if>>  
+  <</if>>
 <</silently>>\
 \
 <<if $interrogationEnding>>\
   <b>[[Bad Ending: Interrogation|Interrogation Archive]]</b>
   Variation 1: <<nobr>>
   <<if $interrogationEndingFreeze>>
-	<label><<radiobutton "$interrogationSpell" "freeze" autocheck>> Freeze</label>
+    <label><<radiobutton "$interrogationSpell" "freeze" autocheck>> Freeze</label>
   <<else>>
     <span class="helper-container">
-	  <span><label><<radiobutton "$interrogationSpell" "">> <span class="disabled">Freeze</span></label></span>
-	  <small class="helper-text">Ivex has a special treatment for northern wolves that like the cold...</small>
-	</span>
-	<<done>><<script>>
-	document.getElementById("radiobutton-interrogationspell-0").disabled = true;
-	<</script>><</done>>
+      <span><label><<radiobutton "$interrogationSpell" "">> <span class="disabled">Freeze</span></label></span>
+      <small class="helper-text">Ivex has a special treatment for northern wolves that like the cold...</small>
+    </span>
+    <<done>><<script>>
+    document.getElementById("radiobutton-interrogationspell-0").disabled = true;
+    <</script>><</done>>
   <</if>>
   <</nobr>>\
    | <<nobr>>
-	<<if $interrogationEndingShock>>
-		<label><<radiobutton "$interrogationSpell" "shock" autocheck>> Shock</label>
-	  <<else>>
-		<span class="helper-container">
-		  <span><label><<radiobutton "$interrogationSpell" "">> <span class="disabled">Shock</span></label></span>
-		  <small class="helper-text">Ivex has a special treatment for southern wolves that hate the cold...</small>
-		</span>
-		<<done>><<script>>
-			document.getElementById("radiobutton-interrogationspell-1").disabled = true;
-		<</script>><</done>>
+    <<if $interrogationEndingShock>>
+        <label><<radiobutton "$interrogationSpell" "shock" autocheck>> Shock</label>
+      <<else>>
+        <span class="helper-container">
+          <span><label><<radiobutton "$interrogationSpell" "">> <span class="disabled">Shock</span></label></span>
+          <small class="helper-text">Ivex has a special treatment for southern wolves that hate the cold...</small>
+        </span>
+        <<done>><<script>>
+            document.getElementById("radiobutton-interrogationspell-1").disabled = true;
+        <</script>><</done>>
     <</if>>
   <</nobr>>
 
   Variation 2: <<nobr>>
   <<if $interrogationEndingMild>>
-	<label><label><<radiobutton "$interrogationEnd" "mild" autocheck>> Mild</label>
+    <label><label><<radiobutton "$interrogationEnd" "mild" autocheck>> Mild</label>
   <<else>>
     <span class="helper-container">
-	  <span><label><<radiobutton "$interrogationEnd" "">> <span class="disabled">Mild</span></label></span>
-	  <small class="helper-text">Ivex treats those that choose collaboration over defiance with "kindness"...</small>
-	</span>
-	<<done>><<script>>
-	document.getElementById("radiobutton-interrogationend-0").disabled = true;
-	<</script>><</done>>
+      <span><label><<radiobutton "$interrogationEnd" "">> <span class="disabled">Mild</span></label></span>
+      <small class="helper-text">Ivex treats those that choose collaboration over defiance with "kindness"...</small>
+    </span>
+    <<done>><<script>>
+    document.getElementById("radiobutton-interrogationend-0").disabled = true;
+    <</script>><</done>>
   <</if>>
   <</nobr>>\
    | <<nobr>>
-	<<if $interrogationEndingRough>>
-	  <label><<radiobutton "$interrogationEnd" "rough" autocheck>> Harsh</label>
-	<<else>>
-	  <span class="helper-container">
-	  <span><label><<radiobutton "$interrogationEnd" "">> <span class="disabled">Rough</span></label></span>
-	  <small class="helper-text">Ivex has a special disdain for those that dare defy his wishes...</small>
-	  </span>
-	  <<done>><<script>>
-	  document.getElementById("radiobutton-interrogationend-1").disabled = true;
-	  <</script>><</done>>
+    <<if $interrogationEndingRough>>
+      <label><<radiobutton "$interrogationEnd" "rough" autocheck>> Harsh</label>
+    <<else>>
+      <span class="helper-container">
+      <span><label><<radiobutton "$interrogationEnd" "">> <span class="disabled">Rough</span></label></span>
+      <small class="helper-text">Ivex has a special disdain for those that dare defy his wishes...</small>
+      </span>
+      <<done>><<script>>
+      document.getElementById("radiobutton-interrogationend-1").disabled = true;
+      <</script>><</done>>
     <</if>>
   <</nobr>>
 <<else>>\
   <span class="helper-container">
-  	<b><span class="disabled">Bad Ending: Interrogation</span></b>
-	<small class="helper-text">Interrogation by the hands of the wizard is the first step that awaits those that cannot escape his contraptions...</small>
+      <b><span class="disabled">Bad Ending: Interrogation</span></b>
+    <small class="helper-text">Interrogation by the hands of the wizard is the first step that awaits those that cannot escape his contraptions...</small>
   </span>
 <</if>>\
 
 
-:: Enthrallment 1 (Text) [text] {"position":"990,2199","size":"100,100"}
+:: Enthrallment 1 (Text) [text] {"position":"1575,3125","size":"100,100"}
 The wolf can't even turn his head to look at the damned mage, but the panther is incredibly happy and amused to find him there with a gemstone around his neck and working next to the lion.
 
 There is nothing $name can do. Ivex compliments the lion for capturing him with a slap to the feline's bare ass. The wolf is forced to remain there, grinding herbs while Ivex's hands explore his helpless body, stroke and play with his forcefully aroused cock and even go as far as shoving a finger up his ass.
@@ -3482,7 +3379,7 @@ Much to <<print $name>>'s dismay, whatever order Ivex issues, the parasitic mind
 After that, there is nothing else the wolf can do. Removing the pendant is impossible by himself and Ivex surely won't do it. $name finds himself doomed to serve as the perverted mage's thrall against his will.
 
 
-:: Enthrallment 2 (Text) [text] {"position":"851,2028","size":"100,100"}
+:: Enthrallment 2 (Text) [text] {"position":"1700,3125","size":"100,100"}
 Time loses all meaning to the wolf. Inside Ivex's tower, it's impossible to tell day from night. His body sleeps sometimes, but the intervals at which he does seem random and, sometimes, get interrupted by Ivex's orders if they are particularly lengthy.
 
 Little by little, the unwilling wolf learns more about the mage, but every new thing he learns just makes him hate him more. $name gets by telling himself that, as soon as he's free, he's gonna get his revenge on the mage, except that the days keep going by and freedom never comes.
@@ -3500,13 +3397,13 @@ Activities with the lion end up being quite common as well. The mage takes pleas
 Time keeps passing, each day a new set of orders with some being worse and some being better. Still, <<print $name>>'s own mind waits. His current system is counting the number of punches he's gonna give Ivex when he gets free, but as of right now he's beaten a thousand and is still going. Still, someday... someday freedom will come and he'll be able to settle the score. Someday, somehow.
 
 
-:: Lion Description {"position":"1420,1161","size":"100,100"}
+:: Lion Description {"position":"1025,2950","size":"100,100"}
 The lion is large with shiny golden fur and an impressive mane. He is also quite muscular, with thick arms and a broad chest, as made plain by the fact that he does not wear much in terms of clothing. What seems to be some kind of harness made of leather has some straps going across his chest and back, and below? Nothing. The lion does not wear anything to cover his rear that is plain for the wolf to see from where he stands.
 
 [[Return|Lion Room Intro]]
 
 
-:: Lion Fucking (Text) [text] {"position":"1448,2259","size":"100,100"}
+:: Lion Fucking (Text) [text] {"position":"1350,3500","size":"100,100"}
 It's too hard to resist. Besides, the lion is clearly a thrall fighting for Ivex. The wolf has beaten him fair and square, and now...
 
 With a lustful growl, $name pulls his hips back so that he can line himself up with the struggling lion's hole. His cock is already coated in his own pre-cum from all the fighting, the damned lingering arousal from that blasted candle. The thought of it, the memories, the humiliation he went through because of Ivex's pervertedness makes the wolf angry. All he went through... Yeah, it's time to let it out on something.
@@ -3526,7 +3423,7 @@ His knot is the only thing that still remains outside of the lion. It begs to fe
 Despite his eagerness and need, however, the wolf glances at the rope. Knotting the lion would mean being stuck to him for a long time, which is a luxury he definitely does not have. His rational mind tells him that, but as $name keeps fucking, his body begs him to knot the damned bastard. As he fucks faster, his pleasure reaching its peak...
 
 
-:: Lion Knotting (Text) [text] {"position":"1219,2198","size":"100,100"}
+:: Lion Knotting (Text) [text] {"position":"1475,3500","size":"100,100"}
 Gritting his teeth, the wolf puts even more force behind his fucking. It feels good, great even, to give in to the overwhelming lust. Drool runs down the wolf's muzzle to fall down on the lion's exposed back at the mere thought of how that tight ass is going to feel around his knot.
 
 It takes effort. A lot of effort. With a lot of grunting from both parties and a lot of insistence from the wolf, his knot finally spreads the lion's ass, the large bulb forcing its way in until finally...
@@ -3550,7 +3447,7 @@ With one sudden move, the lion's hand reaches over his head. The wolf feels some
 $name blinks. Through his fucking, he didn't realize the lion had freed his other hand, reached out for the pendant and now managed to place it over his neck.
 
 
-:: Enthrallment Archive [noreturn] {"position":"475,2806","size":"100,100"}
+:: Enthrallment Archive [noreturn] {"position":"1825,1100","size":"100,100"}
 <<if $lionFuck>>\
 <<include "Lion Fight (Text)">>
 
@@ -3582,7 +3479,7 @@ But there's no decision to be made. After being exposed to that candle for so lo
 [[Return to the Archives|Archives]]
 
 
-:: Enthrallment Archive Display {"position":"180,2804","size":"100,100"}
+:: Enthrallment Archive Display [noreturn] {"position":"1825,1000","size":"100,100"}
 <<silently>>\
   <<set $lionFuck = false>>
 <</silently>>\
@@ -3590,30 +3487,30 @@ But there's no decision to be made. After being exposed to that candle for so lo
 <<if $enthrallmentEnding>>\
   <b>[[Bad Ending: Enthrallment|Enthrallment Archive]]</b>
   Variation: <<nobr>>
-	<label><<radiobutton "$lionFuck" false checked>> None</label>
+    <label><<radiobutton "$lionFuck" false checked>> None</label>
   <</nobr>>\
    | <<nobr>>
-	<<if $enthrallmentLion>>
-		<label><<radiobutton "$lionFuck" true>> Lion</label>
-	  <<else>>
-		<span class="helper-container">
-		  <span><label><<radiobutton "$lionFuck" "">> <span class="disabled">Lion</span></label></span>
-		  <small class="helper-text">Engaging in arousing activities while overtaken by previous magical lust makes some things impossible to resist...</small>
-		</span>
-		<<done>><<script>>
-			document.getElementById("radiobutton-lionfuck-1").disabled = true;
-		<</script>><</done>>
+    <<if $enthrallmentLion>>
+        <label><<radiobutton "$lionFuck" true>> Lion</label>
+      <<else>>
+        <span class="helper-container">
+          <span><label><<radiobutton "$lionFuck" "">> <span class="disabled">Lion</span></label></span>
+          <small class="helper-text">Engaging in arousing activities while overtaken by previous magical lust makes some things impossible to resist...</small>
+        </span>
+        <<done>><<script>>
+            document.getElementById("radiobutton-lionfuck-1").disabled = true;
+        <</script>><</done>>
     <</if>>
   <</nobr>>
 <<else>>\
   <span class="helper-container">
-  	<b><span class="disabled">Bad Ending: Enthrallment</span></b>
-	<small class="helper-text">Sometimes a magical accessory is for more than just the looks...</small>
+      <b><span class="disabled">Bad Ending: Enthrallment</span></b>
+    <small class="helper-text">Sometimes a magical accessory is for more than just the looks...</small>
   </span>
 <</if>>\
 
 
-:: Lion Pindown (Text) [text] {"position":"1455,2057","size":"100,100"}
+:: Lion Pindown (Text) [text] {"position":"1100,3600","size":"100,100"}
 The feline is good. Very good. How can someone this strong end up grinding herbs in some psycho mage's tower?! The wolf's wondering has to wait, however, because as the lion uses his legs to trap his own, things start getting ugly. Much to the wolf's dismay, the lion grips him closer than ever and, in that position, the wolf's cock finds itself hard-pressed against the lion's own member. It feels warm against the wolf's sensitive length, tingles of pleasure distracting $name from the urgency of the situation. The lion forces him back, climbing on top of him, dangerously close to pinning him down...
 
 "NO!" the wolf yells at the lion's face. With a surge of anger, the wolf lets out a loud snarl and bends his knee, hitting the exposed lion straight on the nuts.
@@ -3635,7 +3532,7 @@ As he does so, the lion keeps squirming. When he does, the wolf looks down to se
 The lion's rear is toned and round. The feline's tail swishes back and forth in distress, but with his squirming, his cheeks move and up and down, back and forth... right against the wolf's cock. His erection sits right there, between the beautiful molds of the lion's ass, and his squirming just makes it grind against it. Tingles of pleasure shoot up at the wolf and, as he looks down with more attention, he can see everything. The lion's exposed ass. Bare. Vulnerable. It looks really tight...
 
 
-:: Lion Fight (Text) [text] {"position":"1422,1905","size":"100,100"}
+:: Lion Fight (Text) [text] {"position":"1100,3475","size":"100,100"}
 The lion rushes forward. The wolf growls, bracing to meet the large warrior chest to chest. $name has fought many strong men before and, while many couldn't match the large wolf's strength and size, giving him an advantage, that is not the case with this lion. When the feline tackles him and pushes forward, the wolf finds himself losing his footing.
 
 Before he can fall, however, $name spins, paws pushing back against the lion trying to grip and hold him so that they both fall side by side rather than letting the lion be on top. The wolf then props his knee up to try and get the upper hand and force the lion to roll with him to pin the feline down, but despite the lion's apparent mindless status, $name can tell that his fighting reflexes are still sharp.
@@ -3651,7 +3548,7 @@ The lion grabs hold of <<print $name>>'s wrist and tries to twist it. The wolf h
 The two roll on the ground, muscle against muscle, each trying to end up on top.
 
 
-:: The Spellbook [key] {"position":"1759,674","size":"100,100"}
+:: The Spellbook [key] {"position":"1575,4725","size":"100,100"}
 Opening the large tome, it's plain to see that it is something of importance.
 
 On one of its pages, a very intricate circle that even $name can identify as some sort of arcane incantation symbol takes all the space. On the page beside it, there is what seems to be the name and instructions on words to say for the incantation itself. The random page the wolf opens the book on only says 'Levitate'. It's definitely some sort of <span class="imp-info">spellbook</span>.
@@ -3674,7 +3571,7 @@ He is ready to try and craft the key to his escape.
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Try and craft the red gemstone.|Gemstone Crafting]]</li>
+      <li>[[Try and craft the red gemstone.|Gemstone Crafting]]</li>
   </ul>\
 </div>
 <<else>>\
@@ -3683,7 +3580,7 @@ Now, to craft a gemstone, all he would need is to find an empty gemstone somewhe
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Leave the spellbook as it is for now.|The Desk]]</li>
+      <li>[[Leave the spellbook as it is for now.|The Desk]]</li>
   </ul>\
 </div>
 <</if>>\
@@ -3693,13 +3590,13 @@ After leafing through a bunch of them, the wolf just grunts. It doesn't seem lik
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Leave the spellbook as it is.|The Desk]]</li>
+      <li>[[Leave the spellbook as it is.|The Desk]]</li>
   </ul>\
 </div>
 <</if>>\
 
 
-:: The Journal {"position":"1677,476","size":"100,100"}
+:: The Journal {"position":"1000,4475","size":"100,100"}
 <<set $theJournal = true>>\
 Pulling the journal close to himself, the wolf sits down to take a look. His bare rear against the chair reminds him of his forced nudity, but he forces himself to ignore it and focus on the contents of the journal instead.
 
@@ -3710,7 +3607,7 @@ As $name goes through it, there are a few parts that catch his attention...
 [[Continue|Journal Notes]]
 
 
-:: Journal Notes {"position":"1795,524","size":"100,100"}
+:: Journal Notes {"position":"900,4600","size":"100,100"}
 Among the many, many pages of passages, some stand out...
 
 Near the beginning of the journal...
@@ -3743,12 +3640,12 @@ The rest of the journal is still blank and unwritten.
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Leave the journal as it is.|The Desk]]</li>
+      <li>[[Leave the journal as it is.|The Desk]]</li>
   </ul>\
 </div>
 
 
-:: Memory Book Notes {"position":"1933,439","size":"100,100"}
+:: Memory Book Notes {"position":"1050,4600","size":"100,100"}
 This is the first entry in the journal. The calligraphy is neat and done with care, but the ink is already starting to fade, signaling that it might have been written a long time ago. It reads:
 
 <span class="handwriting">
@@ -3765,12 +3662,12 @@ This part continues on to some far too detailed notes of what seems to be Ivex's
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Read something else.|Journal Notes]]</li>
+      <li>[[Read something else.|Journal Notes]]</li>
   </ul>\
 </div>
 
 
-:: School Notes {"position":"2046,440","size":"100,100"}
+:: School Notes {"position":"1150,4600","size":"100,100"}
 These notes are smeared and poorly written, unlike most that surround them. They read:
 
 <span class="handwriting">
@@ -3802,12 +3699,12 @@ After that, the next routine writing seems to take place several days later and 
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Read something else.|Journal Notes]]</li>
+      <li>[[Read something else.|Journal Notes]]</li>
   </ul>\
 </div>
 
 
-:: Tower Notes {"position":"1933,552","size":"100,100"}
+:: Tower Notes {"position":"1050,4700","size":"100,100"}
 This note stands out amidst a bunch of unorganized notes. The writing at this point is more sporadic and rough. It speaks of concerning matters. It reads:
 
 <span class="mild-handwriting">
@@ -3828,12 +3725,12 @@ The rest of the notes on this page are crude drawings of both things that look a
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Read something else.|Journal Notes]]</li>
+      <li>[[Read something else.|Journal Notes]]</li>
   </ul>\
 </div>
 
 
-:: Gem Notes {"position":"2046,552","size":"100,100"}
+:: Gem Notes {"position":"1150,4700","size":"100,100"}
 These notes stand out amidst a bunch of unorganized notes. The writing at this point is sporadic and rough. They seem to talk about <span class="imp-info">gemstones</span> though. It reads:
 
 <span class="mild-handwriting">
@@ -3854,12 +3751,12 @@ The notes that follow this get far too into magical terms for the wolf to proper
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Read something else.|Journal Notes]]</li>
+      <li>[[Read something else.|Journal Notes]]</li>
   </ul>\
 </div>
 
 
-:: Extraction Notes {"position":"2155,553","size":"100,100"}
+:: Extraction Notes {"position":"1250,4700","size":"100,100"}
 These notes stand out amidst a bunch of unorganized notes. The writing at this point is sporadic and rough. Ivex seems to write about his plans but in a confusing manner. It reads:
 
 <span class="mild-handwriting">
@@ -3884,12 +3781,12 @@ There are drawings and sketches beneath more strange notes. The drawings are lit
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Read something else.|Journal Notes]]</li>
+      <li>[[Read something else.|Journal Notes]]</li>
   </ul>\
 </div>
 
 
-:: Lion Notes {"position":"1932,672","size":"100,100"}
+:: Lion Notes {"position":"1050,4800","size":"100,100"}
 These notes are written in a brasher way with much less care for the handwriting. They seem to mention a lion, which reminds the wolf of the one he's seen in the tower, making them possibly worth reading. It reads:
 
 <span class="crude-handwriting">
@@ -3924,12 +3821,12 @@ This seems to be where the notes about the lion end. The topic of the notes chan
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Read something else.|Journal Notes]]</li>
+      <li>[[Read something else.|Journal Notes]]</li>
   </ul>\
 </div>
 
 
-:: Kink Notes {"position":"2045,672","size":"100,100"}
+:: Kink Notes {"position":"1150,4800","size":"100,100"}
 These notes are written in a brasher way with much less care for the handwriting. Around the page, there are marks left by some kind of dry liquid and, when the wolf touches them, they feel a tad sticky. It reads:
 
 <span class="crude-handwriting">
@@ -3971,12 +3868,12 @@ There are dozens of other ideas written here, but the anger inside the wolf make
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Read something else.|Journal Notes]]</li>
+      <li>[[Read something else.|Journal Notes]]</li>
   </ul>\
 </div>
 
 
-:: Thief Notes {"position":"2156,671","size":"100,100"}
+:: Thief Notes {"position":"600,4775","size":"100,100"}
 These notes are written in a brasher way with much less care for the handwriting. The ink in these notes is dry but still strong, signaling that they might be recent. It reads:
 
 <span class="crude-handwriting">
@@ -4008,7 +3905,7 @@ This is the last entry on the journal so far and, thankfully, it has already pro
 [[Continue|Notes Knowledge]]
 
 
-:: Notes Knowledge [key] {"position":"1945,814","size":"100,100"}
+:: Notes Knowledge [key] {"position":"400,4825","size":"100,100"}
 <<if !$journalKnowledge>>\
 Re-reading the journal entry one more time, the naked wolf's tail wags back and forth. That poor fox, wherever he is, left very useful information in these records! If that fox adventurer could have escaped the tower, then so can <<print $name>>.
 
@@ -4037,22 +3934,22 @@ The wolf's ears twitch and his smile widens. He, in fact, already has some knowl
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Assess his knowledge...|Knowledge Assessment]]</li>
+      <li>[[Assess his knowledge...|Knowledge Assessment]]</li>
   </ul>\
 </div>
 <<else>>\
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Read something else on the journal.|Journal Notes]]</li>
-  	<li>[[Sift through the other contents of the desk.|The Desk]]</li>	
-  	<li>[[Get away from the desk and look somewhere else.|Extraction Room]]</li>	
+      <li>[[Read something else on the journal.|Journal Notes]]</li>
+      <li>[[Sift through the other contents of the desk.|The Desk]]</li>	
+      <li>[[Get away from the desk and look somewhere else.|Extraction Room]]</li>	
   </ul>\
 </div>
 <</if>>\
 
 
-:: Gemstone Crafting [key] {"position":"1781,1136","size":"100,100"}
+:: Gemstone Crafting [key] {"position":"825,5200","size":"100,100"}
 The naked wolf pulls the desk's chair and sits on it properly. He sets a gray gemstone from the lion's room on the table and pulls the spellbook closer to himself.
 
 With a frown, he begins looking for the right spell. Luckily, it doesn't take long for him to smile as he finds what has to be the right one.
@@ -4072,7 +3969,7 @@ And then, just like that, the glow goes away. When the wolf looks at it again, h
 [[Continue|The Exit]]
 
 
-:: Knowledge Assessment [key] {"position":"1641,849","size":"100,100"}
+:: Knowledge Assessment [key] {"position":"200,4850","size":"100,100"}
 According to Ivex's journal, the wolf needs a <span class="imp-info">red teleportation gemstone</span> to get out of the tower.
 
 Ivex's journal mentions two ways to get those...
@@ -4103,19 +4000,19 @@ Crafting a gemstone could be possible if only the wolf could find all of the req
 <div class="action-box">\
   <ul class="actions">\
     <<if $spellbookKnowledge && $lionGemstoneKnowledge>>\
-  	<li>[[Try and craft the red gemstone.|Gemstone Crafting]]</li>
-	<<else>>\
-	<li>[[Read something else on the journal.|Journal Notes]]</li>
-	<li>[[Go back to the main hallway to explore more...|Second Floor]]</li>
-	<</if>>\
-	<<if $blobGemstoneKnowledge>>\
-	<li>[[Try and get the red gemstone left by the fox.|The Altar]]</li>
-	<</if>>\
+      <li>[[Try and craft the red gemstone.|Gemstone Crafting]]</li>
+    <<else>>\
+    <li>[[Read something else on the journal.|Journal Notes]]</li>
+    <li>[[Go back to the main hallway to explore more...|Second Floor]]</li>
+    <</if>>\
+    <<if $blobGemstoneKnowledge>>\
+    <li>[[Try and get the red gemstone left by the fox.|The Altar]]</li>
+    <</if>>\
   </ul>\
 </div>
 
 
-:: The Exit {"position":"1933,1137","size":"100,100"}
+:: The Exit {"position":"825,5325","size":"100,100"}
 With care, $name grabs the gemstone. He holds it in his paw. It feels warm to the touch. The wolf looks at it, takes a sniff at it, then holds it up with two fingers to inspect it properly. It's a beautiful gemstone, but... how to use it?
 
 Even though he has it, $name frowns. Does he need to go to a certain place? Speak certain words? Ivex didn't when he left, but the panther mage could do a whole lot of impressive and downright impossible things.
@@ -4131,7 +4028,7 @@ The whole world around him starts shifting into a blur.
 [[Continue|Outside]]
 
 
-:: Outside {"position":"2079,1139","size":"100,100"}
+:: Outside [restart] {"position":"950,5325","size":"100,100"}
 The big wolf stumbles forward. A sense of vertigo overwhelms him for a moment as everything spins and loses its shape. However, as quickly as it comes, the feeling goes away. The wolf suddenly feels his feet touching the ground again. His hands find a table behind him to hold onto to keep himself steady and, when he blinks... everything feels different.
 
 The air on his bare fur feels colder than before. The floor under his feet is simple wood rather than stone. As the wolf looks around, he realizes he is no longer in the large hallway he was before, but rather somewhere else entirely.
@@ -4149,7 +4046,7 @@ Before $name can ponder more over the implications of that, the sound of steps c
 [[Continue|Ivex's Fall]]
 
 
-:: Ivex's Fall {"position":"2228,1141","size":"100,100"}
+:: Ivex's Fall {"position":"950,5450","size":"100,100"}
 Not knowing what to expect, the wolf prepares himself as best as he can in his naked, unarmed state. The door opens casually without rush, but the person coming in...
 
 Is none other than Ivex himself.
@@ -4195,29 +4092,7 @@ He looks around. All those gemstones scattered across the floor are the source o
 [[Continue|Tying up]]
 
 
-:: To Be Continued 3 {"position":"1911,1343","size":"100,100"}
-<b>Aaaand... that's it, once more!</b>
-
-The final escape and Ivex's downfall signal the end of this month's build. The next build will be the last... and it will include nothing but the endings and all the interesting ways you can choose to make the arrogant mage pay for what he's done.
-
-I have a few things in mind, but I intend on putting up a Patreon vote to let my faithful patrons decide on one of the possibilities we might see here. What kinks will it include? What should our very, very angry wolf put the panther through? We'll see what people decide!
-
-For now, this is it! As always, I encourage you to go back and try some new things if you haven't yet. Have you seen all the ways things can go wrong before you reach this point? Their variations? Have you tried doing things in a different order?
-
-Starting from this build, you can check out the [[Archives]] (also always available in the sidebar menu) and see what you have unlocked and what's still left to be unlocked! Not only that, but in there, you'll have the ability to easily read through any endings you have already unlocked as many times as you want without having to go through the entire game to reach them. I hope you enjoy it!
-
-As always, thank you so much for playing this prototype interactive story. I really hope it's been an enjoyable ride so far!
-
-From here, you also can...
-
-[[Return to the start of the second floor|Escape Start]]
-
-OR!
-
-[[Return all the way to the beginning|Bound]]
-
-
-:: Pulled In (Text) [text] {"position":"1311,491","size":"100,100"}
+:: Pulled In (Text) [text] {"position":"925,4100","size":"100,100"}
 Intent on getting that gemstone, the wolf brings his paw up to the blob. Slowly and carefully, he approaches it to test it with a clawed finger until...
 
 He pokes at it. The whole surface ripples when he does, but the blob remains firm in place. It feels... strange. Definitely viscous and more 'wet' than he thought. Odd. Nothing in particular happens, however, and the wolf pokes it a few more times, seeing it bounce and ripple in response to it. With a small chuckle, the wolf just shakes his head and pulls his paw away.
@@ -4231,7 +4106,7 @@ With a small growl and a frown, the wolf pulls harder. The large warrior puts th
 Stopping his pulling for a moment, the wolf stops to catch his breath. Looking at the blob, $name tries to think of a solution for a moment, when all of a sudden...
 
 
-:: Pulled Further (Text) [text] {"position":"1558,464","size":"100,100"}
+:: Pulled Further (Text) [text] {"position":"1050,4100","size":"100,100"}
 The wolf's ears twitch when he feels his wrist getting engulfed in one swift motion. The blob protrudes itself forward to grab more of his paw, and before the wolf can even properly react, <b>it</b> pulls him.
 
 "Whoa!" The wolf stumbles forward, the entirety of his arm pulled into the viscous blob before he can plant his feet on the ground and use his other hand to grab onto the platform's edge and keep it from pulling him further in. With a growl, the wolf tries to pull his arm out but meets the same resistance that his finger had met before.
@@ -4249,7 +4124,7 @@ $name fights bravely, but soon his hand slips and the blob pulls him in so that 
 In one sudden, even more surprising move, the blob suddenly sucks him in with such strength that the wolf as a whole gets taken into its form.
 
 
-:: Extraction 1 (Text) [text] {"position":"1426,235","size":"100,100"}
+:: Extraction 1 (Text) [text] {"position":"1175,4100","size":"100,100"}
 <<print $name>>'s first instinct is to hold his breath as he gets pulled into the viscous blob. Keeping his muzzle well shut, the wolf thrashes as best as he can inside it. It all feels... sticky, wet and warm. It feels like being underwater, but its texture is thicker and moving inside it is hard. It takes a lot of strength from the wolf to be able to wave his arms in a feeble attempt to 'swim' out of the thing, but the blob keeps him engulfed.
 
 Before long, it starts hardening too. Moving becomes harder and harder. The wolf is left in an awkward 'floating' position with his limbs half-spread. Grunting, $name's muscles bulge with effort as he tries to keep moving, but the liquid hardens all around him, stopping the wolf altogether and keeping him well inside it.
@@ -4269,7 +4144,7 @@ As $name is busy regaining his breath, though, the wolf's eyes widen once more. 
 $name can't even frown when he feels it starts focusing on his forcefully erect cock.
 
 
-:: Extraction 2 (Text) [text] {"position":"1084,145","size":"100,100"}
+:: Extraction 2 (Text) [text] {"position":"1300,4100","size":"100,100"}
 No matter how much the wolf tries to struggle or move, it feels as if he might as well be encased in solid rock. The slime around him does not budge even a little. His arms, legs, paws, everything remains completely immobile and yet, at the same time, the slime's texture can be felt over it. Always moving, always working.
 
 Thankfully for $name, his muzzle ended up slightly tilted so that, directing his eyes downwards, he can look down at his own cock. It stands there just as erect as it was when he fell into the slime. The red spire protruding from his sheath with its veiny, dark red surface remains still as well, and yet...
@@ -4283,7 +4158,7 @@ Before the wolf can ponder on it further, the movement around his cock changes. 
 Though the slime seems solid as rock everywhere else, around his cock it moves. It flexes, its surface shifting ever so slightly around his member and, as it does, the wolf can feel... a stroke over his sensitive shaft.
 
 
-:: Extraction 3 (Text) [text] {"position":"1258,31","size":"100,100"}
+:: Extraction 3 (Text) [text] {"position":"1425,4100","size":"100,100"}
 The slime does it again. And again, and again. It starts a slow, rhythmic set of movements around the wolf's cock, kneading it at the same time as it strokes it. At first, the strokes are loose and wild, but as the slime moves up and down, it seems to adapt to his length. The strokes become wider, reaching all the way to the wolf's tapered tip and then going downwards all the way to the top of his knot, which in turn throbs and pulses, growing more engorged for the stimulation.
 
 From within the slime, $name growls again, but he also can't help but moan. Completely immobilized, the wolf can't even frown as the weird magical slime starts masturbating him without his consent.
@@ -4295,7 +4170,7 @@ At the moment, it's hard to think. As the slime keeps stroking the wolf's cock w
 There's little the wolf can do. Inside him, his rage swells. He can try harder to fight against this thing. Ivex won't get him that easily! On the other hand, it's much, much easier to just give in to the pleasure. It feels so heavenly good. It's not like there's anyone watching. Maybe giving in to it just for a little while would be beneficial as well...
 
 
-:: Forceful Extraction 1 (Text) [text] {"position":"1535,323","size":"100,100"}
+:: Forceful Extraction 1 (Text) [text] {"position":"1550,4150","size":"100,100"}
 No! The wolf lets out another muffled growl. A powerful warrior such as him will never, ever give in to this mage's perverted machinations!
 
 Huffing in outrage, the wolf redoubles his efforts to fight against the slime encasing him. His biceps, his chest, all of his muscles bulge out with effort as the wolf does his best to ignore the pleasure forcefully enveloping his cock and, instead, puts all of his might into forcing himself against the slime.
@@ -4317,7 +4192,7 @@ And the wolf is left panting from all of his efforts with a lingering ache on hi
 It can't be!
 
 
-:: Forceful Extraction 2 (Text) [text] {"position":"1672,321","size":"100,100"}
+:: Forceful Extraction 2 (Text) [text] {"position":"1675,4150","size":"100,100"}
 With even more outrage, the wolf is determined to fight again. Once more, his muscles bulge as he summons his strength. The outrage swells within him. His eyes focus down on his cock, abused by the slime moving around it, pleasuring its surface...
 
 The wolf does his best to try and ignore it. He huffs from the effort while, at the same time, he groans from the pleasure. The slime goes up and down the smooth surface of his cock, assaulting it from all sides. It feels like the softest of hands is stroking him, like a group of smooth tongues is licking it, from top to bottom, over and over again. The wolf can see its surface displacing itself as it moves from the tip of his cock to the base and back, and then, as it goes down his shaft just like all the other times...
@@ -4337,7 +4212,7 @@ The slime keeps pleasuring his cock, but as the wolf tries and tries to fight ag
 It gives the wolf hope! The slime starts speeding up the treatment of his member, maybe trying to distract him with pleasure? He won't fall for it, though! The wolf is determined to keep fighting no matter what! Just as he thinks he might get some movement done inside the slime again, however...
 
 
-:: Forceful Extraction 3 (Text) [text] {"position":"1797,324","size":"100,100"}
+:: Forceful Extraction 3 (Text) [text] {"position":"1800,4150","size":"100,100"}
 The slime hardens again. This time, however, it does not feel the same as last time.
 
 All around his body, that pressure comes from the viscous liquid again, yet around his cock, the stroking doesn't stop. If anything, it increases. While before the wolf could feel a single displacement in the slime's surface going up and down his length, a second one now appears. Then a third, then a fourth. All of them assault his cock, kneading it from different sides to the point where his cock even bobs back and forth inside the liquid as the different surfaces start masturbating it. The feeling of them around his shaft, around his <b>knot</b>, makes the wolf let out a drawn-out groan as the pleasure enforced on him increases tenfold.
@@ -4353,7 +4228,7 @@ The slime starts softening around his sheath. Then around his balls. The same to
 And then, things get even worse for the captured adventurer.
 
 
-:: Forceful Extraction End (Text) [text] {"position":"1921,324","size":"100,100"}
+:: Forceful Extraction End (Text) [text] {"position":"1925,4150","size":"100,100"}
 As if the stimulation on his cock and balls wasn't enough, the wolf feels the slime start to soften around the underside of his tail as well.
 
 Frantically, the wolf's eyes grow even wider.
@@ -4373,7 +4248,7 @@ With a drawn-out muffled moan, the wolf's exposed cock starts pulsing inside the
 It doesn't stop there, and neither does the slime. All the stimulation keeps going as the wolf's orgasm hits, shooting jet after jet of cum into the slime. His seed seems to be 'caught' by the blob. The white, pearly substance is gathered just above his cock, melding together as the wolf is forced to shoot more and more. The slime keeps milking him, kneading his cock, his knot, and pressing hard inside his ass until the wolf's cock is reduced to quick throbs, spurting the last remnants of his orgasm. Only then does the slime start slowing down, although the stimulation doesn't truly stop. It allows the wolf to catch his breath, though. And as he looks down...
 
 
-:: Extraction End 1 (Text) [text] {"position":"2058,178","size":"100,100"}
+:: Extraction End 1 (Text) [text] {"position":"2050,4075","size":"100,100"}
 The seed the wolf expelled is taken by the slime. It travels through its surface around the wolf's body and then it goes down. The wolf remembers the small hole he had seen in the altar beneath the slime and, seeing no more traces of his seed, he can only assume it was taken there.
 
 Before $name can ponder on what might happen next, it simply starts over again.
@@ -4393,7 +4268,7 @@ And then, as always, it does.
 As the wolf is being forcefully milked by the slime, a flicker of light suddenly appears above him.
 
 
-:: Forceful Extraction End 2 (Text) [text] {"position":"2194,342","size":"100,100"}
+:: Forceful Extraction End 2 (Text) [text] {"position":"2175,4150","size":"100,100"}
 The wolf's eyes grow wide as his eyes and nose recognize what the light is at the same time. 
 
 It's a candle. It burns on a special candleholder built inside the closed alcove. A bright red, large candle that looks exactly the same as the one he's seen before.
@@ -4429,7 +4304,7 @@ At one point, $name is barely aware that Ivex opens his alcove to look at him. T
 The pleasure feels unending.
 
 
-:: Gentle Extraction End 2 (Text) [text] {"position":"2198,103","size":"100,100"}
+:: Gentle Extraction End 2 (Text) [text] {"position":"2175,3825","size":"100,100"}
 The wolf's eyes grow wide as his eyes and nose recognize what the light is at the same time. 
 
 It's a candle. It burns on a special candleholder built inside the closed alcove. A bright red, large candle that looks exactly the same as the one he's seen before.
@@ -4465,7 +4340,7 @@ At one point, $name is barely aware that Ivex opens his alcove to look at him. T
 The pleasure feels unending.
 
 
-:: Gentle Extraction 1 (Text) [text] {"position":"1533,102","size":"100,100"}
+:: Gentle Extraction 1 (Text) [text] {"position":"1550,3825","size":"100,100"}
 Yeah. The wolf lets out a muffled groan. Just for a moment, $name lets himself relax inside the slime as it continues to treat his cock.
 
 Resting for just a moment feels wise. The wolf is gathering his strength, he tells himself, as he feels pleasure emanating from his loins all over his body because of what the slime does. His face and ears grow red for letting it happen, but what can he do?
@@ -4479,7 +4354,7 @@ His hips try to move reflexively to do that, but they can't. Of course, they can
 As if reading his thoughts, the wolf can swear the slime starts speeding up. Its strokes, up and down the wolf's smooth, red length, become a little tighter. The pleasure is... almost too much.
 
 
-:: Gentle Extraction 2 (Text) [text] {"position":"1673,101","size":"100,100"}
+:: Gentle Extraction 2 (Text) [text] {"position":"1675,3825","size":"100,100"}
 Despite all the pleasure, the wolf clings to his willpower. He can't let it overcome him, he has to fight it! With effort, his muscles bulge as he summons his strength. The outrage swells within him. His eyes focus down on his cock, abused by the slime moving around it, pleasuring its surface...
 
 The wolf does his best to try and ignore it. He huffs from the effort while, at the same time, he groans from the pleasure. The slime goes up and down the smooth surface of his cock, assaulting it from all sides. It feels like the softest of hands is stroking him, like a group of smooth tongues is licking it, from top to bottom, over and over again. The wolf can see its surface displacing itself as it moves from the tip of his cock to the base and back, and then, as it goes down his shaft just like all the other times...
@@ -4495,7 +4370,7 @@ The pleasure is overwhelming. The slime keeps pleasuring his cock. It's impossib
 The slime starts speeding up the treatment of his member, and then...
 
 
-:: Gentle Extraction 3 (Text) [text] {"position":"1801,101","size":"100,100"}
+:: Gentle Extraction 3 (Text) [text] {"position":"1800,3825","size":"100,100"}
 The slime softens itself even more around the wolf. It starts to feel like floating in water and, though the pleasure is almost overwhelming, even in his relaxed state, $name realizes he can move his head. Thoughts of trying to get away pop up in his head and try to fight the lust he's feeling, but before he can move at all, the slime itself does.
 
 When the wolf feels everything shifting around his body, his reflex is to move his arms or his legs to keep himself balanced. He quickly finds that that's not possible, though. Though the blob around him feels softer, it still feels sticky and impossible to push through for his limbs.
@@ -4513,7 +4388,7 @@ The slime starts softening around his sheath. Then around his balls. The same to
 And then, things grow even more intense for the captured adventurer.
 
 
-:: Gentle Extraction End (Text) [text] {"position":"1926,102","size":"100,100"}
+:: Gentle Extraction End (Text) [text] {"position":"1925,3825","size":"100,100"}
 As if the stimulation on his cock and balls wasn't enough, the wolf feels the soft slime all around his body start to move and twitch as well.
 
 The wolf's eyes grow wide.
@@ -4537,7 +4412,7 @@ With a drawn-out moan, the wolf's exposed cock starts pulsing inside the slime a
 It doesn't stop there, and neither does the slime. All the stimulation keeps going as the wolf's orgasm hits, shooting jet after jet of cum into the slime. His seed seems to be 'caught' by the blob. The white, pearly substance is gathered just above his cock, melding together as the wolf is encouraged to shoot more and more. The slime keeps milking him, kneading his cock, his knot, and inflicting pleasure all around his body until the wolf's cock is reduced to quick throbs, spurting the last remnants of his orgasm. Only then does the slime start slowing down, although the stimulation doesn't truly stop. It allows the wolf to catch his breath, though. And as he looks down…
 
 
-:: Extraction Archive Display {"position":"180,2911","size":"100,100"}
+:: Extraction Archive Display [noreturn] {"position":"1950,1000","size":"100,100"}
 <<silently>>\
   <<if $extractionGentleEnd && $extractionForcefulEnd>>
     <<set $extractionVariant = 'gentle'>>
@@ -4554,39 +4429,39 @@ It doesn't stop there, and neither does the slime. All the stimulation keeps goi
   <b>[[Bad Ending: Extraction|Extraction Archive]]</b>
   Variation: <<nobr>>
   <<if $extractionGentleEnd>>
-	<label><<radiobutton "$extractionVariant" "gentle" autocheck>> Gentle</label>
+    <label><<radiobutton "$extractionVariant" "gentle" autocheck>> Gentle</label>
   <<else>>
     <span class="helper-container">
-	  <span><label><<radiobutton "$extractionVariant" "">> <span class="disabled">Gentle</span></label></span>
-	  <small class="helper-text">The slime is fine-tuned to reward those that let it do its work...</small>
-	</span>
-	<<done>><<script>>
-	document.getElementById("radiobutton-extractionvariant-0").disabled = true;
-	<</script>><</done>>
+      <span><label><<radiobutton "$extractionVariant" "">> <span class="disabled">Gentle</span></label></span>
+      <small class="helper-text">The slime is fine-tuned to reward those that let it do its work...</small>
+    </span>
+    <<done>><<script>>
+    document.getElementById("radiobutton-extractionvariant-0").disabled = true;
+    <</script>><</done>>
   <</if>>
   <</nobr>>\
    | <<nobr>>
-	<<if $extractionForcefulEnd>>
-		<label><<radiobutton "$extractionVariant" "forceful" autocheck>> Forceful</label>
-	  <<else>>
-		<span class="helper-container">
-		  <span><label><<radiobutton "$extractionVariant" "">> <span class="disabled">Forceful</span></label></span>
-		  <small class="helper-text">The slime is fine-tuned to go rougher on those that insist on fighting it...</small>
-		</span>
-		<<done>><<script>>
-			document.getElementById("radiobutton-extractionvariant-1").disabled = true;
-		<</script>><</done>>
+    <<if $extractionForcefulEnd>>
+        <label><<radiobutton "$extractionVariant" "forceful" autocheck>> Forceful</label>
+      <<else>>
+        <span class="helper-container">
+          <span><label><<radiobutton "$extractionVariant" "">> <span class="disabled">Forceful</span></label></span>
+          <small class="helper-text">The slime is fine-tuned to go rougher on those that insist on fighting it...</small>
+        </span>
+        <<done>><<script>>
+            document.getElementById("radiobutton-extractionvariant-1").disabled = true;
+        <</script>><</done>>
     <</if>>
   <</nobr>>
 <<else>>\
   <span class="helper-container">
-  	<b><span class="disabled">Bad Ending: Extraction</span></b>
-	<small class="helper-text">Touching unknown magical things always ends badly...</small>
+      <b><span class="disabled">Bad Ending: Extraction</span></b>
+    <small class="helper-text">Touching unknown magical things always ends badly...</small>
   </span>
 <</if>>\
 
 
-:: Extraction Archive [noreturn] {"position":"475,2917","size":"100,100"}
+:: Extraction Archive [noreturn] {"position":"1950,1100","size":"100,100"}
 <<include "Pulled In (Text)">>
 
 <<include "Pulled Further (Text)">>
@@ -4632,21 +4507,13 @@ It doesn't stop there, and neither does the slime. All the stimulation keeps goi
 [[Return to the Archives|Archives]]
 
 
-:: Coming Soon {"position":"2709,1029","size":"100,100"}
-<div class="action-box">\
-  <ul class="actions">\
-	<li>[[Return to the hallway.|Chastity]]</li>
-  </ul>\
-</div>\
-
-
-:: Title Screen {"position":"879,45","size":"100,100"}
+:: Title Screen [restart] {"position":"2500,25","size":"100,100"}
 <div class="title-screen">\
-<<include "Title Screen 1">>
+<<include [[Title Screen 1]]>>
 </div>\
 
 
-:: Tying up {"position":"2374,1143","size":"100,100"}
+:: Tying up {"position":"1075,5450","size":"100,100"}
 Holding the unconscious panther up, he almost looks harmless. $name keeps growling, though. After all that time wandering around naked and erect, it doesn't bother the wolf as much anymore, but that thought alone is enough for the wolf's anger to feel bolstered. Who knows what the damned mage has done with his gear? With his trusty sword, even? Punishment of the same level should be inflicted upon him so that he can learn how it feels. But... what, exactly?
 
 Carelessly letting the panther fall down, $name looks around. Ivex's gems are scattered all over the floor. It is wise to gather them up and make sure he can't get ahold of them, but before anything, he has to make sure the mage is secure. Going around the house, $name quickly sees that he is in some kind of farmhouse. The tower was stored in the attic, but after going down a crude set of stairs, the windows reveal that there is nothing but fields and a poorly kept road surrounding it. Ivex keeps his hideout well-hidden. Luckily for the wolf, a farmhouse is well-equipped for many things, so he has no trouble finding a good bunch of thick rope in the main room, which he promptly takes upstairs to use.
@@ -4658,7 +4525,7 @@ As he shoves each of the many colored gems back into the small sack, he can't he
 [[Continue|Gemstones]]
 
 
-:: SFW Finish {"position":"2882,1284","size":"100,100"}
+:: SFW Finish {"position":"2400,5200","size":"100,100"}
 Yeah. It's not his place to punish Ivex. A long time in prison ought to be enough to make him re-think his actions. With aching loins, the wolf moves out of the room with the feline in tow. Despite everything, however, $name can't help but smile. A lot has happened, but luckily, no one will need to know about it, and his reputation is safe. Not only that, but the criminal is taken and the wolf is victorious.
 
 There is a lot of satisfaction in the thought that a large sack of gold awaits him for all this effort. In his head, the wolf already makes plans for a night of heavy drinking... and perhaps a few escorts in a tavern to make up for all the built-up need he never got to satisfy.
@@ -4666,7 +4533,7 @@ There is a lot of satisfaction in the thought that a large sack of gold awaits h
 [[Continue|Bounty Collection]]
 
 
-:: Gemstones {"position":"2514,1139","size":"100,100"}
+:: Gemstones {"position":"1200,5450","size":"100,100"}
 Frowning, the wolf hesitates, but curiosity takes over and, carefully, the wolf lets the gemstone rest on his paw... before closing it around to grip it.
 
 The gemstone starts glowing with a faint blue light.
@@ -4692,7 +4559,7 @@ $name shoves each and every one of them into the pouch until there are only four
 [[Continue|Chastity]]
 
 
-:: Punishments {"position":"2532,1403","size":"100,100"}
+:: Punishments {"position":"1425,5575","size":"100,100"}
 The wolf's hands curl into tight fists. He can barely control his growling, looking down at Ivex. Will getting locked up in some mage's containment chamber, or whatever else the guild decides to do to him, be enough to make him pay for what he's done? Of course not. They don't know half of what he's done, and even if he tells them, it won't have the same impact as seeing it.
 
 With the sack of gemstones in hand, the wolf stomps over to the tied-up feline and lifts him up by the scruff. Ivex shifts and grunts in his sleep, but doesn't wake up quite yet.
@@ -4711,18 +4578,18 @@ Thinking back to his experience in the tower and Ivex's journal, his report on w
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Wake him up. He needs to be awake to experience this.|Personal Vengeance]]</li>
-	<<if $enthrallmentEnding>>\
-  	  <li>[[ [Unlocked: Enthrallment] Put a pendant around his neck.|Enthrallment Vengeance]]</li>
-	<</if>>\
-	<<if $extractionEnding>>\
-  	  <li>[[ [Unlocked: Extraction] Throw him into that blob.|Extraction Vengeance]]</li>
-	<</if>>\
+      <li>[[Wake him up. He needs to be awake to experience this.|Personal Vengeance]]</li>
+    <<if $enthrallmentEnding>>\
+        <li>[[ [Unlocked: Enthrallment] Put a pendant around his neck.|Enthrallment Vengeance]]</li>
+    <</if>>\
+    <<if $extractionEnding>>\
+        <li>[[ [Unlocked: Extraction] Throw him into that blob.|Extraction Vengeance]]</li>
+    <</if>>\
   </ul>\
 </div>
 
 
-:: Personal Vengeance {"position":"2596,1533","size":"100,100"}
+:: Personal Vengeance [end] {"position":"1375,5975","size":"100,100"}
 <<silently>>
 <<set $gagged = false>>
 <<set $randomGag to random(1, 2)>>
@@ -4780,12 +4647,12 @@ What to do to him first?
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Strip him.|Strip]]</li>
+      <li>[[Strip him.|Strip]]</li>
   </ul>\
 </div>
 
 
-:: Enthrallment Vengeance {"position":"2088,1518","size":"100,100"}
+:: Enthrallment Vengeance [end] {"position":"1600,5575","size":"100,100"}
 <<include "Enthrallment Vengeance (Text)">>
 
 <span class="good-ending">Ending: <i>Ivex's Enthrallment</i></span>
@@ -4793,7 +4660,7 @@ What to do to him first?
 [[Continue|Ivex Enthrallment 1]]
 
 
-:: Extraction Vengeance {"position":"3126,1535","size":"100,100"}
+:: Extraction Vengeance [end] {"position":"1650,5750","size":"100,100"}
 <<include "Extraction Vengeance (Text)">>
 
 <span class="good-ending">Ending: <i>Ivex's Extraction</i></span>
@@ -4801,13 +4668,13 @@ What to do to him first?
 [[Continue|Ivex Extraction 1]]
 
 
-:: Ivex Extraction 1 {"position":"3126,1685","size":"100,100"}
+:: Ivex Extraction 1 {"position":"1775,5750","size":"100,100"}
 <<include "Ivex Extraction 1 (Text)">>
 
 [[Continue|Ivex Extraction 2]]
 
 
-:: Chastity {"position":"2524,1277","size":"100,100"}
+:: Chastity {"position":"1325,5450","size":"100,100"}
 It is just as perverted as some of the other ones he found, yet even though its effects make the wolf's eyes grow wide, it also makes his tail wag enthusiastically.
 
 It's perfect.
@@ -4840,84 +4707,84 @@ The wolf's member throbs in excitement at the thought. Now he can't wait for the
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Punish Ivex for his misdeeds.|Punishments]]</li>
-  	<li>[[Turn Ivex in and be done with it.|Turn In]]</li>
+      <li>[[Punish Ivex for his misdeeds.|Punishments]]</li>
+      <li>[[Turn Ivex in and be done with it.|Turn In]]</li>
   </ul>\
 </div>
 
 
-:: Ivex Extraction 2 {"position":"3126,1835","size":"100,100"}
+:: Ivex Extraction 2 {"position":"1900,5750","size":"100,100"}
 <<include "Ivex Extraction 2 (Text)">>
 
 [[Continue|Ivex Extraction 3]]
 
 
-:: Ivex Extraction 3 {"position":"3126,1985","size":"100,100"}
+:: Ivex Extraction 3 {"position":"2025,5750","size":"100,100"}
 <<include "Ivex Extraction 3 (Text)">>
 
 [[Continue|Ivex Extraction Final]]
 
 
-:: Ivex Extraction Final {"position":"3126,2135","size":"100,100"}
+:: Ivex Extraction Final {"position":"2150,5750","size":"100,100"}
 <<include "Ivex Extraction Final (Text)">>
 
 [[Continue|Ivex Extraction End]]
 
 
-:: Ivex Extraction End {"position":"3126,2285","size":"100,100"}
+:: Ivex Extraction End {"position":"2275,5750","size":"100,100"}
 <<include "Ivex Extraction End (Text)">>
 
 [[To the end|Extraction Finish]]
 
 
-:: Ivex Enthrallment 1 {"position":"2089,1671","size":"100,100"}
+:: Ivex Enthrallment 1 {"position":"1725,5575","size":"100,100"}
 <<include "Ivex Enthrallment 1 (Text)">>
 
 [[Continue|Ivex Enthrallment 2]]
 
 
-:: Ivex Enthrallment 2 {"position":"2089,1821","size":"100,100"}
+:: Ivex Enthrallment 2 {"position":"1850,5575","size":"100,100"}
 <<include "Ivex Enthrallment 2 (Text)">>
 
 [[Continue|Ivex Enthrallment 3]]
 
 
-:: Ivex Enthrallment 3 {"position":"2089,1971","size":"100,100"}
+:: Ivex Enthrallment 3 {"position":"1975,5575","size":"100,100"}
 <<include "Ivex Enthrallment 3 (Text)">>
 
 [[Continue|Ivex Enthrallment 4]]
 
 
-:: Ivex Enthrallment 4 {"position":"2087,2119","size":"100,100"}
+:: Ivex Enthrallment 4 {"position":"2100,5575","size":"100,100"}
 <<include "Ivex Enthrallment 4 (Text)">>
 
 [[Continue|Ivex Enthrallment 5]]
 
 
-:: Ivex Enthrallment 5 {"position":"2087,2269","size":"100,100"}
+:: Ivex Enthrallment 5 {"position":"2225,5575","size":"100,100"}
 <<include "Ivex Enthrallment 5 (Text)">>
 
 [[Continue|Ivex Enthrallment Final]]
 
 
-:: Ivex Enthrallment Final {"position":"2087,2419","size":"100,100"}
+:: Ivex Enthrallment Final {"position":"2350,5575","size":"100,100"}
 <<include "Ivex Enthrallment Final (Text)">>
 
 [[Continue|Ivex Enthrallment End]]
 
 
-:: Ivex Enthrallment End {"position":"2089,2663","size":"100,100"}
+:: Ivex Enthrallment End {"position":"2475,5575","size":"100,100"}
 <<include "Ivex Enthrallment End (Text)">>
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Keep Ivex as a personal thrall.|Enthrallment Finish]]</li>
-  	<li>[[Take him back as he is and collect the bounty.|Bounty Collection]]</li>
+      <li>[[Keep Ivex as a personal thrall.|Enthrallment Finish]]</li>
+      <li>[[Take him back as he is and collect the bounty.|Bounty Collection]]</li>
   </ul>\
 </div>
 
 
-:: Gag {"position":"2827,1814","size":"100,100"}
+:: Gag {"position":"1225,6425","size":"100,100"}
 <<set $gagged = true>>\
 Yeah, silencing him might be a good idea. Given the place Ivex has chosen to hide, it is unlikely that anyone would hear him, but his prattling is growing annoying pretty quickly.
 
@@ -4927,14 +4794,14 @@ The wolf looks around. There's a few options on how to silence him. What to gag 
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[With a piece of rope.|Gag with Rope]]</li>
-  	<li>[[With a silence spell.|Gag with Spell]]</li>
-  	<li>[[With his own undergarments.|Gag with Underwear]]</li>	
+      <li>[[With a piece of rope.|Gag with Rope]]</li>
+      <li>[[With a silence spell.|Gag with Spell]]</li>
+      <li>[[With his own undergarments.|Gag with Underwear]]</li>	
   </ul>\
 </div>
 
 
-:: Strip {"position":"2481,1665","size":"100,100"}
+:: Strip {"position":"1375,6175","size":"100,100"}
 <<if !$stage0Clear>>\
 Memories of the perverted panther getting rid of his clothes back in the tower come to the wolf's mind. Narrowing his eyes towards the feline, he reaches up to him.
 
@@ -4978,15 +4845,15 @@ Still, the show must go on. Kneeling next to the panther, the wolf drags him clo
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Show him.|Fondle]]</li>
-	<<if !$gagged>>\
-  	<li>[[Gag him.|Gag]]</li>
-	<</if>>\
+      <li>[[Show him.|Fondle]]</li>
+    <<if !$gagged>>\
+      <li>[[Gag him.|Gag]]</li>
+    <</if>>\
   </ul>\
 </div>
 
 
-:: Gag with Rope {"position":"2939,1710","size":"100,100"}
+:: Gag with Rope {"position":"1475,6500","size":"100,100"}
 Better to go with the classics.
 
 Cutting a spare piece of rope with his teeth, the wolf then ties it into a thick, single piece and, nonchalantly, shoves it into the maw of the complaining panther.
@@ -5008,7 +4875,7 @@ Sweet, sweet silence.
 <</if>>\
 
 
-:: Gag with Spell {"position":"2940,1812","size":"100,100"}
+:: Gag with Spell {"position":"1375,6500","size":"100,100"}
 Why not use Ivex's own tools against him?
 
 Shoving his paw into the pouch of gemstones, the wolf pulls out a gray-ish one that he remembers was a spell of silence. Clutching it into his paw, the wolf activates it and sees how to use it.
@@ -5032,7 +4899,7 @@ Sweet, sweet silence.
 <</if>>\
 
 
-:: Gag with Underwear {"position":"2940,1915","size":"100,100"}
+:: Gag with Underwear {"position":"1575,6500","size":"100,100"}
 The wolf smirks. It's time to get creative.
 
 Reaching out for Ivex's cut and discarded clothes, it's easy to find the stained piece of cloth he had wrapped around his crotch. 
@@ -5058,7 +4925,7 @@ Sweet, sweet silence.
 <</if>>\
 
 
-:: Fondle {"position":"2481,1815","size":"100,100"}
+:: Fondle {"position":"1500,6175","size":"100,100"}
 <<set $revengeStage = 1>>\
 The wolf takes a few heavy steps toward the panther. Seeing $name approaching is enough to make Ivex look fearful again. He tries to wiggle away, but a simple pull on his tail is enough to drag him back closer. Then, the wolf gets down on all fours over the bound mage.
 
@@ -5104,16 +4971,16 @@ $name continues to hold the panther down and forcefully stimulate him. What to d
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Use one of his spells on him.|Spell]]</li>
-  	<li>[[Continue stimulating him.|Edge]]</li>	
-	<<if !$gagged>>\
-  	<li>[[Gag him.|Gag]]</li>
-	<</if>>\
+      <li>[[Use one of his spells on him.|Spell]]</li>
+      <li>[[Continue stimulating him.|Edge]]</li>	
+    <<if !$gagged>>\
+      <li>[[Gag him.|Gag]]</li>
+    <</if>>\
   </ul>\
 </div>
 
 
-:: Spell {"position":"2717,2091","size":"100,100"}
+:: Spell {"position":"1875,6375","size":"100,100"}
 <<if !$spellOptions>>\
 Yes. Ivex has made so many spells with the sole intent of using them on people for his own perversion. Why not use some of these against him?
 
@@ -5139,27 +5006,27 @@ Which spell would be best to use right now?
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Use a Lust spell on him.|Lust Spell]]</li>  
-	<<if $interrogationEndingFreeze>>\
-  	  <li>[[ [Unlocked: Freeze] Use an ice spell on him.|Ice Spell]]</li>
-	<<else>>\
-	  <li><span class="disabled">[Locked: Interrogation - ???] ???</span></li>
-	<</if>>\
-	<<if $interrogationEndingShock>>\
-  	  <li>[[ [Unlocked: Shock] Use an lightning spell on him.|Lightning Spell]]</li>
-	<<else>>\
-	  <li><span class="disabled">[Locked: Interrogation - ???] ???</span></li>
-	<</if>>\	
-	<<if $revengeStage == 2 || $revengeStage == 1>>\
-	<li>[[On second thought, maybe no spells just yet...|Hold]]</li>
-	<<elseif $revengeStage == 3>>\
-	<li>[[On second thought, maybe no spells just yet...|Fucking]]</li>
-	<</if>>\
+      <li>[[Use a Lust spell on him.|Lust Spell]]</li>  
+    <<if $interrogationEndingFreeze>>\
+        <li>[[ [Unlocked: Freeze] Use an ice spell on him.|Ice Spell]]</li>
+    <<else>>\
+      <li><span class="disabled">[Locked: Interrogation - ???] ???</span></li>
+    <</if>>\
+    <<if $interrogationEndingShock>>\
+        <li>[[ [Unlocked: Shock] Use an lightning spell on him.|Lightning Spell]]</li>
+    <<else>>\
+      <li><span class="disabled">[Locked: Interrogation - ???] ???</span></li>
+    <</if>>\	
+    <<if $revengeStage == 2 || $revengeStage == 1>>\
+    <li>[[On second thought, maybe no spells just yet...|Hold]]</li>
+    <<elseif $revengeStage == 3>>\
+    <li>[[On second thought, maybe no spells just yet...|Fucking]]</li>
+    <</if>>\
   </ul>\
 </div>
 
 
-:: Edge {"position":"2280,2318","size":"100,100"}
+:: Edge {"position":"1675,6025","size":"100,100"}
 <<if !$ivexEdging>>
 $name is fond of the good, old methods, and this seems to be extra effective on the mage.
 
@@ -5211,7 +5078,7 @@ After he's satisfied, $name wipes his hand on the panther's already matted fur a
 <</if>>\
 
 
-:: Ice Spell {"position":"2905,2218","size":"100,100"}
+:: Ice Spell {"position":"1775,6500","size":"100,100"}
 Pulling out the light blue gemstone, the wolf clutches it in his hand and looks down at Ivex.
 
 <<if !$freezeSpell>>\
@@ -5269,7 +5136,7 @@ After he's satisfied, Ivex's member is left shy and cold inside his sheath, read
 <</if>>\
 
 
-:: Lightning Spell {"position":"2906,2103","size":"100,100"}
+:: Lightning Spell {"position":"1875,6500","size":"100,100"}
 Pulling out the purple gemstone, the wolf clutches it in his hand and looks down at Ivex.
 
 <<if !$shockSpell>>\
@@ -5331,7 +5198,7 @@ Before long, he gets bored of it. Ivex's member seems to have shirked away a lit
 <</if>>\
 
 
-:: Hold {"position":"2484,1991","size":"100,100"}
+:: Hold {"position":"1675,6175","size":"100,100"}
 <<set $revengeStage = 2>>\
 <<if !$stage1Clear>>\
   <<if !$gagged>>\
@@ -5359,17 +5226,17 @@ Before long, he gets bored of it. Ivex's member seems to have shirked away a lit
     <<set $ivexEdges = 0>>\
   <</if>>\
   <<if $ivexEdges <= 2>>\
-	The wolf roughly grabs the bound mage's caged sheath to feel it up.
-	The panther's arousal feels... <span style="color:#e7d778">gripping</span>.
+    The wolf roughly grabs the bound mage's caged sheath to feel it up.
+    The panther's arousal feels... <span style="color:#e7d778">gripping</span>.
   <<elseif $ivexEdges > 2 && $ivexEdges <= 3>>\
-	The wolf roughly grabs the bound mage's caged sheath to feel it up.
-	The panther's arousal feels... <span style="color:#bb5e39">powerful</span>.
+    The wolf roughly grabs the bound mage's caged sheath to feel it up.
+    The panther's arousal feels... <span style="color:#bb5e39">powerful</span>.
   <<elseif $ivexEdges > 3 && $ivexEdges <= 5>>\
   The wolf roughly grabs the bound mage's caged sheath to feel it up.
   The panther's arousal feels... <span style="color:#bf5150">overpowering</span>.
   <<elseif $ivexEdges > 5>>\
-	The wolf roughly grabs the bound mage's caged sheath to feel it up.
-	The panther's arousal feels... <span style="color:#e92940">overwhelming</span>.
+    The wolf roughly grabs the bound mage's caged sheath to feel it up.
+    The panther's arousal feels... <span style="color:#e92940">overwhelming</span>.
   <<else>>\
   <</if>>\
 
@@ -5380,17 +5247,17 @@ Before long, he gets bored of it. Ivex's member seems to have shirked away a lit
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Use one of his spells on him.|Spell]]</li>
-  	<li>[[Stimulate and tease him by hand.|Edge]]</li>
-	<li>[[Fuck him.|Fuck]]</li>
-	<<if !$gagged>>\
-  	<li>[[Gag him.|Gag]]</li>
-	<</if>>\
+      <li>[[Use one of his spells on him.|Spell]]</li>
+      <li>[[Stimulate and tease him by hand.|Edge]]</li>
+    <li>[[Fuck him.|Fuck]]</li>
+    <<if !$gagged>>\
+      <li>[[Gag him.|Gag]]</li>
+    <</if>>\
   </ul>\
 </div>
 
 
-:: Lust Spell {"position":"2788,2337","size":"100,100"}
+:: Lust Spell {"position":"1975,6500","size":"100,100"}
 Pulling out the pink gemstone, the wolf clutches it in his hand and looks down at Ivex.
 
 <<if !$lustSpell>>\
@@ -5454,7 +5321,7 @@ Hearing Ivex panting in desperate frustration like he made him pant in the past 
 <</if>>\
 
 
-:: Fuck {"position":"2484,2141","size":"100,100"}
+:: Fuck {"position":"1800,6175","size":"100,100"}
 It's high time Ivex deals with the consequences of what he has caused.
 
 The wolf's member throbs in excitement. $name keeps one paw firmly on Ivex's shoulder, holding him down on his back, but the other? The wolf's eyes lock with the panther's and he brings it down to his own cock. The wolf gives it a stroke, from top to bottom. The bright red, veiny spire has been aching for this for hours and hours. Ever since he was forced to breathe in that candle. This fire inside him has been burning for too long.
@@ -5507,7 +5374,7 @@ Ivex is simply forced to take the wolf's pounding.
 [[Continue|Fucking]]
 
 
-:: Fucking {"position":"2484,2291","size":"100,100"}
+:: Fucking {"position":"1975,6175","size":"100,100"}
 <<if !$stage2Clear>>\
 <<set $revengeStage = 3>>\
 "Fuck..." the wolf groans. His lusty growling is constant as he continues to fuck the panther hard. In and out, the smaller feline's ass already taking his size with more ease, yet still feeling delightfully tight around his cock.
@@ -5573,17 +5440,17 @@ Holding himself like that, the wolf wonders, what to do to him next?
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Use one of his spells on him.|Spell]]</li>
-  	<li>[[Stimulate and tease him by hand.|Edge]]</li>
-	<li>[[Knot him.|Knot]]</li>
-	<<if !$gagged>>\
-  	<li>[[Gag him.|Gag]]</li>
-	<</if>>\
+      <li>[[Use one of his spells on him.|Spell]]</li>
+      <li>[[Stimulate and tease him by hand.|Edge]]</li>
+    <li>[[Knot him.|Knot]]</li>
+    <<if !$gagged>>\
+      <li>[[Gag him.|Gag]]</li>
+    <</if>>\
   </ul>\
 </div>
 
 
-:: Knot {"position":"2484,2441","size":"100,100"}
+:: Knot {"position":"2150,6175","size":"100,100"}
 No holding back. The wolf's lust is too strong and his instincts start speaking louder. There has been enough messing with the panther. It's time to finish it.
 
 Ivex just yelps and mewls when the wolf pulls him up and grips him hard against his chest again. The smaller feline squirms, certainly knowing what's coming, but the wolf stops it with nothing but one threatening growl.
@@ -5613,7 +5480,7 @@ Putting more strength into his hips, $name pushes in one last time and, this tim
 [[Continue|Knotted Mage]]
 
 
-:: Knotted Mage {"position":"2484,2591","size":"100,100"}
+:: Knotted Mage {"position":"2275,6175","size":"100,100"}
 <<if !$gagged>>\
 "AAAH!!" Ivex yells.
 <<else>>\
@@ -5660,7 +5527,7 @@ It will take some time for the wolf's knot to come down, but $name is not in a h
 [[Continue|Pull Out Finish]]
 
 
-:: Pull Out Finish {"position":"2573,2733","size":"100,100"}
+:: Pull Out Finish {"position":"2400,6175","size":"100,100"}
 The wolf spends his time locked with the feline to play with him some more. Watching him squirm and whine turns out to be extremely therapeutic. To <<print $name>>, it's almost as if all the humiliation he went through in the tower didn't happen. Almost.
 <<if $ivexClimax>>\
 
@@ -5688,13 +5555,13 @@ The wolf does. He wonders if Ivex has had enough punishment or if he should add 
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Add a punishing touch for the journey.|Pull Out Punishment Finish]]</li>
-  	<li>[[Take him back as he is and collect the bounty.|Bounty Collection]]</li>
+      <li>[[Add a punishing touch for the journey.|Pull Out Punishment Finish]]</li>
+      <li>[[Take him back as he is and collect the bounty.|Bounty Collection]]</li>
   </ul>\
 </div>
 
 
-:: Enthrallment Finish {"position":"2394,3056","size":"100,100"}
+:: Enthrallment Finish {"position":"2600,5500","size":"100,100"}
 <<if !$enthralmentIvexEnding>>\
 <<set $enthralmentIvexEndingUnlock = true>>\
 <</if>>\
@@ -5705,7 +5572,7 @@ The wolf does. He wonders if Ivex has had enough punishment or if he should add 
 [[The End|The End]]
 
 
-:: Extraction Finish {"position":"2810,3060","size":"100,100"}
+:: Extraction Finish {"position":"2400,5750","size":"100,100"}
 <<if !$extractionIvexEnding>>\
 <<set $extractionIvexEndingUnlock = true>>\
 <</if>>\
@@ -5716,7 +5583,7 @@ The wolf does. He wonders if Ivex has had enough punishment or if he should add 
 [[The End|The End]]
 
 
-:: Turn In {"position":"2704,1282","size":"100,100"}
+:: Turn In {"position":"1450,5450","size":"100,100"}
 Before Ivex can wake up, $name approaches him. He grunts looking down at the mage, but picks him up and places the unconscious, bound mage over his shoulder to get ready to take him back.
 
 Looking down, however, the wolf sees his member still aching. Surely Ivex's candle effect must wear off at some point, but it's still uncomfortable. Even the large wolf can't help but blush remembering his time bound on that cross. The way Ivex taunted and touched him, the threats the feline made...
@@ -5729,13 +5596,13 @@ $name takes a deep breath. Should he really just take Ivex to be arrested and no
 
 <div class="action-box">\
   <ul class="actions">\
-  	<li>[[Yes. Turn Ivex in and be done with it.|SFW Finish]]</li>  
-  	<li>[[No... he deserves some punishment. Punish Ivex for his misdeeds.|Punishments]]</li>
+      <li>[[Yes. Turn Ivex in and be done with it.|SFW Finish]]</li>  
+      <li>[[No... he deserves some punishment. Punish Ivex for his misdeeds.|Punishments]]</li>
   </ul>\
 </div>
 
 
-:: Pull Out Punishment Finish {"position":"2512,2883","size":"100,100"}
+:: Pull Out Punishment Finish {"position":"2525,6175","size":"100,100"}
 $name decides that, since Ivex's arrogance seems to know no bounds, he can deal with a little extra punishment during the trip back.
 
 With a smirk, the wolf looks down at Ivex, who in turn glares daggers up at him, but is unable to say anything gagged as he is. Not breaking eye contact, the wolf shoves his paw into the gem pouch again and... pulls out the pink, lust spell gemstone.
@@ -5759,7 +5626,7 @@ $name just smiles. He has something he can fuck on the way if he needs to.
 [[Continue|Bounty Collection]]
 
 
-:: Bounty Collection {"position":"2606,3062","size":"100,100"}
+:: Bounty Collection {"position":"2950,5650","size":"100,100"}
 Lucky for the wolf, he manages to find a worn, old pair of pants in the farmhouse Ivex had made his base. They are far too short for him, but they will do, so that at least he's not naked.
 
 Gathering what supplies he can, the wolf sets off with everything in hand: Ivex's tower inside the large gemstone, the pouch of magic gems and, most importantly, Ivex.
@@ -5777,7 +5644,7 @@ Or, at least, he will try to.
 [[The End|The End]]
 
 
-:: The End {"position":"2603,3330","size":"100,100"}
+:: The End [end] {"position":"2775,5050","size":"100,100"}
 The End.
 <<if $personalEndingUnlock>>\
 <<set $personalEnding = true>>\
@@ -5814,14 +5681,14 @@ From here on, you can...
 
 <div class="action-box">\
   <ul class="actions">\  
-  	<li>[[Return to the point of escaping the tower.|Outside]]</li>
-  	<li>[[Return to the point of escaping the first floor.|Escape Start]]</li>	
-  	<li>[[Return to the beginning of the game.|Title Screen]]</li>
+      <li>[[Return to the point of escaping the tower.|Outside]]</li>
+      <li>[[Return to the point of escaping the first floor.|Escape Start]]</li>	
+      <li>[[Return to the beginning of the game.|Title Screen]]</li>
   </ul>\
 </div>
 
 
-:: Enthrallment Vengeance (Text) [text] {"position":"1986,1518","size":"100,100"}
+:: Enthrallment Vengeance (Text) [text] {"position":"1600,5475","size":"100,100"}
 Deciding on his vengeance, the wolf smirks. While the panther is still unconscious on the floor, the wolf turns towards the tower inside the gemstone, picks the red teleportation stone up and clutches it again.
 
 $name finds the transportation easier this time. Perhaps because he was ready for it? Regardless, the wolf turns up at the exact same spot he left. From there, it is a simple matter to return to the lion's room where the large feline still squirms on the ground.
@@ -5849,7 +5716,7 @@ Recognition flares up in Ivex's eyes right away.
 The wolf doesn't stop.
 
 
-:: Ivex Enthrallment 1 (Text) [text] {"position":"1985,1671","size":"100,100"}
+:: Ivex Enthrallment 1 (Text) [text] {"position":"1725,5475","size":"100,100"}
 "YOU FOOL!" Ivex yells as the pendant is brought up to his head. "When I get out of this, I will make you regret all of this a thousand times ov-"
 
 $name lowers the pendant, placing it around his neck. The gemstone emits a glow for a moment and, as soon as it does, Ivex's eyes grow wide for just a moment and his words get interrupted. Then, soon after, his expression of outrage and anger fades into a neutral one. The same one the lion holds all the time.
@@ -5877,7 +5744,7 @@ Watching the bound feline standing still and without expression, the wolf smirks
 Maybe it's time to do something about that, too.
 
 
-:: Ivex Enthrallment 2 (Text) [text] {"position":"1986,1821","size":"100,100"}
+:: Ivex Enthrallment 2 (Text) [text] {"position":"1850,5475","size":"100,100"}
 Deciding to test things out before pushing anything further, the wolf grabs Ivex by his scruff and pulls him up to his knees. The panther stands firm on them, but says nothing and does not change his expression. He does seem to be completely at the wolf's mercy.
 
 Placing the bound captive properly in front of him, the wolf keeps one hand on his head holding his fur, but with the other... he points his hard, red member down towards Ivex.
@@ -5893,7 +5760,7 @@ The red, tapered member throbs in response to Ivex's continuous licking. The pan
 There is little to do but take advantage of it.
 
 
-:: Ivex Enthrallment 3 (Text) [text] {"position":"1987,1972","size":"100,100"}
+:: Ivex Enthrallment 3 (Text) [text] {"position":"1975,5475","size":"100,100"}
 "Stop," the wolf orders, and the panther ceases his licking right away.
 
 With a pleased smile, the wolf grips his cock at the base again and, taking another step forward, presses his member coated with saliva against Ivex's muzzle. The feline does not react as the wolf grinds and wipes his member against his face, smearing it with both drool and pre-cum.
@@ -5919,7 +5786,7 @@ $name smirks. The wolf's hand on his own cock starts stroking it properly. The w
 The wolf's smile widens. He does not stop stroking his cock as he walks toward the door. "Then follow me."
 
 
-:: Ivex Enthrallment 4 (Text) [text] {"position":"1983,2119","size":"100,100"}
+:: Ivex Enthrallment 4 (Text) [text] {"position":"2100,5475","size":"100,100"}
 It doesn't take long for $name to find the bedroom. It looks neat, but a layer of dust on most furniture indicates it likely hasn't been used in a while. Ivex probably sleeps inside his magical tower of nonsense. The wolf points at it, though.
 
 "Get on the bed, panther. On all fours."
@@ -5943,7 +5810,7 @@ Spitting on his paw, the wolf then smears it around his cock, lubricating it a l
 Why should he do all the work?
 
 
-:: Ivex Enthrallment 5 (Text) [text] {"position":"1985,2269","size":"100,100"}
+:: Ivex Enthrallment 5 (Text) [text] {"position":"2225,5475","size":"100,100"}
 Pushing the feline to the side, $name himself lies on the bed on his back. The panther looks at him with no emotion, remaining on all fours at the corner of the bed as the wolf spreads his legs and brings his hand down to give his knot a small squeeze. Then, he looks at the panther and smiles.
 
 "Climb up and line your rear with my cock," he orders.
@@ -5967,7 +5834,7 @@ Inch by inch, the feline takes his cock, and the wolf gets a front-row seat watc
 "Now... ride it. Fuck yourself with my cock."
 
 
-:: Ivex Enthrallment Final (Text) [text] {"position":"1986,2419","size":"100,100"}
+:: Ivex Enthrallment Final (Text) [text] {"position":"2350,5475","size":"100,100"}
 The sensations of the panther going back up on his cock are amazing for the lust-filled wolf. $name lets himself moan in pleasure as the panther moves up... and then comes down again, impaling himself on his cock all over again. Ivex's expression does not change, but the little grunts of effort coming from him are like music to the wolf's ear. The blue gemstone on the feline's pendant continues glowing as the enthralled mage is forced to obey his every command.
 
 "Faster... fuck..." $name growls, and the panther obeys.
@@ -5995,7 +5862,7 @@ Only the sound of Ivex's small grunts can be heard as the panther keeps jerking 
 The wolf is happy and content in laying down like that for a while, with the mage that fucked him over stuck to his cock and forced to pleasure himself in the most frustrating of ways.
 
 
-:: Ivex Enthrallment End (Text) [text] {"position":"1987,2661","size":"100,100"}
+:: Ivex Enthrallment End (Text) [text] {"position":"2475,5475","size":"100,100"}
 $name takes his sweet time. He is definitely not in a hurry anymore. The wolf enjoys the feeling of the panther's ass around his cock, the way it grips his grown knot, and the way it clenches while Ivex continues to try and try to jerk off to no avail.
 
 While waiting for his knot to recede, he looks at the feline. Ivex stares at nothing in particular while his hand continues to tease and work his sheath. His cock, stuck inside it, looks absolutely desperate to grow, but the magic barrier keeping his sheath sealed is strong. The barrier, however, does not seem to apply to liquids, as a steady flow of pre-cum keeps coming from Ivex's sheath to run down towards Ivex's balls and, much to his annoyance, mat the fur of his crotch as well.
@@ -6027,7 +5894,7 @@ What would it be like to have a thrall himself? Would a large bag of gold really
 No, that wouldn't be right. ...Would it? Ivex has made thralls of others and he had no intention of letting them go. It is poetic justice that he ends up meeting the same fate. Besides, slaves are common in most cities. Wouldn't that be a fitting punishment for the mage after all he's done?
 
 
-:: Enthrallment Finish (Text) [text] {"position":"2291,3056","size":"100,100"}
+:: Enthrallment Finish (Text) [text] {"position":"2600,5400","size":"100,100"}
 A smile grows across the wolf's muzzle. Yeah, there is no reason to waste such a good thrall by delivering him in for gold. Thinking back on all Ivex did to him in the tower and, even more so, what Ivex planned to do to him still, fills the wolf with certainty that this is the right way to go about it.
 
 "This is a pretty look for you," $name comments. "You don't mind staying naked, do you? I think I might just keep you naked all the time. It's not like you will mind all the stares, right?"
@@ -6057,7 +5924,7 @@ With a new 'companion' by his side, the wolf moves on. The life of an adventurer
 Or, at least, he will try to.
 
 
-:: Extraction Vengeance (Text) [text] {"position":"3230,1535","size":"100,100"}
+:: Extraction Vengeance (Text) [text] {"position":"1650,5850","size":"100,100"}
 Deciding on his vengeance, the wolf smirks. He picks Ivex up. Taking him inside the tower is risky, as he seemed to be more powerful there, therefore it has to be done before he wakes up. It'll be worth it, hopefully.
 
 With ease, the large wolf lifts the unconscious panther up to carry him over his shoulder. He then takes the red gemstone he made to get out of the tower, looks at it, and grips it again, hoping it'll work...
@@ -6075,7 +5942,7 @@ It softens his impact. The wolf takes a step back, not sure what to expect. Much
 It is at that moment that Ivex's droopy eyes start to open. The blob continues to engulf him, moving the feline to its center. Ivex looks confused for a moment, but then... his eyes grow wide. They meet the wolf's, then dart all around him, and his expression shifts to one of rage... and panic.
 
 
-:: Ivex Extraction 1 (Text) [text] {"position":"3231,1684","size":"100,100"}
+:: Ivex Extraction 1 (Text) [text] {"position":"1775,5850","size":"100,100"}
 The panther's muzzle moves, but if he makes any sound, it doesn't make it past the thick, viscous substance of the blob. Ivex's bound arms and legs move for a moment, but as soon as they start, they immediately slow down, and the wolf can see that the thing is hardening around them to keep the panther still. Frozen in place, Ivex's eyes dart back and forth until they meet the wolf's. $name can see him frown, his expression shifting to one of anger, but his face too freezes inside the thing. Whatever this blob is, it doesn't seem keen on letting the feline move. Good. It works even better than the wolf expected.
 
 $name wipes his paws and smiles triumphantly. Seeing Ivex trapped inside his own device is extremely pleasant. For a few moments, he watches the feline as he clearly struggles to move. His small muscles contract here or there, showing he's trying to put effort into moving his limbs, but none of it amounts to anything. What a weakling! After a while, it is clear that the feline is trapped and cannot get out. The wolf is ready to leave him there, for in fact, he doesn't even know how he would go about getting Ivex out of it. The mages in the adventurer's guild will surely figure something out when he delivers the panther and his tower to them in a few days. Taking a step back, the wolf is about to leave, but then something else catches his eye.
@@ -6089,7 +5956,7 @@ The thing moves around it as if massaging his sheath, except...
 The yellow glow surrounding it stops it. The blob seems keen on continuing to stimulate it for some reason, but the yellow glow blocks it. The wolf raises an eyebrow watching it all unfold. Is this thing another one of Ivex's perverted machinations?
 
 
-:: Ivex Extraction 2 (Text) [text] {"position":"3231,1834","size":"100,100"}
+:: Ivex Extraction 2 (Text) [text] {"position":"1900,5850","size":"100,100"}
 The panther seems angrier and more distressed as time goes on. The blob moving around his sheath grows more active. Even from outside, it looks as if it is actively stroking it, trying to stimulate it for some reason.
 
 In response to that, $name can see how Ivex's body reacts. Since the magic's chastity cage is transparent, the way the panther's sheath grows thicker is clear. The pink member nestled within reaches the opening of his sheath and bulges it, but because of the spell, it is unable to properly grow hard. It sure seems keen on trying to, though.
@@ -6105,7 +5972,7 @@ Ivex makes effort after effort to move, to get away from the thing assaulting hi
 The wolf smirks with satisfaction. Ivex is finally paying for all he has done.
 
 
-:: Ivex Extraction 3 (Text) [text] {"position":"3230,1986","size":"100,100"}
+:: Ivex Extraction 3 (Text) [text] {"position":"2025,5850","size":"100,100"}
 <<print $name>> can't help but move his own hand down to his cock as he watches the struggling panther get assaulted inside his own device. The karmic justice in it feels weirdly erotic. Or maybe it's just the effects of the candle still burning hot within him? Either way, it feels great for the wolf to have the freedom to wrap his paw around his member and stroke it.
 
 It feels even better to see Ivex's eyes shifting downwards towards his cock. The panther is forced to watch the free wolf idly jerking off while, at the same time, the blob keeps working on his cock relentlessly while it is unable to even grow hard.
@@ -6121,7 +5988,7 @@ Ivex seems to definitely feel that. The feline's eyes grow wide, and his face ch
 And then things get even better.
 
 
-:: Ivex Extraction Final (Text) [text] {"position":"3230,2135","size":"100,100"}
+:: Ivex Extraction Final (Text) [text] {"position":"2150,5850","size":"100,100"}
 The wolf's paw speeds up even more on his cock and he laughs when the blob spreads Ivex's legs even wider. The movement under the panther's tail makes what's going to happen next obvious. It's unbelievable that Ivex made this thing to do that to someone, but it feels incredibly pleasant to see it done to him!
 
 The panther seems to be aware of what's going to happen as well. His struggling to move grows more frantic than ever, every muscle in the panther's body contracting as he tries to move, but it is as if he is encased in solid ice. The panther remains there, floating inside the blob, even as it moves under his tail...
@@ -6145,7 +6012,7 @@ The wolf, on the other hand, slows down his paw. His cock, just as before, remai
 Just as he wonders that, the altar where the blob with Ivex inside starts glowing. The wolf takes a step back, readying himself, unsure of what is happening...
 
 
-:: Ivex Extraction End (Text) [text] {"position":"3229,2285","size":"100,100"}
+:: Ivex Extraction End (Text) [text] {"position":"2275,5850","size":"100,100"}
 The glowing on the altar grows brighter. Ivex seems to grow more frantic inside it for a moment, and then...
 
 It disappears.
@@ -6167,7 +6034,7 @@ Yet, he smirks. If the panther has really inflicted that upon others, then it is
 The panther's eyes grow wide with fury when the wolf pushes the first of the alcove's stone doors closed. Then, $name can see him trying so very hard to move, to say something, all the while his eyes and face start losing themselves in an expression of drunken lust and need before the wolf closes the second door, trapping the crazed mage inside with nothing but his own candles... and his own weird blob-thing.
 
 
-:: Extraction Finish (Text) [text] {"position":"2914,3060","size":"100,100"}
+:: Extraction Finish (Text) [text] {"position":"2400,5850","size":"100,100"}
 The wolf gets out of the tower and takes pleasure in knowing that, inside this gemstone where the tower is, the target of his bounty is as well.
 
 Lucky for the wolf, he manages to find a worn, old pair of pants in the farmhouse Ivex had made his base. They are far too short for him, but they will do, so that at least he's not naked.
@@ -6187,18 +6054,18 @@ With a handsome amount of gold in his hands, the wolf moves on. The life of an a
 Or, at least, he will try to.
 
 
-:: Ivex Enthrallment Archive Display {"position":"177,3127","size":"100,100"}
+:: Ivex Enthrallment Archive Display [noreturn] {"position":"2200,1000","size":"100,100"}
 <<if $enthralmentIvexEnding>>\
   <b>[[Ending: A New Servant|Ivex Enthrallment Archive]]</b>
 <<else>>\
   <span class="helper-container">
-  	<b><span class="disabled">Ending: A New Servant</span></b>
-	<small class="helper-text">New punishment ideas might come to the adventurer if he has experienced terrible things in different timelines...</small>
+      <b><span class="disabled">Ending: A New Servant</span></b>
+    <small class="helper-text">New punishment ideas might come to the adventurer if he has experienced terrible things in different timelines...</small>
   </span>
 <</if>>\
 
 
-:: Ivex Enthrallment Archive [noreturn] {"position":"472,3130","size":"100,100"}
+:: Ivex Enthrallment Archive [noreturn] {"position":"2200,1100","size":"100,100"}
 <<include "Enthrallment Vengeance (Text)">>
 
 <<include "Ivex Enthrallment 1 (Text)">>
@@ -6222,18 +6089,18 @@ Or, at least, he will try to.
 [[Return to the Archives|Archives]]
 
 
-:: Ivex Extraction Archive Display {"position":"176,3235","size":"100,100"}
+:: Ivex Extraction Archive Display [noreturn] {"position":"2325,1000","size":"100,100"}
 <<if $extractionIvexEnding>>\
   <b>[[Ending: Energy Supply|Ivex Extraction Archive]]</b>
 <<else>>\
   <span class="helper-container">
-  	<b><span class="disabled">Ending: Energy Supply</span></b>
-	<small class="helper-text">New punishment ideas might come to the adventurer if he has experienced terrible things in different timelines...</small>
+      <b><span class="disabled">Ending: Energy Supply</span></b>
+    <small class="helper-text">New punishment ideas might come to the adventurer if he has experienced terrible things in different timelines...</small>
   </span>
 <</if>>\
 
 
-:: Ivex Extraction Archive [noreturn] {"position":"471,3235","size":"100,100"}
+:: Ivex Extraction Archive [noreturn] {"position":"2325,1100","size":"100,100"}
 <<include "Extraction Vengeance (Text)">>
 
 <<include "Ivex Extraction 1 (Text)">>
@@ -6253,18 +6120,18 @@ Or, at least, he will try to.
 [[Return to the Archives|Archives]]
 
 
-:: Ivex Punishment Archive Display {"position":"178,3020","size":"100,100"}
+:: Ivex Punishment Archive Display [noreturn] {"position":"2075,1000","size":"100,100"}
 <<if $personalEnding>>\
   <b>[[Ending: Punishment|Ivex Punishment Archive]]</b>
 <<else>>\
   <span class="helper-container">
-  	<b><span class="disabled">Ending: Punishment</span></b>
-	<small class="helper-text">The spoils of victory...</small>
+      <b><span class="disabled">Ending: Punishment</span></b>
+    <small class="helper-text">The spoils of victory...</small>
   </span>
 <</if>>\
 
 
-:: Ivex Punishment Archive [noreturn] {"position":"471,3023","size":"100,100"}
+:: Ivex Punishment Archive [noreturn] {"position":"2075,1100","size":"100,100"}
 The wolf, still holding Ivex up by the scruff, lifts him higher so that he can look at the unconscious feline's face. Then, without hesitation, $name brings a paw up and gives the panther's muzzle a hard slap.
 
 Ivex shakes, awakening with a grunt and a mewl. The feline blinks, his feet wiggling up in the air and he looks around confused for a moment before his eyes focus on the large wolf holding him up. The sight of him trying to do something about it, only to realize that his arms are bound behind his back and his bound feet can't even touch the floor makes for quite an amusing scene.
@@ -6644,8 +6511,8 @@ Or, at least, he will try to.
 [[Return to the Archives|Archives]]
 
 
-:: Credits [noreturn] {"position":"722,2741","size":"100,100"}
-[[Return to the game|$return]]
+:: Credits [noreturn] {"position":"2600,700","size":"100,100"}
+<<link "Return to the game" $return>><</link>>\
 
 The writing and development of this interactive story was made by me, [[Sleth|http://www.slethstories.com/]].
 
@@ -6657,50 +6524,50 @@ Not only that, but I'd also like to extend my deepest gratitude to my patrons, w
 
 First and foremost, my patrons that have supported me in these last 4 months it took for me to develop, learn and finish this project:
 
-<b><ul>\  
-	<li>John Harris</li>
-	<li>Timba Saber</li>
-	<li>Kevin Deiderich</li>
-	<li>Gd </li>
-	<li>Rise</li>
-	<li>Bingturong</li>
-	<li>Laswer5</li>
-	<li>Sándor Bajkai</li>
-	<li>Sameer </li>
-	<li>wssbxj </li>
-	<li>Ian Meyers</li>
-	<li>Daniel Choi</li>
-	<li>Lathbalrog</li>
-	<li>Argentcoyote</li>
-	<li>Rin Ookami</li>
-	<li>xiaokiroz </li>
-	<li>Nigel Leiterman</li>
-	<li>keinok82562 </li>
-	<li>MagicMinnett</li>
-	<li>Ishiah </li>
-	<li>Snow Tastes Great</li>
-	<li>nikokarro</li>
-	<li>Nimrax</li>
-	<li>Maxwell</li>
-	<li>SASO_PRO</li>
-	<li>Lykron </li>
-	<li>Chris </li>
-	<li>AshfurtheBroken </li>
-	<li>Hyenatime </li>
-	<li>Michael </li>
-	<li>Chris Gordon</li>
-	<li>Pinecone</li>
-	<li>Guri Linus</li>
-	<li>Hyao</li>
-	<li>fancyhat </li>
-	<li>llama</li>
-	<li>Abraxas </li>
-	<li>Hollud </li>
-	<li>Lykos Bane</li>
-	<li>Rex Aurum</li>
-	<li>Martin Farley</li>
-	<li>Knight of the Dragon</li>
-	<li>Raus</li>
+<b><ul>\
+    <li>John Harris</li>
+    <li>Timba Saber</li>
+    <li>Kevin Deiderich</li>
+    <li>Gd </li>
+    <li>Rise</li>
+    <li>Bingturong</li>
+    <li>Laswer5</li>
+    <li>Sándor Bajkai</li>
+    <li>Sameer </li>
+    <li>wssbxj </li>
+    <li>Ian Meyers</li>
+    <li>Daniel Choi</li>
+    <li>Lathbalrog</li>
+    <li>Argentcoyote</li>
+    <li>Rin Ookami</li>
+    <li>xiaokiroz </li>
+    <li>Nigel Leiterman</li>
+    <li>keinok82562 </li>
+    <li>MagicMinnett</li>
+    <li>Ishiah </li>
+    <li>Snow Tastes Great</li>
+    <li>nikokarro</li>
+    <li>Nimrax</li>
+    <li>Maxwell</li>
+    <li>SASO_PRO</li>
+    <li>Lykron </li>
+    <li>Chris </li>
+    <li>AshfurtheBroken </li>
+    <li>Hyenatime </li>
+    <li>Michael </li>
+    <li>Chris Gordon</li>
+    <li>Pinecone</li>
+    <li>Guri Linus</li>
+    <li>Hyao</li>
+    <li>fancyhat </li>
+    <li>llama</li>
+    <li>Abraxas </li>
+    <li>Hollud </li>
+    <li>Lykos Bane</li>
+    <li>Rex Aurum</li>
+    <li>Martin Farley</li>
+    <li>Knight of the Dragon</li>
+    <li>Raus</li>
 </ul></b>\
 
 And, of course, also an honorable mention to everyone that has supported me and my writing in the these last years I have had my patreon going:
@@ -6778,7 +6645,7 @@ And, of course, also an honorable mention to everyone that has supported me and 
 Thank you so much!
 
 
-:: Title Screen 1 {"position":"1016,2","size":"100,100"}
+:: Title Screen 1 {"position":"2625,25","size":"100,100"}
 <<silently>>
 <<if $personalEnding>>
 <<set $characterDisplay = "images/wolf.png">>
@@ -6795,6 +6662,7 @@ Thank you so much!
 <div class="title-options">\
 <<link "New Game">>
   <<script>>
+    // [[Bound]]
     Dialog.setup("Content Warning");
 	  Dialog.wiki("This interactive story contains content of an adult nature. If you are easily offended or are under the age of 18, please exit now.<br/><br/> Moreover, this story contains elements that depict dubious or lack of consent, as well as other fetish sexual topics such as mind control, CBT, chastity, and others. If these themes make you uncomfortable or are not enjoyable for you, proceed only at your own discretion.<br/><br/><span style= 'float: right;'><<"+"button Proceed>><<"+"goto 'Bound'>><<"+"script>>Dialog.close();<<"+"/script>><<"+"/button>></span>");
     Dialog.open();
