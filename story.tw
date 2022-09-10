@@ -9,11 +9,16 @@ The Mage's Tower
 	"format-version": "2.36.1",
 	"start": "Title Screen",
 	"tag-colors": {
-		"hub": "purple",
+		"done": "purple",
+		"end": "red",
+		"has-hole": "yellow",
 		"incomplete": "red",
-		"key": "red",
-		"noreturn": "red",
-		"start": "green",
+		"init": "blue",
+		"key": "orange",
+		"maybe-password": "blue",
+		"must-fix": "orange",
+		"noreturn": "yellow",
+		"restart": "green",
 		"text": "blue"
 	},
 	"zoom": 0.6
@@ -95,6 +100,11 @@ The Mage's Tower
   background-color: #cb9b32;
 }
 
+#menu {
+  /* make some clear space, since footer is on top */
+  margin-bottom: 50px;
+}
+
 #menu ul {
   border-radius: 15px;
 }
@@ -148,6 +158,13 @@ The Mage's Tower
 
 #story-title {
   display: none;
+}
+
+#story-version {
+  color: rgb(90 90 90);
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1;
 }
 
 #story-caption {
@@ -250,7 +267,6 @@ ul.actions {
 }
 
 ul.actions li {
-  /*list-style-image: url('https://i.imgur.com/VdVEJPV.png');*/
   padding: 10px 0 10px 25px;
   list-style: none;
   background-image: url("images/quote.png");
@@ -258,6 +274,12 @@ ul.actions li {
   background-position: left center;
   background-size: 15px;
 }
+
+/* fixup for debug/test mode */
+.debugging ul.actions li {
+  background-image: url("https://magestower.slethstories.com/images/quote.png");
+}
+
 /* Action Box - End */
 
 
@@ -369,15 +391,35 @@ ul.actions li {
 
 :: Story JavaScript [script]
 Config.ui.stowBarInitially = true;
-Config.history.controls = false;
+
+if (!Config.debug) {
+  Config.history.controls = false;
+}
+
+if (Config.debug) {
+  // set flag for StoryMenu (can't use Config.debug; it's always false for StoryMenu)
+  setup.enableDebugMenu = true;
+
+  // set base url for html images (this happens too late for css images)
+  $('head').prepend('<base href="https://magestower.slethstories.com/">');
+
+  // add debugging class for css
+  $('html').addClass('debugging');
+
+  // start with debugview off
+  setTimeout(() => DebugView.disable());
+}
+
+l10nStrings.restartTitle = 'Reset';
+l10nStrings.restartPrompt = 'Archive unlocks and unsaved progress will be lost.<br><br>Are you sure you want to reset everything and start over?';
 
 $(document.head).append("<link rel='icon' href='images/mt_icon_tr.png'>");
 
-predisplay["Menu Return"] = function (taskName) {
-	if (! tags().contains("noreturn")) {
-		State.variables.return = passage();
+$(document).on(':passagestart', function (ev) {
+    if (! ev.passage.tags.contains("noreturn")) {
+        State.variables.return = ev.passage.title;
     }
-};
+});
 
 /* Health Bar code - Start */
 window.Health = function (CurHP, MaxHP, BarID, Horizontal, Container) {
@@ -414,6 +456,7 @@ macros.arousalbar = {
 
 
 :: Bound {"position":"2500,175","size":"100,100"}
+<<set $passedContentWarning = true>>\
 The sound of snapping fingers feels distant at first. As consciousness returns, it grows closer and closer until it starts becoming loud.
 
 The snapping comes from right beside his ear. The adventurer frowns, but consciousness has not returned in its entirety just yet. He feels as if... as if he had fallen down a well. At least that's all he can remember, sort of. It was bright, it was sudden, and now...
@@ -422,11 +465,14 @@ The snapping comes from right beside his ear. The adventurer frowns, but conscio
 
 The bound wolf only lets out a pained groan at first. Everything hurts. Slowly but surely, memories start to return. Memories of who he is...
 
-[[Continue|Wolf Warrior Chosen]]
+[[Continue|Drekkar Start]]
 
 
 :: StoryAuthor {"position":"1825,150","size":"100,100"}
-by <a href="http://www.slethstories.com/" target="_blank">Sleth</a>
+by <a href="http://www.slethstories.com/" target="_blank">Sleth</a>\
+<div id="story-version">
+  v1.2002910.0
+</div>
 
 
 :: StoryBanner {"position":"2075,150","size":"100,100"}
@@ -441,6 +487,9 @@ The Mage's Tower
 :: StoryMenu {"position":"2500,500","size":"100,100"}
 [[Archives]]
 [[Credits]]
+<<if setup.enableDebugMenu>>
+    [[Debug: Goto Title|Title Screen]]
+<</if>>
 
 
 :: Soft Awakening {"position":"900,625","size":"100,100"}
@@ -545,7 +594,7 @@ The panther opens a cocky grin.
 
 "The reward, however, is quite substantial. I do wonder who exactly hired you to find me, and how you managed to reach my location. I'd very much like to know that before I decide what to do with you."
 
-The wolf's narrow eyes focus on the panther. Bound in an unknown location and at the wizard's mercy, the lupine $class knows that the situation isn't good. Still, to just give out the name and location of the adventurer's guild that hired him to go after the mage would put all of them in danger, to say the least...
+The wolf's narrow eyes focus on the panther. Bound in an unknown location and at the wizard's mercy, the lupine $class knows that the situation isn't good. Still, to just give out the name and location of the Wayward Adventurer Guild would put all of them in danger, to say the least...
 
 The panther stares at the wolf expecting an answer.
 
@@ -557,13 +606,13 @@ The panther stares at the wolf expecting an answer.
 </div>
 
 
-:: Wolf Warrior Chosen {"position":"950,500","size":"100,100"}
+:: Drekkar Start {"position":"950,500","size":"100,100"}
 <<set $name = "Drekkar">>\
 <<set $class = "warrior">>\
 <<set $warrior = true>>\
 <<set $mage = false>>\
 <<set $rough_awakening = false>>\
-An adventurer, a fighter, a large wolf that takes pride in his strength. He goes by the name of Drekkar, with his older name being way more complex and difficult to pronounce. Hailing from the less advanced wolven tribes from the north, Drekkar left his kind early and adapted well to the world. With a sword in hand, there's little he cannot accomplish. Now, however...
+A seasoned fighter, a large wolf that takes pride in his strength. He goes by the name of Drekkar, with his older name being more complex and difficult to pronounce. Hailing from the less advanced wolven tribes from the north, Drekkar left his kind early and adapted well to the wider world. He's known among his friends at the Wayward Adventurers Guild as "that crazy bastard who took down the Mad Wizard of Carcenvellathrop by punching him in the face". With a sword in hand, there's little Drekkar cannot accomplish. Now, however...
 
 Drekkar's muscles, usually his most powerful weapon, ache. They feel stiff. An aching to stretch them comes upon the big wolf, but his body is only just recovering its proper responses. Drekkar lets out another tired groan. This feels worse than his last hangover...
 
@@ -608,62 +657,67 @@ With a spring to his step, the panther approaches, closing in the last distance 
 
 
 :: StoryInit {"position":"2200,150","size":"100,100"}
-<<set $name = "Drekkar">>\
-<<set $class = "warrior">>\
-<<set $warrior = true>>\
-<<set $mage = false>>\
+<<script>>
+const v = variables();
+v.name = "Drekkar";
+v.class = "warrior";
+v.warrior = true;
+v.mage = false;
 
-<<set $rough_awakening = true>>
-<<set $FurtherDefiance = false>>
+v.rough_awakening = true;
+v.FurtherDefiance = false;
 
-<<set $CurArousal = 10>>
-<<set $MaxArousal = 100>>
+v.CurArousal = 10;
+v.MaxArousal = 100;
 
-<<set $candleTimer = "2s">>
-<<set $window = false>>
-<<set $office = false>>
-<<set $door = false>>
+v.candleTimer = "2s";
+v.window = false;
+v.office = false;
+v.door = false;
 
-<<set $lionwatch1 = 40>>
-<<set $lionwatch2 = 20>>
-<<set $lionwatch3 = 20>>
-<<set $lionwatch4 = 40>>
-<<set $lionwatch5 = 50>>
-<<set $lionwatch6 = 60>>
-<<set $lionwatch7 = 90>>
-<<set $lionwatchFinal = ($lionwatch1 + $lionwatch2 + $lionwatch3 + $lionwatch4+ $lionwatch5 + $lionwatch6 + $lionwatch7)>>
+v.lionwatch1 = 40;
+v.lionwatch2 = 20;
+v.lionwatch3 = 20;
+v.lionwatch4 = 40;
+v.lionwatch5 = 50;
+v.lionwatch6 = 60;
+v.lionwatch7 = 90;
+v.lionwatchFinal = v.lionwatch1 + v.lionwatch2 + v.lionwatch3 +
+  v.lionwatch4 + v.lionwatch5 + v.lionwatch6 + v.lionwatch7;
 
-<<set $interrogationEndingUnlock = false>>
-<<set $interrogationEndingShockUnlock = false>>
-<<set $interrogationEndingFreezeUnlock = false>>
-<<set $interrogationEndingMildUnlock = false>>
-<<set $interrogationEndingRoughUnlock = false>>
-<<set $interrogationEnding = false>>
-<<set $interrogationEndingShock = false>>
-<<set $interrogationEndingFreeze = false>>
-<<set $interrogationEndingMild = false>>
-<<set $interrogationEndingRough = false>>
+v.interrogationEndingUnlock = false;
+v.interrogationEndingShockUnlock = false;
+v.interrogationEndingFreezeUnlock = false;
+v.interrogationEndingMildUnlock = false;
+v.interrogationEndingRoughUnlock = false;
+v.interrogationEnding = false;
+v.interrogationEndingShock = false;
+v.interrogationEndingFreeze = false;
+v.interrogationEndingMild = false;
+v.interrogationEndingRough = false;
 
-<<set $enthrallmentEndingUnlock = false>>
-<<set $enthrallmentLionUnlock = false>>
-<<set $enthrallmentEnding = false>>
-<<set $enthrallmentLion = false>>
+v.enthrallmentEndingUnlock = false;
+v.enthrallmentLionUnlock = false;
+v.enthrallmentEnding = false;
+v.enthrallmentLion = false;
 
-<<set $extractionEndingUnlock = false>>
-<<set $extractionForcefulEndUnlock = false>>
-<<set $extractionGentleEndUnlock = false>>
-<<set $extractionEnding = false>>
-<<set $extractionForcefulEnd = false>>
-<<set $extractionGentleEnd = false>>
+v.extractionEndingUnlock = false;
+v.extractionForcefulEndUnlock = false;
+v.extractionGentleEndUnlock = false;
+v.extractionEnding = false;
+v.extractionForcefulEnd = false;
+v.extractionGentleEnd = false;
 
-<<set $enthralmentIvexEndingUnlock = false>>
-<<set $enthralmentIvexEnding = false>>
-<<set $extractionIvexEndingUnlock = false>>
-<<set $extractionIvexEnding = false>>
-<<set $personalEndingUnlock = false>>
-<<set $personalEnding = false>>
-
+v.enthralmentIvexEndingUnlock = false;
+v.enthralmentIvexEnding = false;
+v.extractionIvexEndingUnlock = false;
+v.extractionIvexEnding = false;
+v.personalEndingUnlock = false;
+v.personalEnding = false;
+<</script>>\
+\
 <<nobr>>
+
 <<append "#ui-bar-body">>
   <div id="ui-bar-footer">
     <span>
@@ -677,7 +731,7 @@ With a spring to his step, the panther approaches, closing in the last distance 
     </span>
   </div>
 <</append>>
-<</nobr>>
+<</nobr>>\
 
 
 :: Molesting {"position":"950,1000","size":"100,100"}
@@ -766,7 +820,7 @@ The panther approaches again.
 
 <div class="action-box">\
   <ul class="actions">\
-	<li>[["Whatever you're trying to do, it won't work!" Keep holding your breath in defiance.|Hold Breath Defiantly]]</li>
+    <li>[["Whatever you're trying to do, it won't work!" Keep holding his breath in defiance.|Hold Breath Defiantly]]</li>
     <li>[[He has a point. Breathe out and at least give him a warning growl.|Growl Defiantly]]</li>
   </ul>\
 </div>
@@ -2489,28 +2543,31 @@ To change the adventurer's fate, you can...
 
 :: Archives [noreturn] {"position":"2400,700","size":"100,100"}
 <<link "Return to the game" $return>><</link>>\
-
-<h1>Archives</h1>
+\
+<h1>Archives</h1>\
 Welcome to the Mage's Tower Archives.
+
 Here you can revisit the different endings the adventurer has met in his time in the Mage's Tower. When the adventurer goes through an ending in the game for the first time, it will be unlocked here to be revisited at any time. If an ending has different variations due to the adventurer's choices during the game, these also can be set here, provided they have been seen before.
 
 Grayed out endings are paths that have not yet been found, although there are hints under them as to what path the adventurer should take to reach them. The same applies to different variations of endings.
 
 <i>Unlocked endings are only kept within a save. To keep all unlocked endings, make sure to always use and load the same save file.</i>
+\
+<hr>\
+<h2>Endings unlocked:</h2>\
+<<include [[Interrogation Archive Display]]>>\
+\
+<<include [[Enthrallment Archive Display]]>>\
+\
+<<include [[Extraction Archive Display]]>>\
+\
+<<include [[Ivex Punishment Archive Display]]>>\
+\
+<<include [[Ivex Enthrallment Archive Display]]>>\
+\
+<<include [[Ivex Extraction Archive Display]]>>\
 
-<hr>
-<h2>Endings unlocked:</h2>
-<<include [[Interrogation Archive Display]]>>
-
-<<include [[Enthrallment Archive Display]]>>
-
-<<include [[Extraction Archive Display]]>>
-
-<<include [[Ivex Punishment Archive Display]]>>
-
-<<include [[Ivex Enthrallment Archive Display]]>>
-
-<<include [[Ivex Extraction Archive Display]]>>
+<<link "Return to the game" $return>><</link>>\
 
 
 :: The Desk {"position":"900,4350","size":"100,100"}
@@ -2823,7 +2880,7 @@ Its arousing scent lingers for a few more moments, but soon enough the wolf's br
 
 Still panting, $name finally stops struggling and lets himself relax against his bonds for a moment. He realizes how sore all of his muscles are from the continuous desperate effort. Everything aches. Even as his mind clears up to some extent, however, the burning fire of arousal within him doesn't subside. It merely stops growing. His cock still remains fully hard, knot engorged and everything, and just looking at it makes his heart race with an urge to touch it.
 
-At least the wolf has enough awareness back to know he won't be able, to while bound as he is. And to worry about the panther standing in front of him.
+At least the wolf has enough awareness back to know he won't be able to, while bound as he is. And to worry about the panther standing in front of him.
 
 Ivex pulls the cloth covering his nose down as well to reveal his large grin.
 
@@ -2871,9 +2928,9 @@ The mage finally takes hold of the wolf's exposed cock with a paw. The feeling a
 
 It gets even worse when Ivex starts massaging it ever so lightly with his fingers. The pleasure contrasts with the pain of his balls being so mercilessly pulled by the crystal's weight.
 
-"I know the adventurer's guild sent you. What do they have on me?"
+"I know the Wayward Adventurers Guild sent you. What do they have on me?"
 
-A vague question. The wolf's knowledge is limited, but any details he tells Ivex could put the Adventurer's guild or whoever else they send after Ivex in the same danger he is facing. Betraying his comrades is something the wolf would never do, and just the fact that Ivex believes he would is an offense in itself.
+A vague question. The wolf's knowledge is limited, but any details he tells Ivex could put Guild or whoever else they send after Ivex in the same danger he is facing. Betraying his comrades is something the wolf would never do, and just the fact that Ivex believes he would is an offense in itself.
 
 
 :: Hard Way (Text) [text] {"position":"1375,2200","size":"100,100"}
@@ -2897,9 +2954,9 @@ The mage grabs the wolf's exposed cock with a paw. The feeling around it alone i
 
 It gets even worse when Ivex starts massaging it ever so lightly with his fingers. The pleasure is a terrible contrast to the pain of his balls being so mercifully pulled by the crystal's weight.
 
-"I know the adventurer's guild sent you. What do they have on me?"
+"I know the Wayward Adventurers Guild sent you. What do they have on me?"
 
-A vague question. The wolf's knowledge is limited, but any details he tells Ivex could put the Adventurer's guild or whoever else they send after Ivex in the same danger he is facing. Betraying his comrades is something the wolf would never do.
+A vague question. The wolf's knowledge is limited, but any details he tells Ivex could put the Guild or whoever else they send after Ivex in the same danger he is facing. Betraying his comrades is something the wolf would never do.
 
 
 :: Resistance (Text) [text] {"position":"1525,2200","size":"100,100"}
@@ -3281,7 +3338,7 @@ No matter how much he tries, $name cannot find a way out. He's trapped there gri
 
 
 :: Interrogation Archive Display [noreturn] {"position":"1700,1000","size":"100,100"}
-<<silently>>\
+<<silently>>
   <<if $interrogationEndingFreeze && $interrogationEndingShock>>
     <<set $interrogationSpell = 'freeze'>>
   <<elseif $interrogationEndingFreeze && !$interrogationEndingShock>>
@@ -4508,9 +4565,65 @@ It doesn't stop there, and neither does the slime. All the stimulation keeps goi
 
 
 :: Title Screen [restart] {"position":"2500,25","size":"100,100"}
+<<script>>
+    const v = variables();
+    if (v.personalEnding) {
+        v.characterDisplay = 'images/wolf.png';
+    } else {
+        v.characterDisplay = 'images/panther.png';
+    }
+    if (v.titleDelay1) {
+        // already seen title, speed it up.
+        v.titleDelay1 = '0.1s';
+        v.titleDelay2 = '1s';
+        v.titleDelay3 = '0.2s';
+    } else {
+        v.titleDelay1 = '1s';
+        v.titleDelay2 = '2s';
+        v.titleDelay3 = '3s';
+    }
+    if (v.passedContentWarning) {
+        // we're here without clearing data
+        v.startGameText = 'Try Again';
+    } else {
+        v.startGameText = 'New Game';
+    }
+<</script>>\
+\
 <div class="title-screen">\
-<<include [[Title Screen 1]]>>
-</div>\
+<div class="title-container">\
+\
+<<timed $titleDelay1 t8n>>\
+<img class="title-character" @src="$characterDisplay">\
+\
+<<next $titleDelay2>>\
+<img class="title-logo" src="images/logo_tr.png">\
+\
+<<next $titleDelay3>>
+<div class="title-options">\
+\
+<<link $startGameText>>
+    <<if $passedContentWarning>>
+        <<goto [[Bound]]>>
+    <<else>>
+        <<script>>
+            Dialog.setup("Content Warning");
+            Dialog.wiki("<<include [[Content Warning]]>>");
+            Dialog.open();
+        <</script>>
+    <</if>>
+<</link>>
+\
+<<link 'Load Game'>>
+    <<run UI.saves()>>
+<</link>>
+\
+[[Credits]]
+\
+</div> <!--title-options-->\
+<</timed>>\
+</div> <!--title-container-->\
+</div> <!--title-screen-->\
 
 
 :: Tying up {"position":"1075,5450","size":"100,100"}
@@ -4560,7 +4673,7 @@ $name shoves each and every one of them into the pouch until there are only four
 
 
 :: Punishments {"position":"1425,5575","size":"100,100"}
-The wolf's hands curl into tight fists. He can barely control his growling, looking down at Ivex. Will getting locked up in some mage's containment chamber, or whatever else the guild decides to do to him, be enough to make him pay for what he's done? Of course not. They don't know half of what he's done, and even if he tells them, it won't have the same impact as seeing it.
+The wolf's hands curl into tight fists. He can barely control his growling, looking down at Ivex. Will getting locked up in some mage's containment chamber, or whatever else the Guild decides to do to him, be enough to make him pay for what he's done? Of course not. They don't know half of what he's done, and even if he tells them, it won't have the same impact as seeing it.
 
 With the sack of gemstones in hand, the wolf stomps over to the tied-up feline and lifts him up by the scruff. Ivex shifts and grunts in his sleep, but doesn't wake up quite yet.
 
@@ -5142,7 +5255,11 @@ Pulling out the purple gemstone, the wolf clutches it in his hand and looks down
 <<if !$shockSpell>>\
 The panther catches a glimpse of which gemstone the wolf is pulling out and frowns.
 
+<<if !$gagged>>\
 "You idiot! Be careful what you touch! You don't even know what you're doing!" The panther hisses and wiggles trying to get away.
+<<else>>\
+"Ymm mmfgh! Mm gmfmf hmmgff gmfhgh!" The panther hisses and wiggles trying to get away.
+<</if>>\
 
 The wolf's grip on Ivex simply tightens while he clutches the gemstone with the other hand. The cackle of lightning around his paw creates a tingle. A funny one. It definitely seems like it does more than just tingle when his paw touches something, though.
 
@@ -5548,7 +5665,7 @@ Wiping his hands, the wolf looks down at Ivex. Bound, gagged and without his gem
 
 $name steps towards him to pick him up. Ivex still squirms and complains, obviously still angry over having lost. He no longer gets a choice, though.
 
-The wolf does. He wonders if Ivex has had enough punishment or if he should add a finishing touch to his reckoning. After all, it will be a few days' journey back to the adventurer's guild. Maybe adding something to... <b>entertain</b> Ivex in the meantime would be fun as well.
+The wolf does. He wonders if Ivex has had enough punishment or if he should add a finishing touch to his reckoning. After all, it will be a few days' journey back to the Wayward Adventurers Guild. Maybe adding something to... <b>entertain</b> Ivex in the meantime would be fun as well.
 <<if !$personalEnding>>\
 <<set $personalEndingUnlock = true>>\
 <</if>>\
@@ -5590,7 +5707,7 @@ Looking down, however, the wolf sees his member still aching. Surely Ivex's cand
 
 Not to mention the rest of his time trudging naked through his tower with a permanent hard-on. The wolf has captured many bounties before, some of them mages, but none of them had taken so much effort and humiliation to defeat.
 
-Glancing at the mage, he wonders. If he wants to give Ivex some reckoning for all he has done to him and to others, it has to be now. Once he's in the hands of the adventurer's guild officers, then another kind of justice will be served to him.
+Glancing at the mage, he wonders. If he wants to give Ivex some reckoning for all he has done to him and to others, it has to be now. Once he's in the hands of the Wayward Adventurers Guild officers, then another kind of justice will be served to him.
 
 $name takes a deep breath. Should he really just take Ivex to be arrested and nothing more?
 
@@ -5631,11 +5748,11 @@ Lucky for the wolf, he manages to find a worn, old pair of pants in the farmhous
 
 Gathering what supplies he can, the wolf sets off with everything in hand: Ivex's tower inside the large gemstone, the pouch of magic gems and, most importantly, Ivex.
 
-The journey back to the adventurer's guild takes a few days. It could go quicker, but after the deeply distressing effort to capture the mage, $name is not exactly in a hurry to get there anymore. The wolf takes his sweet time recovering from everything he went through inside the mage's crazy tower, and basking in his success.
+The journey back to the Wayward Adventurers Guild takes a few days. It could go quicker, but after the deeply distressing effort to capture the mage, $name is not exactly in a hurry to get there anymore. The wolf takes his sweet time recovering from everything he went through inside the mage's crazy tower, and basking in his success.
 
-When he gets to the guild, both the adventurers and officers there are deeply amused by the way $name delivers Ivex to them. After a thorough re-telling of what he went through and what he has in tow, the official mages in the adventurer's guild take Ivex to a prison where his magic will be kept in check.
+When he gets to the Guild, both the adventurers and officers there are deeply amused by the way $name delivers Ivex to them. After a thorough re-telling of what he went through and what he has in tow, the official mages in the Wayward Adventures Guild take Ivex to a prison where his magic will be kept in check.
 
-They also handle his tower. The wolf does not stick around to see it, but the rumors of the insane tower a mage possessed spread like wildfire. Apparently, the mages of the guild had to go through an arduous, delicate process to save the over fifty people Ivex had trapped inside his tower. All of them males.
+They also handle his tower. The wolf does not stick around to see it, but the rumors of the insane tower a mage possessed spread like wildfire. Apparently, the mages of the Guild had to go through an arduous, delicate process to save the over fifty people Ivex had trapped inside his tower. All of them males.
 
 With a handsome amount of gold in his pocket, the wolf moves on. The life of an adventurer is like that. Ivex wasn't the first mage he had to fight and it won't be the last. The events of the tower stick inside <<print $name>>'s mind, though, and they are enough to make him blush every now and then. He will make sure that such things never happen again.
 
@@ -5887,7 +6004,7 @@ The enthralled panther finally stops licking himself to sit up straight. Then, p
 
 Standing up himself, $name looks down at the mage. With the wolf's seed running down the back of his thighs, he smirks.
 
-It's time to take Ivex back to the adventurer's guild. Watching the blank-faced mage and knowing he's trapped like that, however, the wolf gets to thinking...
+It's time to take Ivex back to the Wayward Adventurers Guild. Watching the blank-faced mage and knowing he's trapped like that, however, the wolf gets to thinking...
 
 What would it be like to have a thrall himself? Would a large bag of gold really be enough to make up for something like that? What if...?
 
@@ -5913,11 +6030,11 @@ $name packs everything. The sack of gemstones with Ivex's spells and the large g
 
 Ivex, with the pendant around his neck, is made to walk behind the wolf the whole way. Never before had delivering a bounty been so easy. True to his word, the wolf leaves the panther completely naked. There is no point in wasting gold buying clothes for someone that does not deserve them.
 
-The journey back to the adventurer's guild is a few days long and the wolf is not in a hurry to return. In fact, $name makes a point to include as many towns as he can on the way back and, each time, he takes immense pleasure in watching the stares of folk as they see the naked panther parading around the city. In one of them, the wolf went as far as ordering the panther to clutch a gemstone containing a lust spell so he was mewling and dripping the whole time as well.
+The journey back to the Wayward Adventurers Guild is a few days long and the wolf is not in a hurry to return. In fact, $name makes a point to include as many towns as he can on the way back and, each time, he takes immense pleasure in watching the stares of folk as they see the naked panther parading around the city. In one of them, the wolf went as far as ordering the panther to clutch a gemstone containing a lust spell so he was mewling and dripping the whole time as well.
 
-When they arrive back in the adventurer's guild, the wolf delivers Ivex's tower and his gemstones to the official mages, but claims that he could not capture Ivex himself. It fills him with pleasure to know that he, in fact, left the panther jerking himself off in the alley behind the building.
+When they arrive back in the Guild, the wolf delivers Ivex's tower and his gemstones to the official mages, but claims that he could not capture Ivex himself. It fills him with pleasure to know that he, in fact, left the panther jerking himself off in the alley behind the building.
 
-The mages handle his tower. The wolf does not stick around to see it, but the rumors of the insane tower a mage possessed spread like wildfire. Apparently, the mages of the guild had to go through an arduous, delicate process to save the over fifty people Ivex had trapped inside his tower. All of them males. It makes $name feel all the better for having such a previously dangerous and deranged mage at his disposal, ready to lick his feet if he feels like it. Literally.
+The mages handle his tower. The wolf does not stick around to see it, but the rumors of the insane tower a mage possessed spread like wildfire. Apparently, the mages of the Wayward Adventurers Guild had to go through an arduous, delicate process to save the over fifty people Ivex had trapped inside his tower. All of them males. It makes $name feel all the better for having such a previously dangerous and deranged mage at his disposal, ready to lick his feet if he feels like it. Literally.
 
 With a new 'companion' by his side, the wolf moves on. The life of an adventurer is like that. Ivex wasn't the first mage he had to fight and it won't be the last. The events of the tower stick inside <<print $name>>'s mind, though, and they are enough to make him blush every now and then, but whenever that happens, his new panther servant is there to alleviate his rage. He will make sure that such things never happen again.
 
@@ -5945,7 +6062,7 @@ It is at that moment that Ivex's droopy eyes start to open. The blob continues t
 :: Ivex Extraction 1 (Text) [text] {"position":"1775,5850","size":"100,100"}
 The panther's muzzle moves, but if he makes any sound, it doesn't make it past the thick, viscous substance of the blob. Ivex's bound arms and legs move for a moment, but as soon as they start, they immediately slow down, and the wolf can see that the thing is hardening around them to keep the panther still. Frozen in place, Ivex's eyes dart back and forth until they meet the wolf's. $name can see him frown, his expression shifting to one of anger, but his face too freezes inside the thing. Whatever this blob is, it doesn't seem keen on letting the feline move. Good. It works even better than the wolf expected.
 
-$name wipes his paws and smiles triumphantly. Seeing Ivex trapped inside his own device is extremely pleasant. For a few moments, he watches the feline as he clearly struggles to move. His small muscles contract here or there, showing he's trying to put effort into moving his limbs, but none of it amounts to anything. What a weakling! After a while, it is clear that the feline is trapped and cannot get out. The wolf is ready to leave him there, for in fact, he doesn't even know how he would go about getting Ivex out of it. The mages in the adventurer's guild will surely figure something out when he delivers the panther and his tower to them in a few days. Taking a step back, the wolf is about to leave, but then something else catches his eye.
+$name wipes his paws and smiles triumphantly. Seeing Ivex trapped inside his own device is extremely pleasant. For a few moments, he watches the feline as he clearly struggles to move. His small muscles contract here or there, showing he's trying to put effort into moving his limbs, but none of it amounts to anything. What a weakling! After a while, it is clear that the feline is trapped and cannot get out. The wolf is ready to leave him there, for in fact, he doesn't even know how he would go about getting Ivex out of it. The mages in the Wayward Adventurers Guild will surely figure something out when he delivers the panther and his tower to them in a few days. Taking a step back, the wolf is about to leave, but then something else catches his eye.
 
 Ivex seems to start growing more frantic in his entrapment. As the wolf's eyes go over the feline, he can see why. Little by little, the blob seems to <b>dissolve</b> Ivex's clothing. It moves around the panther as a whole, its surface full of ripples as it does its work while keeping the mage still at the same time. Ivex's robes start tearing, then little by little, holes start appearing in the fabric and these grow wider and wider, expanding until, soon enough, there is nothing left. The wolf smirks. The panther is left not only trapped but also <b>naked</b>. The rope that bound him dissolve as well, which worries the wolf for a moment, but the panther can't even manage to move them out of the position they were while bound inside the slime.
 
@@ -6041,13 +6158,13 @@ Lucky for the wolf, he manages to find a worn, old pair of pants in the farmhous
 
 Gathering what supplies he can, the wolf sets off with everything in hand: Ivex's tower inside the large gemstone, the pouch of magic gemstones and, most importantly, Ivex.
 
-The journey back to the adventurer's guild takes a few days. It could go quicker, but after the deeply distressing effort to capture the mage, $name is not exactly in a hurry to get there anymore. The wolf takes his sweet time recovering from everything he went through inside the mage's crazy tower, and basking in his success.
+The journey back to the Wayward Adventurers Guild takes a few days. It could go quicker, but after the deeply distressing effort to capture the mage, $name is not exactly in a hurry to get there anymore. The wolf takes his sweet time recovering from everything he went through inside the mage's crazy tower, and basking in his success.
 
 A few times during his journey he goes back in to check on Ivex. Every time he does, the panther's eyes dart to him, but they are glazed. He's lost in an infinite loop of pleasure. Pleasure he can't have. The blob always looks like it's working its hardest to stimulate the panther, but with the chastity spell still on him, all he can provide is pre-cum as his cock always strains to grow hard, but can't. Other than his pleasurable torment, Ivex seems fine. Whatever magics he has going on in this system with the blob-things, it seems to be made to sustain who is inside and keep them well and healthy.
 
-When the wolf gets back to the guild, he gives them a thorough re-telling of what he went through and what he has in tow, the official mages in the adventurer's guild take a while to extract Ivex himself from his own torment, but from there, they throw him straight into a prison where his magic will be kept in check.
+When the wolf gets back to the Guild, he gives them a thorough re-telling of what he went through and what he has in tow, the official mages in the Wayward Adventurers Guild take a while to extract Ivex himself from his own torment, but from there, they throw him straight into a prison where his magic will be kept in check.
 
-They also handle his tower as a whole. The wolf does not stick around to see it, but the rumors of the insane tower a mage possessed spread like wildfire. Apparently, the mages of the guild had to go through an arduous, delicate process to save the over fifty people Ivex had trapped inside his tower in the same way he was trapped. All of them males, and all of them kept there to provide energy for the tower's existence with their seed inside these things that would perpetually extract it from them while, at the same time, stimulating their bodies to produce more. A truly twisted device.
+They also handle his tower as a whole. The wolf does not stick around to see it, but the rumors of the insane tower a mage possessed spread like wildfire. Apparently, the mages of the Guild had to go through an arduous, delicate process to save the over fifty people Ivex had trapped inside his tower in the same way he was trapped. All of them males, and all of them kept there to provide energy for the tower's existence with their seed inside these things that would perpetually extract it from them while, at the same time, stimulating their bodies to produce more. A truly twisted device.
 
 With a handsome amount of gold in his hands, the wolf moves on. The life of an adventurer is like that. Ivex wasn't the first mage he had to fight and it won't be the last. The events of the tower stick inside <<print $name>>'s mind, though, and they are enough to make him blush every now and then. He will make sure that such things never happen again.
 
@@ -6468,7 +6585,7 @@ Wiping his hands, the wolf looks down at Ivex. Bound, gagged and without his gem
 
 $name steps towards him to pick him up. Ivex still squirms and complains, obviously still angry over having lost. He no longer gets a choice, though.
 
-The wolf does. He wonders if Ivex has had enough punishment or if he should add a finishing touch to his reckoning. After all, it will be a few days' journey back to the adventurer's guild. Maybe adding something to... <b>entertain</b> Ivex in the meantime would be fun as well.
+The wolf does. He wonders if Ivex has had enough punishment or if he should add a finishing touch to his reckoning. After all, it will be a few days' journey back to the Wayward Adventurers Guild. Maybe adding something to... <b>entertain</b> Ivex in the meantime would be fun as well.
 
 Yeah... Ivex has certainly done enough to deserve an extra.
 
@@ -6496,11 +6613,11 @@ Lucky for the wolf, he manages to find a worn, old pair of pants in the farmhous
 
 Gathering what supplies he can, the wolf sets off with everything in hand: Ivex's tower inside the large gemstone, the pouch of magic gems and, most importantly, Ivex.
 
-The journey back to the adventurer's guild takes a few days. It could go quicker, but after the deeply distressing effort to capture the mage, $name is not exactly in a hurry to get there anymore. The wolf takes his sweet time recovering from everything he went through inside the mage's crazy tower, and basking in his success.
+The journey back to the Wayward Adventurers Guild takes a few days. It could go quicker, but after the deeply distressing effort to capture the mage, $name is not exactly in a hurry to get there anymore. The wolf takes his sweet time recovering from everything he went through inside the mage's crazy tower, and basking in his success.
 
-When he gets to the guild, both the adventurers and officers there are deeply amused by the way $name delivers Ivex to them. After a thorough re-telling of what he went through and what he has in tow, the official mages in the adventurer's guild take Ivex to a prison where his magic will be kept in check.
+When he gets to the Guild, both the adventurers and officers there are deeply amused by the way $name delivers Ivex to them. After a thorough re-telling of what he went through and what he has in tow, the official mages in the Wayward Adventurers Guild take Ivex to a prison where his magic will be kept in check.
 
-They also handle his tower. The wolf does not stick around to see it, but the rumors of the insane tower a mage possessed spread like wildfire. Apparently, the mages of the guild had to go through an arduous, delicate process to save the over fifty people Ivex had trapped inside his tower. All of them males.
+They also handle his tower. The wolf does not stick around to see it, but the rumors of the insane tower a mage possessed spread like wildfire. Apparently, the mages of the Guild had to go through an arduous, delicate process to save the over fifty people Ivex had trapped inside his tower. All of them males.
 
 With a handsome amount of gold in his pocket, the wolf moves on. The life of an adventurer is like that. Ivex wasn't the first mage he had to fight and it won't be the last. The events of the tower stick inside <<print $name>>'s mind, though, and they are enough to make him blush every now and then. He will make sure that such things never happen again.
 
@@ -6513,7 +6630,8 @@ Or, at least, he will try to.
 
 :: Credits [noreturn] {"position":"2600,700","size":"100,100"}
 <<link "Return to the game" $return>><</link>>\
-
+\
+<h1>Credits</h1>\
 The writing and development of this interactive story was made by me, [[Sleth|http://www.slethstories.com/]].
 
 The amazing artwork you see in the game, including the character art and the Mage's Tower logo, was done by commission by [[BlainWolf|https://twitter.com/Blain_Wolf]]. You can check out more of his stuff in his [[Twitter|https://twitter.com/Blain_Wolf]] or [[FurAffinity|https://www.furaffinity.net/user/blainwolf]] pages!
@@ -6523,7 +6641,7 @@ I'd also like to give a special, personal thanks to [[Raus|https://twitter.com/r
 Not only that, but I'd also like to extend my deepest gratitude to my patrons, who have been supporting me and my craft through the months it took to develop this interactive story! None of this would be possible without you all!
 
 First and foremost, my patrons that have supported me in these last 4 months it took for me to develop, learn and finish this project:
-
+\
 <b><ul>\
     <li>John Harris</li>
     <li>Timba Saber</li>
@@ -6569,9 +6687,9 @@ First and foremost, my patrons that have supported me in these last 4 months it 
     <li>Knight of the Dragon</li>
     <li>Raus</li>
 </ul></b>\
-
+\
 And, of course, also an honorable mention to everyone that has supported me and my writing in the these last years I have had my patreon going:
-
+\
 <ul>\
 <li>John Harris</li>
 <li>Timba Saber</li>
@@ -6641,37 +6759,36 @@ And, of course, also an honorable mention to everyone that has supported me and 
 <li>Martin Farley</li>
 <li>Raus</li>
 </ul>\
-
+\
 Thank you so much!
 
+<<link "Return to the game" $return>><</link>>
 
-:: Title Screen 1 {"position":"2625,25","size":"100,100"}
-<<silently>>
-<<if $personalEnding>>
-<<set $characterDisplay = "images/wolf.png">>
-<<else>>
-<<set $characterDisplay = "images/panther.png">>
-<</if>>
-<</silently>>
-<div class="title-container">
-<<timed 1s t8n>>\
-<img class="title-character" @src="$characterDisplay">\
-<<next 2s>>\
-<img class="title-logo" src="images/logo_tr.png">\
-<<next 3s>>
-<div class="title-options">\
-<<link "New Game">>
-  <<script>>
-    // [[Bound]]
-    Dialog.setup("Content Warning");
-	  Dialog.wiki("This interactive story contains content of an adult nature. If you are easily offended or are under the age of 18, please exit now.<br/><br/> Moreover, this story contains elements that depict dubious or lack of consent, as well as other fetish sexual topics such as mind control, CBT, chastity, and others. If these themes make you uncomfortable or are not enjoyable for you, proceed only at your own discretion.<br/><br/><span style= 'float: right;'><<"+"button Proceed>><<"+"goto 'Bound'>><<"+"script>>Dialog.close();<<"+"/script>><<"+"/button>></span>");
-    Dialog.open();
-  <</script>>
-<</link>>
-<<link 'Load Game'>><<script>>UI.saves()<</script>><</link>>
-[[Credits]]
-</div>\
-<</timed>>
+
+:: Choose Character {"position":"2500,325","size":"100,100"}
+<i>Choose Your Adventurer</i>\
+
+<dl>
+<dt>Drekkar</dt>
+<dd>A seasoned fighter, a large wolf that takes pride in his strength. He goes by the name of Drekkar, with his older name being more complex and difficult to pronounce. Hailing from the less advanced wolven tribes from the north, Drekkar left his kind early and adapted well to the wider world. He's known among his friends at the Wayward Adventurers Guild as "that crazy bastard who took down the Mad Wizard of Carcenvellathrop by punching him in the face". With a sword in hand, there's little Drekkar cannot accomplish. Now, however...
+
+</dd>
+
+<dt>Nero</dt>
+<dd>A slender wolf, and unusually handsome for a mage. But he's always valued his mind more than his body. Nero is an unacknowledged son of one of Lady Garloch's nephews (or so he says). He's equally at ease covering for absent professors at the prestigious Windbone Magic Academy as he is when singing with drunken sailors at a Seaside tavern. His talent for magic has turned out to be very useful in his career of discreetly handling difficult problems for patrons who have way more money than sense. But this time...
+</dd></dl>\
+
+
+:: Content Warning {"position":"2625,75","size":"100,100"}
+This interactive story contains content of an adult nature. If you are easily offended or are under the age of 18, please exit now.
+
+Moreover, this story contains elements that depict dubious or lack of consent, as well as other fetish sexual topics such as mind control, CBT, chastity, and others. If these themes make you uncomfortable or are not enjoyable for you, proceed only at your own discretion.
+
+<div style='float: right;'>\
+<<button Proceed>>
+    <<run Dialog.close()>>
+    <<goto [[Bound]]>>
+<</button>>\
 </div>
 
 
