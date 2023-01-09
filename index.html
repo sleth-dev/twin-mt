@@ -479,6 +479,16 @@ $(document).on(':passagestart', function (ev) {
     }
 });
 
+/** Stow the sidebar on narrow screens. */
+Macro.add("sidebar-auto-stow", {
+  handler: function() {
+    // sugarcube css overlaps the sidebar at max-width:768px
+    if (document.body.offsetWidth <= 768) {
+      UIBar.stow();
+    }
+  }
+});
+
 /* Health Bar code - Start */
 window.Health = function (CurHP, MaxHP, BarID, Horizontal, Container) {
     if (Container == undefined) {
@@ -2260,7 +2270,8 @@ To change the adventurer&#39;s fate, you can...
       &lt;li&gt;[[Return to the point of escaping the first floor.|Escape Start]]&lt;/li&gt;
       &lt;li&gt;[[Return to the beginning of the game.|Title Screen]]&lt;/li&gt;
   &lt;/ul&gt;\
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="85" name="Archives" tags="noreturn" position="2400,700" size="100,100">&lt;&lt;link &quot;Return to the game&quot; $return&gt;&gt;&lt;&lt;/link&gt;&gt;\
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="85" name="Archives" tags="noreturn" position="2400,700" size="100,100">&lt;&lt;sidebar-auto-stow&gt;&gt; \
+&lt;&lt;link &quot;Return to the game&quot; $return&gt;&gt;&lt;&lt;/link&gt;&gt;\
 \
 &lt;h1&gt;Archives&lt;/h1&gt;\
 Welcome to the Mage&#39;s Tower Archives.
@@ -5747,7 +5758,8 @@ Or, at least, he will try to.
 
 &lt;span class=&quot;good-ending&quot;&gt;Ending: &lt;i&gt;Punishment&lt;/i&gt;&lt;/span&gt;
 
-[[Return to the Archives|Archives]]</tw-passagedata><tw-passagedata pid="235" name="Credits" tags="noreturn" position="2600,700" size="100,100">&lt;&lt;link &quot;Return to the game&quot; $return&gt;&gt;&lt;&lt;/link&gt;&gt;\
+[[Return to the Archives|Archives]]</tw-passagedata><tw-passagedata pid="235" name="Credits" tags="noreturn" position="2600,700" size="100,100">&lt;&lt;sidebar-auto-stow&gt;&gt; \
+&lt;&lt;link &quot;Return to the game&quot; $return&gt;&gt;&lt;&lt;/link&gt;&gt;\
 \
 &lt;h1&gt;Credits&lt;/h1&gt;\
 The writing and development of this interactive story was made by me, [[Sleth|http://www.slethstories.com/]].
