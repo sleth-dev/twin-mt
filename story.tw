@@ -28,22 +28,25 @@ The Mage's Tower
 :: Story Stylesheet [stylesheet]
 /* Title Screen - Start */
 .title-container {
-  position:relative;
+  position: relative;
+  /* #story has 2.5em top margin */
+  top: -2.5em;
+  /* sugarcube html structure makes it hard to use display:grid */
 }
 .title-character {
-  position:absolute;
-  top:-2vw;
-  z-index:0;
-  max-width:100%;
+  position: absolute;
+  z-index: 0;
+  max-width: 100%;
+  /* try to keep Ivex's feet on screen, but don't make his face too small */
+  max-height: max(100vh, 60vw);
 }
 
 .title-logo {
-  position:relative;
-  top:-2vw;
-  display:block;
-  margin-left:auto;
-  z-index:1;
-  max-width:50%;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  z-index: 1;
+  max-width: 50%;
 }
 
 .title-options {
@@ -63,35 +66,21 @@ The Mage's Tower
   color: #c78f28;
 }
 
-.title-character-2 {
-  position:absolute;
-  top:-10px;
-  z-index:0;
-}
-
-.title-logo-2 {
-  position:absolute;
-  top: 10px;
-  right: 310px;
-  z-index:1;
-}
-
-.title-options-2 {
-  z-index: 2;
-  position: relative;
-  top: 300px;
-  left: 425px;
-  background-color: #222;
-  width: 165px;
-  padding: 30px;
-  border: 1px solid #aaa;
-  border-radius: 15px;
-}
-
-.title-options-2 a {
-  font-size: 2em;
-  font-family: fantasy;
-  color: #c78f28;
+/* on narrow screens */
+@media(max-width: 30rem) {
+  /* move logo down */
+  .title-logo {
+    top: 25vw;
+  }
+  
+  /* center menu below Ivex */
+  .title-options {
+    position: relative;
+    right: -50%;
+    text-align: center;
+    top: 40vw;
+    translate: -50%;
+  }
 }
 
 #ui-dialog-body button {
