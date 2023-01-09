@@ -411,7 +411,7 @@ if (Config.debug) {
 }
 
 l10nStrings.restartTitle = 'Reset';
-l10nStrings.restartPrompt = 'Archive unlocks and unsaved progress will be lost.<br><br>Are you sure you want to reset everything and start over?';
+l10nStrings.restartPrompt = 'Reset will re-lock all endings in the Archives, and delete any unsaved progress.<br><br>Are you sure you want to reset everything and start over?';
 
 $(document.head).append("<link rel='icon' href='images/mt_icon_tr.png'>");
 
