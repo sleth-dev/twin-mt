@@ -400,8 +400,15 @@ if (Config.debug) {
   setTimeout(() => DebugView.disable());
 }
 
-l10nStrings.restartTitle = 'Reset';
-l10nStrings.restartPrompt = 'Reset will re-lock all endings in the Archives, and delete any unsaved progress.<br><br>Are you sure you want to reset everything and start over?';
+l10nStrings.restartTitle = "Restart";
+l10nStrings.restartPrompt =
+  "Restart will return you to the beginning of the story."
+  + "<br><br>"
+  + "Your unlocked endings will remain unlocked."
+  + "<br><br>"
+  + "Are you sure you want to restart?";
+l10nStrings.restartOk = "Restart";
+l10nStrings.restartCancel = "Cancel";
 
 $(document.head).append("<link rel='icon' href='images/mt_icon_tr.png'>");
 
@@ -471,7 +478,7 @@ The bound wolf only lets out a pained groan at first. Everything hurts. Slowly b
 :: StoryAuthor {"position":"1825,150","size":"100,100"}
 by <a href="http://www.slethstories.com/" target="_blank">Sleth</a>\
 <div id="story-version">
-  v1.20221202.0
+  v1.20230612.0
 </div>
 
 
@@ -658,6 +665,14 @@ With a spring to his step, the panther approaches, closing in the last distance 
 
 :: StoryInit {"position":"2200,150","size":"100,100"}
 <<script>>
+  /** Mage's Tower namespace */
+  window.MT = {};
+<</script>>
+
+<<include [[g0boot Metadata]]>>
+<<include [[g0init Saved Games]]>>
+
+<<script>>
 const v = variables();
 v.name = "Drekkar";
 v.class = "warrior";
@@ -685,35 +700,58 @@ v.lionwatch7 = 90;
 v.lionwatchFinal = v.lionwatch1 + v.lionwatch2 + v.lionwatch3 +
   v.lionwatch4 + v.lionwatch5 + v.lionwatch6 + v.lionwatch7;
 
+MT.drekkarEndings = [];
+
+/* 1F endings */
+
 v.interrogationEndingUnlock = false;
 v.interrogationEndingShockUnlock = false;
 v.interrogationEndingFreezeUnlock = false;
 v.interrogationEndingMildUnlock = false;
 v.interrogationEndingRoughUnlock = false;
-v.interrogationEnding = false;
-v.interrogationEndingShock = false;
-v.interrogationEndingFreeze = false;
-v.interrogationEndingMild = false;
-v.interrogationEndingRough = false;
+
+MT.drekkarEndings.push("interrogationEnding");
+MT.drekkarEndings.push("interrogationEndingShock");
+MT.drekkarEndings.push("interrogationEndingFreeze");
+MT.drekkarEndings.push("interrogationEndingMild");
+MT.drekkarEndings.push("interrogationEndingRough");
+
+/* 2F endings */
 
 v.enthrallmentEndingUnlock = false;
 v.enthrallmentLionUnlock = false;
-v.enthrallmentEnding = false;
-v.enthrallmentLion = false;
+
+MT.drekkarEndings.push("enthrallmentEnding");
+MT.drekkarEndings.push("enthrallmentLion");
 
 v.extractionEndingUnlock = false;
 v.extractionForcefulEndUnlock = false;
 v.extractionGentleEndUnlock = false;
-v.extractionEnding = false;
-v.extractionForcefulEnd = false;
-v.extractionGentleEnd = false;
+
+MT.drekkarEndings.push("extractionEnding");
+MT.drekkarEndings.push("extractionForcefulEnd");
+MT.drekkarEndings.push("extractionGentleEnd");
+
+/* Escape endings */
 
 v.enthralmentIvexEndingUnlock = false;
-v.enthralmentIvexEnding = false;
+MT.drekkarEndings.push("enthralmentIvexEnding");
+
 v.extractionIvexEndingUnlock = false;
-v.extractionIvexEnding = false;
+MT.drekkarEndings.push("extractionIvexEnding");
+
 v.personalEndingUnlock = false;
-v.personalEnding = false;
+MT.drekkarEndings.push("personalEnding");
+
+/* declare metadata */
+
+for (const key of MT.drekkarEndings) {
+  MT.mdDefSaved(key);
+}
+
+MT.mdDefPreserved("sawTitle");
+MT.mdDefPreserved("passedContentWarning");
+
 <</script>>\
 \
 <<nobr>>
@@ -1755,27 +1793,27 @@ There is little choice but to proceed, though.
 $name fell into Ivex's hands.
 
 <<if $interrogationEndingUnlock>>\
-<<set $interrogationEnding = true>>\
+<<set MT.mdSet("interrogationEnding", true)>>\
 <<set $interrogationEndingUnlock = false>>\
 The <span class="imp-info">Bad Ending: Interrogation</span> is unlocked in the Archive!
 <</if>>\
 <<if $interrogationEndingShockUnlock>>\
-<<set $interrogationEndingShock = true>>\
+<<set MT.mdSet("interrogationEndingShock", true)>>\
 <<set $interrogationEndingShockUnlock = false>>\
 The <span class="imp-info">Shock variant</span> for Bad Ending: Interrogation is unlocked in the Archive!
 <</if>>\
 <<if $interrogationEndingFreezeUnlock>>\
-<<set $interrogationEndingFreeze = true>>\
+<<set MT.mdSet("interrogationEndingFreeze", true)>>\
 <<set $interrogationEndingFreezeUnlock = false>>\
 The <span class="imp-info">Freeze variant</span> for Bad Ending: Interrogation is unlocked in the Archive!
 <</if>>\
 <<if $interrogationEndingMildUnlock>>\
-<<set $interrogationEndingMild = true>>\
+<<set MT.mdSet("interrogationEndingMild", true)>>\
 <<set $interrogationEndingMildUnlock = false>>\
 The <span class="imp-info">Mild variant</span> for Bad Ending: Interrogation is unlocked in the Archive!
 <</if>>\
 <<if $interrogationEndingRoughUnlock>>\
-<<set $interrogationEndingRough = true>>\
+<<set MT.mdSet("interrogationEndingRough", true)>>\
 <<set $interrogationEndingRoughUnlock = false>>\
 The <span class="imp-info">Rough variant</span> for Bad Ending: Interrogation is unlocked in the Archive!
 <</if>>\
@@ -1785,7 +1823,9 @@ To change the adventurer's fate, you can...
 <div class="action-box">\
   <ul class="actions">\  
       <li>[[Attempt to escape again.|Escape Options]]</li>
-      <li>[[Return to the beginning of the game.|Title Screen]]</li>
+      <li><<link "Return to the beginning of the game">>
+        <<run Engine.restart()>>
+      <</link>></li>
   </ul>\
 </div>
 
@@ -2521,12 +2561,12 @@ But, no! He's wasted enough time as it is! Ivex could return at any time. Lookin
 $name became Ivex's thrall.
 
 <<if $enthrallmentEndingUnlock>>\
-<<set $enthrallmentEnding = true>>\
+<<set MT.mdSet("enthrallmentEnding", true)>>\
 <<set $enthrallmentEndingUnlock = false>>\
 The <span class="imp-info">Bad Ending: Enthrallment</span> is unlocked in the Archive!
 <</if>>\
 <<if $enthrallmentLionUnlock>>\
-<<set $enthrallmentLion = true>>\
+<<set MT.mdSet("enthrallmentLion", true)>>\
 <<set $enthrallmentLionUnlock = false>>\
 The <span class="imp-info">Lion variant</span> for Bad Ending: Enthrallment is unlocked in the Archive!
 <</if>>\
@@ -2536,24 +2576,25 @@ To change the adventurer's fate, you can...
 <div class="action-box">\
   <ul class="actions">\  
       <li>[[Return to the point of escaping the first floor.|Escape Start]]</li>
-      <li>[[Return to the beginning of the game.|Title Screen]]</li>
-  </ul>\
+      <li><<link "Return to the beginning of the game">>
+        <<run Engine.restart()>>
+      <</link>></li>  </ul>\
 </div>
 
 
 :: Archives [noreturn] {"position":"2400,700","size":"100,100"}
 <<sidebar-auto-stow>> \
-<<link "Return to the game" $return>><</link>>\
+@@.meta-text;<<link "Return to the game" $return>><</link>>@@\
 \
-<h1>Archives</h1>\
+<h1 class=meta-text>Archives</h1>\
 Welcome to the Mage's Tower Archives.
 
 Here you can revisit the different endings the adventurer has met in his time in the Mage's Tower. When the adventurer goes through an ending in the game for the first time, it will be unlocked here to be revisited at any time. If an ending has different variations due to the adventurer's choices during the game, these also can be set here, provided they have been seen before.
 
 Grayed out endings are paths that have not yet been found, although there are hints under them as to what path the adventurer should take to reach them. The same applies to different variations of endings.
 
-<i>Unlocked endings are only kept within a save. To keep all unlocked endings, make sure to always use and load the same save file.</i>
-\
+Saved games will remember all the endings you've unlocked. Loading a saved game may unlock more endings, but it will not re-lock anything already unlocked.
+
 <hr>\
 <h2>Endings unlocked:</h2>\
 <<include [[Interrogation Archive Display]]>>\
@@ -2567,8 +2608,15 @@ Grayed out endings are paths that have not yet been found, although there are hi
 <<include [[Ivex Enthrallment Archive Display]]>>\
 \
 <<include [[Ivex Extraction Archive Display]]>>\
-
-<<link "Return to the game" $return>><</link>>\
+<hr>\
+<<link "Lock all the Archives">>
+  <<script>>
+    Dialog.setup("Confirm lock Archives");
+    Dialog.wiki("<<include [[g1m Archives Forget]]>>");
+    Dialog.open();
+  <</script>>
+<</link>>
+<<link "Return to the game" $return>><</link>>
 
 
 :: The Desk {"position":"900,4350","size":"100,100"}
@@ -2752,17 +2800,17 @@ Still, it looks absolutely harmless.
 $name remained trapped serving as fuel for Ivex's magic.
 
 <<if $extractionEndingUnlock>>\
-<<set $extractionEnding = true>>\
+<<set MT.mdSet("extractionEnding", true)>>\
 <<set $extractionEndingUnlock = false>>\
 The <span class="imp-info">Bad Ending: Extraction</span> is unlocked in the Archive!
 <</if>>\
 <<if $extractionGentleEndUnlock>>\
-<<set $extractionGentleEnd = true>>\
+<<set MT.mdSet("extractionGentleEnd", true)>>\
 <<set $extractionGentleEndUnlock = false>>\
 The <span class="imp-info">Gentle variant</span> for Bad Ending: Extraction is unlocked in the Archive!
 <</if>>\
 <<if $extractionForcefulEndUnlock>>\
-<<set $extractionForcefulEnd = true>>\
+<<set MT.mdSet("extractionForcefulEnd", true)>>\
 <<set $extractionForcefulEndUnlock = false>>\
 The <span class="imp-info">Forceful variant</span> for Bad Ending: Extraction is unlocked in the Archive!
 <</if>>\
@@ -2772,8 +2820,9 @@ To change the adventurer's fate, you can...
 <div class="action-box">\
   <ul class="actions">\  
       <li>[[Return to the point of escaping the first floor.|Escape Start]]</li>
-      <li>[[Return to the beginning of the game.|Title Screen]]</li>
-  </ul>\
+      <li><<link "Return to the beginning of the game">>
+        <<run Engine.restart()>>
+      <</link>></li>  </ul>\
 </div>
 
 
@@ -4573,18 +4622,18 @@ It doesn't stop there, and neither does the slime. All the stimulation keeps goi
     } else {
         v.characterDisplay = 'images/panther.png';
     }
-    if (v.titleDelay1) {
+    if (v.sawTitle) {
         // already seen title, speed it up.
         v.titleDelay1 = '0.1s';
         v.titleDelay2 = '1s';
         v.titleDelay3 = '0.2s';
     } else {
+        MT.mdSet("sawTitle", true);
         v.titleDelay1 = '1s';
         v.titleDelay2 = '2s';
         v.titleDelay3 = '3s';
     }
     if (v.passedContentWarning) {
-        // we're here without clearing data
         v.startGameText = 'Try Again';
     } else {
         v.startGameText = 'New Game';
@@ -4617,6 +4666,13 @@ It doesn't stop there, and neither does the slime. All the stimulation keeps goi
 \
 <<link 'Load Game'>>
     <<run UI.saves()>>
+<</link>>
+<<link 'Content Warning'>>
+    <<script>>
+        Dialog.setup("Content Warning");
+        Dialog.wiki("<<include [[Content Warning]]>>");
+        Dialog.open();
+    <</script>>
 <</link>>
 \
 [[Credits]]
@@ -5765,19 +5821,19 @@ Or, at least, he will try to.
 :: The End [end] {"position":"2775,5050","size":"100,100"}
 The End.
 <<if $personalEndingUnlock>>\
-<<set $personalEnding = true>>\
+<<set MT.mdSet("personalEnding", true)>>\
 <<set $personalEndingUnlock = false>>\
 
 The <span class="imp-info">Ending: Punishment</span> is unlocked in the Archive!
 <</if>>\
 <<if $enthralmentIvexEndingUnlock>>\
-<<set $enthralmentIvexEnding = true>>\
+<<set MT.mdSet("enthralmentIvexEnding", true)>>\
 <<set $enthralmentIvexEndingUnlock = false>>\
 
 The <span class="imp-info">Ending: A New Servant</span> is unlocked in the Archive!
 <</if>>\
 <<if $extractionIvexEndingUnlock>>\
-<<set $extractionIvexEnding = true>>\
+<<set MT.mdSet("extractionIvexEnding", true)>>\
 <<set $extractionIvexEndingUnlock = false>>\
 
 The <span class="imp-info">Ending: Energy Supply</span> is unlocked in the Archive!
@@ -5801,8 +5857,9 @@ From here on, you can...
   <ul class="actions">\  
       <li>[[Return to the point of escaping the tower.|Outside]]</li>
       <li>[[Return to the point of escaping the first floor.|Escape Start]]</li>	
-      <li>[[Return to the beginning of the game.|Title Screen]]</li>
-  </ul>\
+      <li><<link "Return to the beginning of the game">>
+        <<run Engine.restart()>>
+      <</link>></li>  </ul>\
 </div>
 
 
@@ -6788,9 +6845,305 @@ Moreover, this story contains elements that depict dubious or lack of consent, a
 
 <div style='float: right;'>\
 <<button Proceed>>
+    <<run MT.mdSet("passedContentWarning", true)>>
     <<run Dialog.close()>>
     <<goto [[Bound]]>>
 <</button>>\
+</div>\
+
+
+:: g0boot Metadata {"position":"2125,275","size":"100,100"}
+<<script>>
+
+/*----------------
+ * This module manages game metadata.
+ * It's mostly a wrapper around SugarCube's metadata, with:
+ * - "clear metadata" that preserves keys marked PRESERVED.
+ * - saving and loading keys marked SAVEDs to saved games.
+ * - copying metadata to State.variables for easy access and debug tooling.
+ *
+ * Note, the values copied to State.variables are writable,
+ * but writing them *does not* write to metadata.
+ * Persisting a value needs to use `MD.mdSet`.
+ */
+
+// metadata types
+const UNSAVED = 1;
+const SAVED = 2;
+const PRESERVED = 3;
+
+/** metadata key -> metadata type. */
+const knownKeys = {};
+
+/** If `key` is not known, reports a warning and returns true. */
+function warnUnknownKey(key) {
+  if (!(key in knownKeys)) {
+    MT.diag(`Warning: unknown metadata key ${key}`);
+    return true;
+  }
+  return false;
+}
+
+/** If `key` is already known, reports a warning and returns true. */
+function warnKnownKey(key) {
+  if (key in knownKeys) {
+    MT.diag(`Warning: metadata key ${key} already exists.`);
+    return true;
+  }
+  return false;
+}
+
+/**
+ * Defines `key` to be UNSAVED metadata, which means:
+ * - it persists across game resets.
+ * - it doesn't get stored in saved games.
+ * - it gets deleted by "clear metadata".
+*/
+MT.mdDefUnsaved = (key) => {
+  if (warnKnownKey(key)) return;
+  knownKeys[key] = UNSAVED;
+};
+
+/**
+ * Defines `key` to be SAVED metadata, which means;
+ * - it persists across game resets.
+ * - it gets stored in saved games.
+ * - loading a saved game will set its value from the saved game,
+ *   but only if it isn't already set.
+ * - it gets deleted by "clear metadata".
+ */
+MT.mdDefSaved = (key) => {
+  if (warnKnownKey(key)) return;
+  knownKeys[key] = SAVED;
+};
+
+/**
+ * Defines `key` to be PRESERVED metadata, which means:
+ * - it persists across game resets.
+ * - it doesn't get stored in saved games.
+ * - it doesn't get deleted by "clear metadata".
+ */
+MT.mdDefPreserved = (key) => {
+  if (warnKnownKey(key)) return;
+  knownKeys[key] = PRESERVED;
+};
+
+/** True if `key` is a known metadata key. */
+MT.mdKnown = (key) => knownKeys[key] != null;
+
+/**
+ * Returns the value of metadata `key`.
+ *
+ * Note, each call will always decompress and deserialize
+ * all metadata from localStorage, so this is somewhat expensive.
+ *
+ * If you don't need the authoritative value, you can read the
+ * copy in State.variables (which might be out-of-date if the
+ * value was changed in another tab).
+ *
+ * If you want more than a few authoritative values at a time,
+ * use `MT.mdEntries` or `MT.mdRecord`.
+ */
+MT.mdUncachedGet = (key) => {
+  warnUnknownKey(key);
+  return State.metadata.get(key);
+};
+
+/**
+ * Sets metadata `key` to `value`. Any false-y value will delete the key.
+ *
+ * Note, each call will always decompress and deserialize
+ * all metadata from localStorage, then reserialize and recompress
+ * back to localStorage. So this is very expensive, and SugarCube
+ * doesn't give us a way to batch multiple set operations
+ * (other than bypassing SugarCube and doing it ourselves.)
+ */
+MT.mdSet = (key, value) => {
+  warnUnknownKey(key);
+  if (value) {
+    State.metadata.set(key, value);
+    State.variables[key] = value;
+  } else {
+    State.metadata.delete(key);
+    delete State.variables[key];
+  }
+};
+
+/** Returns an array of all [key, value] metadata entries. */
+MT.mdEntries = () => {
+  return State.metadata.entries() || [];
+};
+
+/** Returns an object-map of all metadata keys and values. */
+MT.mdRecord = () => {
+  return Object.fromEntries(MT.mdEntries());
+};
+
+/** Deletes all metadata, except for PRESERVED keys and unknown keys. */
+MT.mdClear = () => {
+  const preserve = [];
+  const entries = State.metadata.entries() || [];
+  for (const [key, value] of entries) {
+    warnUnknownKey(key);
+    if (knownKeys[key] === PRESERVED) {
+      preserve.push([key, value]);
+    }
+  }
+  State.metadata.clear();
+  for (const [key, value] of preserve) {
+    State.metadata.set(key, value);
+  }
+};
+
+/** Merges metadata from `save` into current metadata. */
+function readFromSave(save) {
+  if (!save.metadata) return;
+  const current = MT.mdRecord();
+  for (const [key, value] of Object.entries(save.metadata)) {
+    if (value && knownKeys[key] === SAVED && !current[key]) {
+      State.metadata.set(key, value);
+      // XXX announce the unlock
+    }
+  }
+  copyToVars();
+}
+
+/** Adds current metadata to `save`. */
+function writeToSave(save) {
+  save.metadata ||= {};
+  const entries = State.metadata.entries() || [];
+  for (const [key, value] of entries) {
+    if (knownKeys[key] === SAVED) {
+      save.metadata[key] = value;
+    }
+  }
+}
+
+/** Copies current metadata to State.variables */
+function copyToVars() {
+  const U = MT.untracedVars ? MT.untracedVars() : State.variables;
+  const meta = MT.mdRecord();
+  // need to do all known keys, not just set keys
+  for (const key of Object.keys(knownKeys)) {
+    if (meta[key]) {
+      U[key] = meta[key];
+    } else {
+      delete U[key];
+    }
+  }
+};
+
+/** Migrates existing State.variables to metadata */
+function migrateFromVars() {
+  const U = MT.untracedVars ? MT.untracedVars() : State.variables;
+  const meta = MT.mdRecord();
+  for (const key of Object.keys(knownKeys)) {
+    if (U[key] && U[key] !== meta[key]) {
+      MT.mdSet(key, U[key]);
+    }
+  }
+}
+
+function mdInit() {
+  migrateFromVars();
+  Save.onLoad.add(readFromSave);
+  Save.onSave.add(writeToSave);
+  $(document).on(":passageinit", copyToVars);
+}
+
+mdInit();
+<</script>>
+
+
+:: g1m Archives Forget {"position":"2550,850","size":"100,100"}
+<<nobr>>
+Are you sure you want to lock all the Archives?
+
+<br><br>
+You will have to play through each ending to unlock them again.
+
+<br><br>
+<div>
+  <<button "Lock Archives">>
+    <<script>>
+      Dialog.close();
+      MT.mdClear();
+    <</script>>
+    <<goto `State.passage`>>
+  <</button>>
+  <<button "Cancel">>
+    <<script>>
+      Dialog.close();
+    <</script>>
+  <</button>>
 </div>
+<</nobr>>\
+
+
+:: g0init Saved Games {"position":"2250,275","size":"100,100"}
+<<script>>
+
+/** Fix up the in-browser saved game title. */
+Config.passages.descriptions = function() {
+
+  // SugarCube sometimes gets a description for a passage other than
+  // the current one. In that case, use its default excerpt.
+  if (this.title !== State.passage) return false;
+
+  // For the current passage, use the rendered text, not the source text.
+  const doc = $(".passage").clone();
+  doc.find("style, script, .meta-text").remove();
+  doc.find("br").replaceWith(" ");
+  const text = doc.text();
+  const words = text.trim().split(/\s+/);
+
+  let excerpt = words.slice(0, 10).join(" ");
+
+  // Title screen has no text
+  if (excerpt === "") excerpt = State.passage;
+
+  // add unlock count
+  const [unlocked, total] = countUnlocks();
+  if (unlocked > 0) {
+    excerpt = `${unlocked}\uD83D\uDD13 ${excerpt}`;
+  }
+
+  console.log({excerpt});
+  return excerpt;
+};
+
+/** Intercept file save and fix filename */
+{
+  // sugarcube's default save UI doesn't provide any way to change the
+  // savefile name, and all its methods are readonly. but it uses a saveAs()
+  // function that can be hooked. (the alternative is to re-implement or
+  // copy the entire save UI just to tweak the savefile name.)
+
+  const origSaveAs = saveAs;
+  saveAs = (blob, name, opt) => {
+    // add unlock count to name
+    const [unlocked, total] = countUnlocks();
+    if (unlocked > 0) {
+      name = name.replace(/-\d/, `-${unlocked}u$&`);
+    }
+    return origSaveAs(blob, name, opt);
+  };
+}
+
+function countUnlocks() {
+  const meta = MT.mdRecord();
+  let num = 0;
+  let total = 0;
+  const add = (keys) => {
+    total += keys.length;
+    for (const k of keys) {
+      if (meta[k]) num++;
+    }
+  };
+  add(MT.drekkarEndings);
+  return [num, total];
+}
+
+<</script>>
 
 
