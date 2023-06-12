@@ -411,6 +411,16 @@ $(document).on(':passagestart', function (ev) {
     }
 });
 
+/** Stow the sidebar on narrow screens. */
+Macro.add("sidebar-auto-stow", {
+  handler: function() {
+    // sugarcube css overlaps the sidebar at max-width:768px
+    if (document.body.offsetWidth <= 768) {
+      UIBar.stow();
+    }
+  }
+});
+
 /* Health Bar code - Start */
 window.Health = function (CurHP, MaxHP, BarID, Horizontal, Container) {
     if (Container == undefined) {
@@ -2532,6 +2542,7 @@ To change the adventurer's fate, you can...
 
 
 :: Archives [noreturn] {"position":"2400,700","size":"100,100"}
+<<sidebar-auto-stow>> \
 <<link "Return to the game" $return>><</link>>\
 \
 <h1>Archives</h1>\
@@ -5776,9 +5787,9 @@ This is it. You've escaped the Mage's Tower and (maybe) given the mage some righ
 
 If you haven't yet, do check out the [[Archives]], where you can read the endings you have unlocked so far and see hints on how to find different ones. Try to see them all and their variations! A lot of things can change based on your choices up until the end.
 
-That's not all, though. As an author, I've written literally hundreds of short stories including all sorts of themes. If you enjoyed what you read here but haven't checked out my other stuff yet, there's a good chance you'll like them! You can read them on my [[FurAffinity page|https://www.furaffinity.net/user/sleth/]], [[SoFurry page|https://sleth.sofurry.com/]], or get links to them and a handy search tool in my [[website|http://www.slethstories.com/]].
+There's more to see as well, though! As an author, I've written literally hundreds of short stories including all sorts of themes. If you enjoyed what you read here but haven't checked out my other stuff yet, there's a good chance you'll like them! You can read them on my [[FurAffinity page|https://www.furaffinity.net/user/sleth/]], [[SoFurry page|https://sleth.sofurry.com/]], or get links to them and a handy search tool in my [[website|http://www.slethstories.com/]].
 
-If you've enjoyed this kinky experiment of an interactive story, I also urge you to check out my <span><img src="images/pa_logo.png" height="20">[[Patreon|https://www.patreon.com/sleth]]</span> as well , where I'll be working on a bigger scale, more story-based interactive story next. Even though this new one will have a larger focus on story rather than kink, be assured that there'll be plenty of spicy scenes as well! Be on the lookout for that! That's not all, though. Through Patreon, my amazing supporters have kept my passion for writing this sort of thing going. By joining it, you're supporting and getting first dibs on stories and games like this one!
+If you've enjoyed this kinky experiment of an interactive story, I also urge you to check out my <span><img src="images/pa_logo.png" height="20">[[Patreon|https://www.patreon.com/sleth]]</span> as well , where I'm working on a bigger scale, more story-based game called [[Demons Within|https://sleths.itch.io/demons-within]]. Rather than an interactive story, I also got an artist to work with me in it, so it's more of a visual novel with a focus on the 'novel' part of it. Even though this new project has a larger focus on story rather than kink, be assured that there are plenty of spicy scenes as well! That's not all, though. Through Patreon, my amazing supporters have kept my passion for writing this sort of thing burning bright. By joining it, you're supporting and getting first dibs on stories and games like this one!
 
 In fact... did you know that this interactive story as a whole was shaped up by my patrons themselves ? Yep. Through a series of polls, they chose a highly magical setting for the story, as well as kink focus in bondage, CBT, mind control and chastity from a list of possible kinks. It is based on those results that I molded this story into what it became today!
 
@@ -6619,10 +6630,11 @@ Or, at least, he will try to.
 
 
 :: Credits [noreturn] {"position":"2600,700","size":"100,100"}
+<<sidebar-auto-stow>> \
 <<link "Return to the game" $return>><</link>>\
 \
 <h1>Credits</h1>\
-The writing and development of this interactive story was made by me, [[Sleth|http://www.slethstories.com/]].
+The writing and development of this interactive story was made by me, [[Sleth|http://www.slethstories.com/]]. Big thanks and kuddos as well to Grayscale Wolf for providing thorough proofreading and numerous other code improvements.
 
 The amazing artwork you see in the game, including the character art and the Mage's Tower logo, was done by commission by [[BlainWolf|https://twitter.com/Blain_Wolf]]. You can check out more of his stuff in his [[Twitter|https://twitter.com/Blain_Wolf]] or [[FurAffinity|https://www.furaffinity.net/user/blainwolf]] pages!
 
@@ -6770,7 +6782,7 @@ Thank you so much!
 
 
 :: Content Warning {"position":"2625,75","size":"100,100"}
-This interactive story contains content of an adult nature. If you are easily offended or are under the age of 18, please exit now.
+This interactive story contains content of an adult nature. If you are under the age of 18, please exit now.
 
 Moreover, this story contains elements that depict dubious or lack of consent, as well as other fetish sexual topics such as mind control, CBT, chastity, and others. If these themes make you uncomfortable or are not enjoyable for you, proceed only at your own discretion.
 
